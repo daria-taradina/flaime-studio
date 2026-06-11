@@ -1,0 +1,129 @@
+.wrapper {
+  width: 100%;
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+}
+
+/* ── Track — hidden scrollbar, drag to scroll ── */
+.track {
+  display: flex;
+  align-items: center;
+  gap: 24px;
+  overflow-x: scroll;
+  overflow-y: hidden;
+  scroll-snap-type: x mandatory;
+  -webkit-overflow-scrolling: touch;
+  cursor: grab;
+  /* hide scrollbar cross-browser */
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+}
+
+.track::-webkit-scrollbar { display: none; }
+
+/* Spacer so first/last card peek symmetrically */
+.spacer {
+  flex-shrink: 0;
+  width: clamp(1.25rem, 4vw, 3rem);
+}
+
+/* ── Card ── */
+.card {
+  flex-shrink: 0;
+  /* peek-through: show ~80% of card + hint of next */
+  width: clamp(260px, 55vw, 680px);
+  aspect-ratio: 16 / 9;
+  border-radius: 12px;
+  overflow: hidden;
+  position: relative;
+  scroll-snap-align: center;
+  background: #111;
+  transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
+              opacity  0.4s ease;
+  /* non-active cards slightly scaled down */
+  transform: scale(0.94);
+  opacity: 0.55;
+}
+
+.cardActive {
+  transform: scale(1);
+  opacity: 1;
+}
+
+/* ── Video fill ── */
+.video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── Placeholder (while real videos aren't wired up) ── */
+.placeholder {
+  position: absolute;
+  inset: 0;
+  background: inherit;
+}
+
+/* ── Overlay — always visible at bottom ── */
+.cardOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.75) 0%, transparent 100%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+}
+
+.cardCategory {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+}
+
+.cardTitle {
+  font-family: var(--ff-display);
+  font-size: clamp(1rem, 2vw, 1.4rem);
+  font-weight: 700;
+  color: var(--clr-white);
+  line-height: 1.2;
+}
+
+/* ── Dots ── */
+.dots {
+  display: flex;
+  justify-content: center;
+  gap: 0.5rem;
+}
+
+.dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.25);
+  transition: background var(--transition), width var(--transition);
+  flex-shrink: 0;
+}
+
+.dotActive {
+  background: var(--clr-white);
+  width: 24px;
+  border-radius: 3px;
+}
+
+/* ── Mobile ── */
+@media (max-width: 640px) {
+  .card {
+    width: clamp(260px, 80vw, 340px);
+  }
+
+  .track { gap: 14px; }
+}

@@ -1,0 +1,442 @@
+/* ── HERO ──────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  /* 100svh = viewport minus mobile browser chrome.
+     Fallback to 100vh for older browsers. */
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: var(--space-xl);
+  overflow: hidden;
+}
+
+/* Background container — holds video + overlay */
+.heroBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  /* Placeholder gradient shown when no video is set */
+  background: linear-gradient(135deg, #1a1209 0%, #0d0d0d 50%, #141a10 100%);
+}
+
+/* The video itself — covers the full background */
+.heroBgVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  /* object-position can be tuned to keep the figure
+     in frame on mobile if needed: */
+  object-position: center top;
+  display: block;
+  /* No pointer events so it doesn't interfere with clicking */
+  pointer-events: none;
+}
+
+/* Overlay — darkens video so text stays readable.
+   Opacity is controlled by --overlay-opacity CSS variable
+   set inline from the JS constant, making it easy to tune. */
+.heroBgOverlay {
+  position: absolute;
+  inset: 0;
+  background: rgba(0, 0, 0, var(--overlay-opacity, 0.45));
+  /* Extra gradient at bottom so text area is always readable */
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0, calc(var(--overlay-opacity, 0.45) * 0.6)) 0%,
+    rgba(0,0,0, var(--overlay-opacity, 0.45))              50%,
+    rgba(0,0,0, calc(var(--overlay-opacity, 0.45) * 1.4)) 100%
+  );
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: flex-end;
+  padding-top: 8rem;
+}
+
+.heroHeadline {
+  font-family: var(--ff-display);
+  font-size: var(--step-4);
+  font-weight: 900;
+  line-height: 1.05;
+  letter-spacing: -0.02em;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2em;
+  align-content: flex-end;
+}
+
+.heroWord {
+  display: inline-block;
+}
+
+.heroRight {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: var(--space-md);
+  padding-bottom: 0.5rem;
+}
+
+.heroDesc {
+  font-size: var(--step-0);
+  color: rgba(255,255,255,0.8);
+  line-height: 1.65;
+  max-width: 36ch;
+}
+
+.heroBtn {
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  padding: 0.7rem 1.8rem;
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 100px;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+
+.heroBtn:hover {
+  background: var(--clr-white);
+  color: var(--clr-bg-dark);
+  border-color: var(--clr-white);
+}
+
+/* ── WHO WE ARE ─────────────────────────────────────────────── */
+.who {
+  padding-block: var(--space-xl);
+  background: var(--clr-bg-light);
+  color: var(--clr-bg-dark);
+}
+
+.who .section-label,
+.who :global(.section-label) { color: #888; }
+
+.whoInner {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--space-xl);
+}
+
+.whoBody {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-lg);
+}
+
+.whoText {
+  font-size: var(--step-1);
+  line-height: 1.55;
+  max-width: 60ch;
+  color: var(--clr-bg-dark);
+}
+
+.whoGrid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: var(--space-sm);
+  max-width: 680px;
+}
+
+.whoImg {
+  aspect-ratio: 1 / 1;
+  border-radius: var(--radius-md);
+  background: #d4cfc8;
+  /* replace with: background-image: url(cloudinaryUrl); background-size: cover; */
+}
+
+.whoImgTall {
+  aspect-ratio: 1 / 1.35;
+  align-self: start;
+}
+
+.learnMore {
+  font-size: var(--step--1);
+  color: var(--clr-bg-dark);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  opacity: 0.6;
+  transition: opacity var(--transition);
+}
+.learnMore:hover { opacity: 1; }
+
+/* ── WHAT WE DO ─────────────────────────────────────────────── */
+.services {
+  padding-block: var(--space-xl);
+}
+
+.servicesInner {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--space-xl);
+}
+
+.servicesIntro {
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: rgba(255,255,255,0.75);
+  max-width: 40ch;
+  margin-bottom: var(--space-lg);
+  /* span across both cols implicitly via grid-column below */
+}
+
+/* Make intro and list span past the label column */
+.servicesIntro,
+.servicesList {
+  grid-column: 2;
+}
+
+.servicesList {
+  display: flex;
+  flex-direction: column;
+  border-top: 1px solid var(--clr-border);
+}
+
+.serviceItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: baseline;
+  gap: var(--space-md);
+  padding-block: 1.25rem;
+  border-bottom: 1px solid var(--clr-border);
+}
+
+.serviceTitle {
+  font-family: var(--ff-display);
+  font-size: var(--step-1);
+  font-weight: 400;
+}
+
+.serviceDesc {
+  font-size: var(--step--1);
+  color: var(--clr-muted);
+  text-align: right;
+  max-width: 30ch;
+}
+
+/* ── LATEST WORKS ───────────────────────────────────────────── */
+.works {
+  padding-block: var(--space-xl);
+}
+
+.worksHeader {
+  margin-bottom: var(--space-lg);
+}
+
+/* Marquee breaks out of container intentionally for full-bleed feel */
+.marqueeWrapper {
+  width: 100%;
+  overflow: hidden;
+  padding-block: 0.5rem;
+}
+
+.worksSeeMore {
+  margin-top: var(--space-md);
+  display: flex;
+  justify-content: flex-end;
+}
+
+.seeMore {
+  font-size: var(--step--1);
+  color: rgba(255,255,255,0.5);
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4em;
+  transition: color var(--transition);
+}
+.seeMore:hover { color: var(--clr-white); }
+
+/* ── VIDEO REEL ─────────────────────────────────────────────── */
+.reel {
+  padding-block: var(--space-xl);
+}
+
+.reelHeader {
+  margin-bottom: var(--space-lg);
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+}
+
+.reelIntro {
+  font-size: var(--step-0);
+  color: rgba(255,255,255,0.5);
+  max-width: 44ch;
+}
+
+/* ── THE PROCESS ────────────────────────────────────────────── */
+.process {
+  padding-block: var(--space-xl);
+  background: var(--clr-bg-light);
+  color: var(--clr-bg-dark);
+}
+
+.processInner {
+  display: grid;
+  grid-template-columns: 200px 1fr;
+  gap: var(--space-xl);
+}
+
+.processIntro {
+  grid-column: 2;
+  font-size: var(--step-1);
+  line-height: 1.55;
+  color: #444;
+  max-width: 44ch;
+  margin-bottom: var(--space-lg);
+}
+
+.processGrid {
+  grid-column: 2;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+}
+
+.processStep {
+  padding: var(--space-md);
+  background: rgba(0,0,0,0.04);
+  border-radius: var(--radius-md);
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.processStepTitle {
+  font-family: var(--ff-display);
+  font-size: var(--step-0);
+  font-weight: 700;
+  line-height: 1.2;
+}
+
+.processStepBody {
+  font-size: var(--step--1);
+  line-height: 1.6;
+  color: #555;
+}
+
+/* ── CTA BANNER ─────────────────────────────────────────────── */
+.cta {
+  padding-block: var(--space-xl);
+}
+
+.ctaInner {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: center;
+}
+
+.ctaText {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-md);
+}
+
+.ctaHeadline {
+  font-family: var(--ff-display);
+  font-size: var(--step-3);
+  font-weight: 900;
+  line-height: 1.1;
+  letter-spacing: -0.02em;
+}
+
+.ctaBody {
+  font-size: var(--step-0);
+  color: rgba(255,255,255,0.65);
+  line-height: 1.65;
+  max-width: 38ch;
+}
+
+.ctaBtn {
+  display: inline-block;
+  font-size: var(--step--1);
+  font-weight: 500;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  padding: 0.75rem 2rem;
+  border: 1px solid var(--clr-white);
+  border-radius: 100px;
+  transition: background var(--transition), color var(--transition);
+  width: fit-content;
+}
+
+.ctaBtn:hover {
+  background: var(--clr-white);
+  color: var(--clr-bg-dark);
+}
+
+.ctaImage {
+  aspect-ratio: 4 / 5;
+  border-radius: var(--radius-md);
+  background: linear-gradient(145deg, #1a1a1a, #2a2520);
+  /* replace with: background-image: url(cloudinaryUrl); background-size: cover; */
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────────── */
+@media (max-width: 960px) {
+  .processGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}
+
+@media (max-width: 768px) {
+  .heroContent {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    align-items: flex-start;
+    padding-top: 7rem;
+  }
+
+  /* On mobile, shift the video so the figure stays visible
+     even when the layout is single-column.
+     She can adjust this once the real video is in. */
+  .heroBgVideo {
+    object-position: 70% top;
+  }
+
+  .whoInner,
+  .servicesInner,
+  .processInner {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+  }
+
+  .servicesIntro,
+  .servicesList,
+  .processIntro,
+  .processGrid {
+    grid-column: 1;
+  }
+
+  .serviceItem {
+    flex-direction: column;
+    gap: 0.25rem;
+  }
+
+  .serviceDesc { text-align: left; }
+
+  .ctaInner {
+    grid-template-columns: 1fr;
+  }
+
+  .ctaImage { display: none; }
+
+  .processGrid {
+    grid-template-columns: 1fr;
+  }
+}
+
+@media (max-width: 480px) {
+  .whoGrid {
+    grid-template-columns: repeat(2, 1fr);
+  }
+}

@@ -1,0 +1,204 @@
+.page {
+  padding-top: calc(80px + var(--space-xl));
+  padding-bottom: var(--space-xl);
+  min-height: 100svh;
+}
+
+/* ── Header ── */
+.header {
+  display: flex;
+  flex-direction: column;
+  gap: var(--space-sm);
+  margin-bottom: var(--space-lg);
+}
+
+.title {
+  font-family: var(--ff-display);
+  font-size: var(--step-3);
+  font-weight: 900;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+}
+
+/* ── Filters ── */
+.filters {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+  margin-bottom: var(--space-xl);
+}
+
+.filterBtn {
+  font-size: var(--step--1);
+  padding: 0.45rem 1.1rem;
+  border-radius: 100px;
+  border: 1px solid var(--clr-border);
+  color: rgba(255,255,255,0.5);
+  transition: all var(--transition);
+}
+
+.filterBtn:hover {
+  border-color: rgba(255,255,255,0.35);
+  color: var(--clr-white);
+}
+
+.filterBtnActive {
+  background: var(--clr-white);
+  color: var(--clr-bg-dark);
+  border-color: var(--clr-white);
+}
+
+/* ── Featured hero card ── */
+.featuredWrap {
+  margin-bottom: var(--space-sm);
+}
+
+/* ── Masonry grid ──
+   CSS columns gives true masonry (items flow into shortest column).
+   3 cols desktop → 2 tablet → 1 mobile.
+── */
+.grid {
+  columns: 3;
+  column-gap: 14px;
+}
+
+.grid > * {
+  break-inside: avoid;
+  margin-bottom: 14px;
+}
+
+/* ── Base card ── */
+.card {
+  position: relative;
+  border-radius: 10px;
+  overflow: hidden;
+  cursor: pointer;
+  background: #111;
+  display: block;
+  width: 100%;
+}
+
+/* Size variants */
+.card--large {
+  /* Hero card — full width, cinematic ratio */
+  aspect-ratio: 16 / 7;
+  width: 100%;
+}
+
+.card--medium {
+  aspect-ratio: 3 / 4;
+}
+
+.card--small {
+  aspect-ratio: 4 / 3;
+}
+
+/* ── Media ── */
+.cardImg,
+.cardVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  transition: transform 0.6s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+.card:hover .cardImg,
+.card:hover .cardVideo {
+  transform: scale(1.04);
+}
+
+/* ── Video play badge ── */
+.videoBadge {
+  position: absolute;
+  top: 1rem;
+  right: 1rem;
+  width: 36px;
+  height: 36px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.15);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--clr-white);
+  transition: opacity var(--transition), transform var(--transition);
+  z-index: 2;
+}
+
+.videoBadgeHidden {
+  opacity: 0;
+  transform: scale(0.8);
+}
+
+/* ── Info overlay ── */
+.cardOverlay {
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  padding: 1.5rem;
+  background: linear-gradient(to top, rgba(0,0,0,0.82) 0%, transparent 65%);
+  display: flex;
+  flex-direction: column;
+  gap: 0.3rem;
+  transform: translateY(8px);
+  opacity: 0;
+  transition: opacity 0.3s ease, transform 0.3s ease;
+  z-index: 2;
+}
+
+.cardOverlayVisible {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.cardCategory {
+  font-size: 0.7rem;
+  font-weight: 500;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--clr-accent);
+}
+
+.cardTitle {
+  font-family: var(--ff-display);
+  font-size: clamp(1rem, 2vw, 1.35rem);
+  font-weight: 700;
+  color: var(--clr-white);
+  line-height: 1.2;
+}
+
+/* ── Empty state ── */
+.empty {
+  color: var(--clr-muted);
+  font-size: var(--step-0);
+  padding-block: var(--space-xl);
+  text-align: center;
+}
+
+/* ── Responsive ── */
+@media (max-width: 960px) {
+  .grid { columns: 2; }
+  .card--large { aspect-ratio: 16 / 8; }
+}
+
+@media (max-width: 600px) {
+  .grid { columns: 1; }
+
+  .card--large { aspect-ratio: 4 / 3; }
+  .card--medium { aspect-ratio: 4 / 3; }
+  .card--small  { aspect-ratio: 4 / 3; }
+
+  /* Always show overlay on touch (no hover) */
+  .cardOverlay {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .filters { gap: 0.4rem; }
+  .filterBtn { font-size: 0.72rem; padding: 0.4rem 0.85rem; }
+}
