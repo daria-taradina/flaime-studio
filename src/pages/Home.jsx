@@ -6,6 +6,10 @@ import MarqueeGallery from '../components/MarqueeGallery';
 import VideoSlider from '../components/VideoSlider';
 import styles from './Home.module.css';
 
+const HERO_CLOUD_NAME = 'dgad4xyuc';
+const HERO_PUBLIC_ID  = 'hf_20260611_231757_26018a0c-efd2-4af3-a5a5-1c4fe405b2dd_efvzeg';
+const HERO_POSTER_ID  = 'hf_20260611_231223_d542720e-9929-4e9e-985b-b20205b0fcd6_abxyer';
+
 /**
  * ── HERO BACKGROUND VIDEO ────────────────────────────────────
  * Swap these two values when the video is ready in Cloudinary:
@@ -16,9 +20,9 @@ import styles from './Home.module.css';
  *
  * Leave as null to show the dark gradient placeholder.
  */
-const HERO_CLOUD_NAME = null;   // e.g. 'your-cloud-name'
-const HERO_PUBLIC_ID  = null;   // e.g. 'hero/studio-walk'
-const HERO_POSTER_ID  = null;   // e.g. 'hero/studio-walk-poster'
+// const HERO_CLOUD_NAME = null;   // e.g. 'your-cloud-name'
+// const HERO_PUBLIC_ID  = null;   // e.g. 'hero/studio-walk'
+// const HERO_POSTER_ID  = null;   // e.g. 'hero/studio-walk-poster'
 
 /**
  * Overlay opacity — tune this once the real video is in.
@@ -67,13 +71,13 @@ function HeroBg() {
 
 /* ── Image marquee items — swap bg with Cloudinary image URLs ── */
 const GALLERY_ITEMS = [
-  { id: 1, title: 'Brand Identity — Linya',    category: 'Visual Identity',       bg: '#1c1812' },
-  { id: 2, title: 'AI Editorial Series',        category: 'AI Generated Content',  bg: '#12181c' },
-  { id: 3, title: 'Social Campaign',            category: 'Social Media Content',  bg: '#181c12' },
-  { id: 4, title: 'Packaging Design',           category: 'Marketing Materials',   bg: '#1c1218' },
-  { id: 5, title: 'Creative Direction',         category: 'Creative Concept',      bg: '#121c18' },
-  { id: 6, title: 'Product Campaign',           category: 'AI Generated Content',  bg: '#221a10' },
-  { id: 7, title: 'Visual Identity System',     category: 'Visual Identity',       bg: '#101822' },
+  { id: 1, title: 'Brand Identity — Linya',    category: 'Visual Identity',       bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781228733/hf_20260403_215802_26dda678-2f90-4fe0-b5d7-39a55f0f377b_1_jgsrxl.png' },
+  { id: 2, title: 'AI Editorial Series',        category: 'AI Generated Content',  bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781228731/4f_feyshi.png' },
+  { id: 3, title: 'Social Campaign',            category: 'Social Media Content',  bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781229106/d-9_jrekkm.jpg' },
+  { id: 4, title: 'Packaging Design',           category: 'Marketing Materials',   bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781228734/F-3_uunmgt.jpg' },
+  { id: 5, title: 'Creative Direction',         category: 'Creative Concept',      bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781229102/d-10_geiek8.jpg' },
+  { id: 6, title: 'Product Campaign',           category: 'AI Generated Content',  bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781229106/a06b97ea_nano_2K_xy3svv.jpg' },
+  { id: 7, title: 'Visual Identity System',     category: 'Visual Identity',       bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781229106/6db9025c_nano_2K_f9vofx.jpg' },
 ];
 
 /**
