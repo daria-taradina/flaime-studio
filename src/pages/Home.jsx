@@ -1,4 +1,4 @@
-import { useRef, useState } from 'react';
+import { useRef, useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import FadeIn from '../components/FadeIn';
@@ -98,44 +98,68 @@ const CTA_IMG = 'https://res.cloudinary.com/dgad4xyuc/image/upload/v1781229106/6
 
 /* ─── Services interactive section ─────────────────────────── */
 function ServicesSection() {
-  const [active, setActive] = useState(0);
-  const current = SERVICES[active];
+  const [active, setActive] = useState(0); // desktop only: drives hover + crossfade image
+  const [openItems, setOpenItems] = useState(new Set()); // mobile only: independently toggled
+  const [isMobile, setIsMobile] = useState(() =>
+    window.matchMedia('(max-width: 768px)').matches
+  );
+
+  useEffect(() => {
+    const mq = window.matchMedia('(max-width: 768px)');
+    const handleChange = (e) => setIsMobile(e.matches);
+    mq.addEventListener('change', handleChange);
+    return () => mq.removeEventListener('change', handleChange);
+  }, []);
+
+  const isItemActive = (i) => (isMobile ? openItems.has(i) : i === active);
+
+  const handleSelect = (i) => {
+    if (isMobile) {
+      setOpenItems((prev) => {
+        const next = new Set(prev);
+        next.has(i) ? next.delete(i) : next.add(i);
+        return next;
+      });
+    } else {
+      setActive(i);
+    }
+  };
 
   return (
     <section className={styles.services}>
       <div className={`container ${styles.servicesInner}`}>
-
-        {/* Left / full-width on mobile: list */}
         <FadeIn className={styles.servicesList}>
           <span className={`section-label ${styles.servicesLabel}`}>What We Do</span>
           <ul>
-            {SERVICES.map((s, i) => (
-              <li
-                key={s.title}
-                className={`${styles.serviceItem} ${i === active ? styles.serviceItemActive : ''}`}
-                onClick={() => setActive(i)}
-                onMouseEnter={() => setActive(i)}
-              >
-                <div className={styles.serviceRow}>
-                  <span className={styles.serviceTitle}>{s.title}</span>
-                  <span className={styles.serviceArrow}>↗</span>
-                </div>
-                {/* desc only visible on active */}
-                <p className={`${styles.serviceDesc} ${i === active ? styles.serviceDescVisible : ''}`}>
-                  {s.desc}
-                </p>
-                {/* Mobile only: image inside active item */}
-                {i === active && (
-                  <div className={styles.serviceMobileImg}>
-                    <img src={current.img} alt={current.title} />
+            {SERVICES.map((s, i) => {
+              const isActive = isItemActive(i);
+              return (
+                <li
+                  key={s.title}
+                  className={`${styles.serviceItem} ${isActive ? styles.serviceItemActive : ''}`}
+                  onClick={() => handleSelect(i)}
+                  onMouseEnter={() => { if (!isMobile) setActive(i); }}
+                >
+                  <div className={styles.serviceRow}>
+                    <span className={styles.serviceTitle}>{s.title}</span>
+                    <span className={styles.serviceArrow}>
+                      {isMobile ? (isActive ? '−' : '+') : '↗'}
+                    </span>
                   </div>
-                )}
-              </li>
-            ))}
+                  <p className={`${styles.serviceDesc} ${isActive ? styles.serviceDescVisible : ''}`}>
+                    {s.desc}
+                  </p>
+                  {isActive && (
+                    <div className={styles.serviceMobileImg}>
+                      <img src={s.img} alt={s.title} />
+                    </div>
+                  )}
+                </li>
+              );
+            })}
           </ul>
         </FadeIn>
 
-        {/* Desktop only: sticky image on the right */}
         <FadeIn delay={0.1} className={styles.serviceImageWrap}>
           <div className={styles.serviceImageInner}>
             {SERVICES.map((s, i) => (
@@ -148,7 +172,6 @@ function ServicesSection() {
             ))}
           </div>
         </FadeIn>
-
       </div>
     </section>
   );
