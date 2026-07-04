@@ -15,7 +15,8 @@ import styles from './MarqueeGallery.module.css';
  * - Pauses on hover / touch so users can look
  * - On mobile, also allows touch-drag
  */
-export default function MarqueeGallery({ items = [], speed = 60, gap = 16 }) {
+export default function MarqueeGallery({ items = [], speed = 60, gap = 16, interactive = true, showOverlay = true, direction = 'left' }) {
+  const dir = direction === 'right' ? 1 : -1;
   const trackRef = useRef(null);
   const posRef   = useRef(0);
   const rafRef   = useRef(null);
@@ -29,8 +30,10 @@ export default function MarqueeGallery({ items = [], speed = 60, gap = 16 }) {
     const track = trackRef.current;
     if (!track) return;
     // half = one full copy
-    setHalfWidth(track.scrollWidth / 2);
-  }, [items, gap]);
+    const hw = track.scrollWidth / 2;
+  setHalfWidth(hw);
+  if (dir === 1) posRef.current = -hw;
+}, [items, gap, dir]);
 
   // Animation loop
   useEffect(() => {
@@ -40,11 +43,13 @@ export default function MarqueeGallery({ items = [], speed = 60, gap = 16 }) {
       if (!pausedRef.current) {
         const delta = lastTsRef.current ? (ts - lastTsRef.current) / 1000 : 0;
         lastTsRef.current = ts;
-        posRef.current -= speed * delta;
+        posRef.current += dir * speed * delta;
         // Seamless reset: when we've scrolled one full copy, jump back
-        if (posRef.current <= -halfWidth) {
-          posRef.current += halfWidth;
-        }
+        if (dir === -1 && posRef.current <= -halfWidth) {
+    posRef.current += halfWidth;
+  } else if (dir === 1 && posRef.current >= 0) {
+    posRef.current -= halfWidth;
+  }
         if (trackRef.current) {
           trackRef.current.style.transform = `translateX(${posRef.current}px)`;
         }
@@ -59,23 +64,25 @@ export default function MarqueeGallery({ items = [], speed = 60, gap = 16 }) {
   }, [halfWidth, speed]);
 
   // Pause on hover
-  const pause = () => { pausedRef.current = true; };
-  const resume = () => { pausedRef.current = false; };
+  //const pause = () => { pausedRef.current = true; };
+  //const resume = () => { pausedRef.current = false; };
+  const pause  = () => { if (interactive) pausedRef.current = true; };
+  const resume = () => { if (interactive) pausedRef.current = false; };
 
   // Touch drag
   const onTouchStart = (e) => {
+    if (!interactive) return;
     dragRef.current = { active: true, startX: e.touches[0].clientX, startPos: posRef.current };
     pausedRef.current = true;
   };
   const onTouchMove = (e) => {
-    if (!dragRef.current.active) return;
+    if (!interactive || !dragRef.current.active) return;
     const dx = e.touches[0].clientX - dragRef.current.startX;
     posRef.current = dragRef.current.startPos + dx;
-    if (trackRef.current) {
-      trackRef.current.style.transform = `translateX(${posRef.current}px)`;
-    }
+    if (trackRef.current) trackRef.current.style.transform = `translateX(${posRef.current}px)`;
   };
   const onTouchEnd = () => {
+    if (!interactive) return;
     dragRef.current.active = false;
     pausedRef.current = false;
   };
@@ -84,38 +91,30 @@ export default function MarqueeGallery({ items = [], speed = 60, gap = 16 }) {
 
   return (
     <div
-      className={styles.wrapper}
+      className={`${styles.wrapper} ${!interactive ? styles.decorative : ''}`}
       onMouseEnter={pause}
       onMouseLeave={resume}
       onTouchStart={onTouchStart}
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
-      {/* Fade edges */}
-      <div className={styles.fadeLeft}  aria-hidden="true" />
+      <div className={styles.fadeLeft} aria-hidden="true" />
       <div className={styles.fadeRight} aria-hidden="true" />
 
-      <div
-        ref={trackRef}
-        className={styles.track}
-        style={{ gap: `${gap}px` }}
-        aria-label="Work gallery"
-      >
+      <div ref={trackRef} className={styles.track} style={{ gap: `${gap}px` }} aria-label="Work gallery">
         {doubled.map((item, i) => (
           <div
             key={`${item.id}-${i}`}
-            className={styles.card}
-            style={
-              item.bg?.startsWith('http')
-                ? { backgroundImage: `url(${item.bg})` }
-                : { backgroundColor: item.bg || '#1e1e1e' }
-            }
-            aria-hidden={i >= items.length} /* duplicates are decorative */
+            className={`${styles.card} ${!interactive ? styles.cardStatic : ''}`}
+            style={item.bg?.startsWith('http') ? { backgroundImage: `url(${item.bg})` } : { backgroundColor: item.bg || '#1e1e1e' }}
+            aria-hidden={i >= items.length}
           >
-            <div className={styles.overlay}>
-              <span className={styles.cardCategory}>{item.category}</span>
-              <span className={styles.cardTitle}>{item.title}</span>
-            </div>
+            {showOverlay && (
+              <div className={styles.overlay}>
+                <span className={styles.cardCategory}>{item.category}</span>
+                <span className={styles.cardTitle}>{item.title}</span>
+              </div>
+            )}
           </div>
         ))}
       </div>

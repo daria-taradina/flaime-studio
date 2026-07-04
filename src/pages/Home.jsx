@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import FadeIn from '../components/FadeIn';
 import DragGallery from '../components/DragGallery';
 import styles from './Home.module.css';
+import MarqueeGallery from '../components/MarqueeGallery';
 
 /* ─── Hero video ───────────────────────────────────────────── */
 const HERO_CLOUD_NAME = 'dgad4xyuc';
@@ -42,7 +43,7 @@ function HeroBg() {
 /* ─── Data ─────────────────────────────────────────────────── */
 const WORDS = ['Transforming', 'brands', 'into', 'visual', 'experiences.'];
 
-const INTRO_IMG = 'https://res.cloudinary.com/dgad4xyuc/image/upload/v1781228731/4f_feyshi.png';
+//const INTRO_IMG = 'https://res.cloudinary.com/dgad4xyuc/image/upload/v1781228731/4f_feyshi.png';
 
 const SERVICES = [
   {
@@ -98,35 +99,50 @@ const CTA_IMG = 'https://res.cloudinary.com/dgad4xyuc/image/upload/v1781229106/6
 
 /* ─── Services interactive section ─────────────────────────── */
 function ServicesSection() {
-  const [active, setActive] = useState(0);
-  const current = SERVICES[active];
+  const [active, setActive] = useState(() => {
+    if (typeof window === 'undefined') return 0;
+    return window.matchMedia('(min-width: 769px)').matches ? 0 : null;
+  });
+
+  const canHoverRef = useRef(
+    typeof window !== 'undefined' && window.matchMedia('(hover: hover)').matches
+  );
+
+  const handleMouseEnter = (i) => {
+    if (canHoverRef.current) setActive(i);
+  };
+
+  const handleClick = (i) => {
+    setActive((prev) => (prev === i ? null : i)); // tap again to collapse
+  };
+
+  const current = active !== null ? SERVICES[active] : null;
 
   return (
     <section className={styles.services}>
       <div className={`container ${styles.servicesInner}`}>
 
-        {/* Left / full-width on mobile: list */}
         <FadeIn className={styles.servicesList}>
+          <span className={styles.servicesLabel}>What We Do</span>
+
           <ul>
             {SERVICES.map((s, i) => (
               <li
                 key={s.title}
                 className={`${styles.serviceItem} ${i === active ? styles.serviceItemActive : ''}`}
-                onClick={() => setActive(i)}
-                onMouseEnter={() => setActive(i)}
+                onClick={() => handleClick(i)}
+                onMouseEnter={() => handleMouseEnter(i)}
               >
                 <div className={styles.serviceRow}>
                   <span className={styles.serviceTitle}>{s.title}</span>
                   <span className={styles.serviceArrow}>↗</span>
                 </div>
-                {/* desc only visible on active */}
                 <p className={`${styles.serviceDesc} ${i === active ? styles.serviceDescVisible : ''}`}>
                   {s.desc}
                 </p>
-                {/* Mobile only: image inside active item */}
                 {i === active && (
                   <div className={styles.serviceMobileImg}>
-                    <img src={current.img} alt={current.title} />
+                    <img src={s.img} alt={s.title} />
                   </div>
                 )}
               </li>
@@ -134,7 +150,6 @@ function ServicesSection() {
           </ul>
         </FadeIn>
 
-        {/* Desktop only: sticky image on the right */}
         <FadeIn delay={0.1} className={styles.serviceImageWrap}>
           <div className={styles.serviceImageInner}>
             {SERVICES.map((s, i) => (
@@ -194,19 +209,25 @@ export default function Home() {
       </section>
 
       {/* ── INTRO ── */}
-      <section className={styles.intro}>
-        <div className={`container ${styles.introInner}`}>
-          <FadeIn className={styles.introText}>
-            <p>
-              Flaime Studio is a creative studio helping product-based brands communicate
-              their value through design and creative direction.
-            </p>
-          </FadeIn>
-          <FadeIn delay={0.1} className={styles.introImg}>
-              <img src={INTRO_IMG} alt="Flaime Studio work sample" />
-          </FadeIn>
-        </div>
-      </section>
+<section className={styles.introSection}>
+  <div className={styles.introMarqueeBg} aria-hidden="true">
+    <MarqueeGallery
+      items={GALLERY_ITEMS}
+      speed={40}
+      gap={14}
+      interactive={false}
+      showOverlay={false}
+      direction="right"
+    />
+  </div>
+
+  <FadeIn className={styles.introTextPanel}>
+    <p>
+      Flaime Studio is a creative studio helping product-based brands communicate
+      their value through design and creative direction.
+    </p>
+  </FadeIn>
+</section>
 
       {/* ── SERVICES ── */}
       
