@@ -4,27 +4,23 @@ import styles from './Footer.module.css';
 export default function Footer() {
   return (
     <footer className={styles.footer}>
-      <div className={`container ${styles.inner}`}>
-        <div className={styles.brand}>
-          <span className={styles.logo}>
-            fl<em>ai</em>me <span className={styles.logoStudio}>studio</span>
-          </span>
-          <p className={styles.tagline}>Based in Los Angeles. Working worldwide.</p>
-        </div>
-
-        <nav className={styles.links}>
+      <div className={`container ${styles.top}`}>
+        <div className={styles.links}>
           <div className={styles.col}>
-            <span className={styles.colLabel}>Navigate</span>
-            <Link to="/about">About</Link>
             <Link to="/work">Work</Link>
-            <Link to="/contact">Services</Link>
+            <Link to="/contact">Contact</Link>
           </div>
           <div className={styles.col}>
-            <span className={styles.colLabel}>Connect</span>
-            <a href="mailto:hello@flaimestudio.com">Contact</a>
             <a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a>
+            <a href="mailto:hello@flaimestudio.com">hello@flaimestudio.com</a>
           </div>
-        </nav>
+        </div>
+        <p className={styles.location}>Based in Los Angeles. Working worldwide.</p>
+      </div>
+
+      {/* Big footer logo */}
+      <div className={styles.bigLogo} aria-hidden="true">
+        fl<em>ai</em>me studio
       </div>
 
       <div className={`container ${styles.bottom}`}>

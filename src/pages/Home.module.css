@@ -1,8 +1,6 @@
 /* ── HERO ──────────────────────────────────────────────────── */
 .hero {
   position: relative;
-  /* 100svh = viewport minus mobile browser chrome.
-     Fallback to 100vh for older browsers. */
   min-height: 100vh;
   min-height: 100svh;
   display: flex;
@@ -11,38 +9,26 @@
   overflow: hidden;
 }
 
-/* Background container — holds video + overlay */
 .heroBg {
   position: absolute;
   inset: 0;
   z-index: 0;
-  /* Placeholder gradient shown when no video is set */
   background: linear-gradient(135deg, #1a1209 0%, #0d0d0d 50%, #141a10 100%);
 }
 
-/* The video itself — covers the full background */
 .heroBgVideo {
   position: absolute;
   inset: 0;
-  width: 100%;
-  height: 100%;
+  width: 100%; height: 100%;
   object-fit: cover;
-  /* object-position can be tuned to keep the figure
-     in frame on mobile if needed: */
   object-position: center top;
   display: block;
-  /* No pointer events so it doesn't interfere with clicking */
   pointer-events: none;
 }
 
-/* Overlay — darkens video so text stays readable.
-   Opacity is controlled by --overlay-opacity CSS variable
-   set inline from the JS constant, making it easy to tune. */
 .heroBgOverlay {
   position: absolute;
   inset: 0;
-  background: rgba(0, 0, 0, var(--overlay-opacity, 0.45));
-  /* Extra gradient at bottom so text area is always readable */
   background: linear-gradient(
     to bottom,
     rgba(0,0,0, calc(var(--overlay-opacity, 0.45) * 0.6)) 0%,
@@ -62,10 +48,10 @@
 }
 
 .heroHeadline {
-  font-family: var(--ff-display);
+  font-family: var(--ff-heading);
   font-size: var(--step-4);
-  font-weight: 900;
-  line-height: 1.05;
+  font-weight: 350;
+  line-height: 0.8;
   letter-spacing: -0.02em;
   display: flex;
   flex-wrap: wrap;
@@ -73,9 +59,7 @@
   align-content: flex-end;
 }
 
-.heroWord {
-  display: inline-block;
-}
+.heroWord { display: inline-block; }
 
 .heroRight {
   display: flex;
@@ -95,237 +79,293 @@
 .heroBtn {
   font-size: var(--step--1);
   font-weight: 500;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
   padding: 0.7rem 1.8rem;
   border: 1px solid rgba(255,255,255,0.6);
   border-radius: 100px;
   transition: background var(--transition), color var(--transition), border-color var(--transition);
 }
-
 .heroBtn:hover {
   background: var(--clr-white);
   color: var(--clr-bg-dark);
   border-color: var(--clr-white);
 }
 
-/* ── WHO WE ARE ─────────────────────────────────────────────── */
-.who {
-  padding-block: var(--space-xl);
+/* ── INTRO ─────────────────────────────────────────────────── */
+.intro {
+  padding-block: var(--space-lg);
+  border-bottom: 1px solid var(--clr-border);
   background: var(--clr-bg-light);
-  color: var(--clr-bg-dark);
 }
 
-.who .section-label,
-.who :global(.section-label) { color: #888; }
-
-.whoInner {
-  display: grid;
-  grid-template-columns: 200px 1fr;
+.introInner {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
   gap: var(--space-xl);
 }
 
-.whoBody {
-  display: flex;
-  flex-direction: column;
-  gap: var(--space-lg);
-}
-
-.whoText {
+.introText p {
+  font-family: var(--ff-heading);
   font-size: var(--step-1);
   line-height: 1.55;
-  max-width: 60ch;
   color: var(--clr-bg-dark);
+  max-width: 44ch;
 }
 
-.whoGrid {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-sm);
-  max-width: 680px;
-}
-
-.whoImg {
-  aspect-ratio: 1 / 1;
+.introImg {
+  flex-shrink: 0;
+  width: clamp(120px, 18vw, 220px);
+  aspect-ratio: 4 / 5;
   border-radius: var(--radius-md);
-  background: #d4cfc8;
-  /* replace with: background-image: url(cloudinaryUrl); background-size: cover; */
+  background: #1e1e1e;
+  /* swap: background-image: url(cloudinaryUrl); background-size: cover; */
 }
 
-.whoImgTall {
-  aspect-ratio: 1 / 1.35;
-  align-self: start;
-}
-
-.learnMore {
-  font-size: var(--step--1);
-  color: var(--clr-bg-dark);
-  display: inline-flex;
-  align-items: center;
-  gap: 0.4em;
-  opacity: 0.6;
-  transition: opacity var(--transition);
-}
-.learnMore:hover { opacity: 1; }
-
-/* ── WHAT WE DO ─────────────────────────────────────────────── */
+/* ── SERVICES ──────────────────────────────────────────────── */
 .services {
   padding-block: var(--space-xl);
-}
-
-.servicesInner {
-  display: grid;
-  grid-template-columns: 200px 1fr;
-  gap: var(--space-xl);
-}
-
-.servicesIntro {
-  font-size: var(--step-1);
-  line-height: 1.55;
-  color: rgba(255,255,255,0.75);
-  max-width: 40ch;
-  margin-bottom: var(--space-lg);
-  /* span across both cols implicitly via grid-column below */
-}
-
-/* Make intro and list span past the label column */
-.servicesIntro,
-.servicesList {
-  grid-column: 2;
-}
-
-.servicesList {
-  display: flex;
-  flex-direction: column;
   border-top: 1px solid var(--clr-border);
 }
 
+/* Two-col on desktop: list left, image right */
+.servicesInner {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+/* List */
+.servicesList { width: 100%; }
+
+.servicesList ul {
+  border-top: 1px solid var(--clr-border);
+}
+
+.servicesLabel {
+  display: block;
+  margin-bottom: 2rem;
+}
+
 .serviceItem {
+  border-bottom: 1px solid var(--clr-border);
+  padding: 1rem 0;
+  cursor: pointer;
+  transition: background var(--transition);
+}
+
+.serviceRow {
   display: flex;
   justify-content: space-between;
-  align-items: baseline;
-  gap: var(--space-md);
-  padding-block: 1.25rem;
-  border-bottom: 1px solid var(--clr-border);
-}
-
-.serviceTitle {
-  font-family: var(--ff-display);
-  font-size: var(--step-1);
-  font-weight: 400;
-}
-
-.serviceDesc {
-  font-size: var(--step--1);
-  color: var(--clr-muted);
-  text-align: right;
-  max-width: 30ch;
-}
-
-/* ── LATEST WORKS ───────────────────────────────────────────── */
-.works {
-  padding-block: var(--space-xl);
-}
-
-.worksHeader {
-  margin-bottom: var(--space-lg);
-}
-
-/* Marquee breaks out of container intentionally for full-bleed feel */
-.marqueeWrapper {
-  width: 100%;
-  overflow: hidden;
-  padding-block: 0.5rem;
-}
-
-.worksSeeMore {
-  margin-top: var(--space-md);
-  display: flex;
-  justify-content: flex-end;
-}
-
-.seeMore {
-  font-size: var(--step--1);
-  color: rgba(255,255,255,0.5);
-  display: inline-flex;
   align-items: center;
-  gap: 0.4em;
-  transition: color var(--transition);
-}
-.seeMore:hover { color: var(--clr-white); }
-
-/* ── VIDEO REEL ─────────────────────────────────────────────── */
-.reel {
-  padding-block: var(--space-xl);
-}
-
-.reelHeader {
-  margin-bottom: var(--space-lg);
-  display: flex;
-  flex-direction: column;
   gap: var(--space-sm);
 }
 
-.reelIntro {
-  font-size: var(--step-0);
-  color: rgba(255,255,255,0.5);
-  max-width: 44ch;
+.serviceTitle {
+  font-family: var(--ff-heading);
+  font-size: var(--step-1);
+  font-weight: 400;
+  color: rgba(255,255,255,0.35);
+  transition: color var(--transition), font-size var(--transition);
+  line-height: 1.2;
 }
 
-/* ── THE PROCESS ────────────────────────────────────────────── */
-.process {
-  padding-block: var(--space-xl);
-  background: var(--clr-bg-light);
+.serviceArrow {
+  font-size: var(--step-0);
+  color: rgba(255,255,255,0.15);
+  transition: color var(--transition), opacity var(--transition);
+  opacity: 0;
+  flex-shrink: 0;
+}
+
+/* Active state */
+.serviceItemActive .serviceTitle {
+  color: var(--clr-white);
+  font-size: var(--step-2);
+  font-weight: 400;
+}
+
+.serviceItemActive .serviceArrow {
+  color: var(--clr-accent);
+  opacity: 1;
+}
+
+/* Desc — hidden by default, visible on active */
+.serviceDesc {
+  font-size: var(--step--1);
+  color: rgba(255,255,255,0.45);
+  line-height: 1.5;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.35s ease, opacity 0.3s ease, margin 0.3s ease;
+  margin-top: 0;
+}
+
+.serviceDescVisible {
+  max-height: 3rem;
+  opacity: 1;
+  margin-top: 0.4rem;
+}
+
+/* Mobile image — shown inside active item, hidden on desktop */
+.serviceMobileImg {
+  margin-top: 1rem;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  aspect-ratio: 16 / 9;
+  display: none; /* hidden on desktop */
+}
+
+.serviceMobileImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* Desktop image — right column, stacked + crossfade */
+.serviceImageWrap {
+  position: sticky;
+  top: 100px; /* below navbar */
+}
+
+.serviceImageInner {
+  position: relative;
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-md);
+  overflow: hidden;
+  background: #1a1a1a;
+}
+
+.serviceImage {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.5s ease;
+}
+
+.serviceImageActive {
+  opacity: 1;
+}
+
+
+/* ── SELECTED WORKS ────────────────────────────────────────── */
+.works {
+  padding-block: var(--space-md);
+}
+
+.worksHeader {
+  margin-bottom: var(--space-md);
+}
+
+.worksHeaderRow {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.seeAll {
+  font-size: var(--step--1);
+  color: rgba(255,255,255,0.5);
+  transition: color var(--transition);
+  padding: 0.5rem 1.5rem;
+  border: 1px solid rgba(255,255,255,0.6);
+  border-radius: 100px;
+  transition: background var(--transition), color var(--transition), border-color var(--transition);
+}
+.seeAll:hover {   
+  background: var(--clr-white);
   color: var(--clr-bg-dark);
+  border-color: var(--clr-white);
+}
+
+/* ── PROCESS ───────────────────────────────────────────────── */
+.process {
+  background: var(--clr-bg-light);
+  padding-block: var(--space-xl);
+  border-top: 1px solid var(--clr-border);
 }
 
 .processInner {
-  display: grid;
-  grid-template-columns: 200px 1fr;
+  display: flex;
+  flex-direction: column;
   gap: var(--space-xl);
 }
 
-.processIntro {
-  grid-column: 2;
-  font-size: var(--step-1);
-  line-height: 1.55;
-  color: #444;
-  max-width: 44ch;
-  margin-bottom: var(--space-lg);
+.processTagline {
+  font-family: var(--ff-heading);
+  color: var(--clr-bg-dark);
+  letter-spacing: -0.04em;
+  font-size: var(--step-3);
+  font-weight: 300;
+  line-height: 1.1;
+  text-align: center;
+  max-width: 40ch;
+  margin-inline: auto;
 }
 
-.processGrid {
-  grid-column: 2;
+/* Timeline — horizontal on desktop */
+.timeline {
+  position: relative;
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   gap: var(--space-md);
 }
 
-.processStep {
-  padding: var(--space-md);
-  background: rgba(0,0,0,0.04);
-  border-radius: var(--radius-md);
+/* The connecting line */
+.timelineLine {
+  position: absolute;
+  top: 8px; /* vertically centered on dot */
+  left: 0; right: 0;
+  height: 1px;
+  background: var(--clr-bg-dark);
+  z-index: 0;
+}
+
+.timelineStep {
+  position: relative;
   display: flex;
   flex-direction: column;
   gap: 0.75rem;
+  padding-top: 1.5rem; /* space above for dot */
 }
 
-.processStepTitle {
-  font-family: var(--ff-display);
+.timelineDot {
+  position: absolute;
+  top: 0.3rem;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--clr-bg-dark);
+  border: 2px solid var(--clr-bg-light);
+  outline: 1px solid var(--clr-bg-dark);
+  z-index: 1;
+}
+
+.stepTitle {
+  font-family: var(--ff-heading);
+  color: var(--clr-bg-dark);
   font-size: var(--step-0);
-  font-weight: 700;
+  font-weight: 300;
   line-height: 1.2;
 }
 
-.processStepBody {
+.stepBody {
   font-size: var(--step--1);
+  color: var(--clr-bg-dark);
   line-height: 1.6;
-  color: #555;
 }
 
-/* ── CTA BANNER ─────────────────────────────────────────────── */
+/* ── CTA ───────────────────────────────────────────────────── */
 .cta {
   padding-block: var(--space-xl);
+  border-top: 1px solid var(--clr-border);
 }
 
 .ctaInner {
@@ -333,6 +373,13 @@
   grid-template-columns: 1fr 1fr;
   gap: var(--space-xl);
   align-items: center;
+}
+
+.ctaImg {
+  aspect-ratio: 3 / 4;
+  border-radius: var(--radius-md);
+  background: #1a1a1a;
+  /* swap: background-image: url(cloudinaryUrl); background-size: cover; */
 }
 
 .ctaText {
@@ -349,43 +396,51 @@
   letter-spacing: -0.02em;
 }
 
+.ctaHeadline em {
+  font-style: italic;
+  color: var(--clr-accent);
+}
+
 .ctaBody {
   font-size: var(--step-0);
-  color: rgba(255,255,255,0.65);
+  color: rgba(255,255,255,0.6);
   line-height: 1.65;
-  max-width: 38ch;
+  max-width: 36ch;
 }
 
 .ctaBtn {
   display: inline-block;
   font-size: var(--step--1);
   font-weight: 500;
-  letter-spacing: 0.08em;
-  text-transform: uppercase;
+  letter-spacing: 0.06em;
   padding: 0.75rem 2rem;
   border: 1px solid var(--clr-white);
   border-radius: 100px;
-  transition: background var(--transition), color var(--transition);
   width: fit-content;
+  transition: background var(--transition), color var(--transition);
 }
+.ctaBtn:hover { background: var(--clr-white); color: var(--clr-bg-dark); }
 
-.ctaBtn:hover {
-  background: var(--clr-white);
-  color: var(--clr-bg-dark);
-}
-
-.ctaImage {
-  aspect-ratio: 4 / 5;
-  border-radius: var(--radius-md);
-  background: linear-gradient(145deg, #1a1a1a, #2a2520);
-  /* replace with: background-image: url(cloudinaryUrl); background-size: cover; */
-}
-
-/* ── RESPONSIVE ─────────────────────────────────────────────── */
-@media (max-width: 960px) {
-  .processGrid {
+/* ── RESPONSIVE ────────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .timeline {
     grid-template-columns: repeat(2, 1fr);
+    row-gap: var(--space-md);
   }
+  /* Line only spans top row on 2-col */
+  .timelineLine { display: none; }
+
+  .stepTitle {
+  font-family: var(--ff-heading);
+  font-size: var(--step-2);
+  font-weight: 300;
+  line-height: 1.2;
+}
+
+  .stepBody {
+  font-size: var(--step--2);
+  line-height: 1.6;
+}
 }
 
 @media (max-width: 768px) {
@@ -395,48 +450,62 @@
     align-items: flex-start;
     padding-top: 7rem;
   }
+  .heroBgVideo { object-position: 70% top; }
 
-  /* On mobile, shift the video so the figure stays visible
-     even when the layout is single-column.
-     She can adjust this once the real video is in. */
-  .heroBgVideo {
-    object-position: 70% top;
-  }
+  .introInner { flex-direction: column; gap: var(--space-md); }
+  .introImg { width: 100%; aspect-ratio: 16 / 7; }
 
-  .whoInner,
-  .servicesInner,
-  .processInner {
+  /* Services — single column, image inside active item */
+  .servicesInner {
     grid-template-columns: 1fr;
-    gap: var(--space-md);
+    gap: 0;
   }
+  .serviceImageWrap { display: none; }   /* hide desktop image */
+  .serviceMobileImg { display: block; }  /* show mobile image */
+  .serviceItemActive .serviceTitle { font-size: var(--step-1); } /* don't blow up on mobile */
 
-  .servicesIntro,
-  .servicesList,
-  .processIntro,
-  .processGrid {
-    grid-column: 1;
-  }
+  .serviceItem { flex-direction: column; gap: 0.2rem; }
+  .serviceDesc { text-align: left; max-width: none; }
 
-  .serviceItem {
-    flex-direction: column;
-    gap: 0.25rem;
-  }
+  .ctaInner { grid-template-columns: 1fr; }
+  .ctaImg { aspect-ratio: 16 / 9; }
 
-  .serviceDesc { text-align: left; }
-
-  .ctaInner {
+  /* Process — vertical layout on mobile */
+  .timeline {
     grid-template-columns: 1fr;
+    padding-left: 1.5rem;
   }
 
-  .ctaImage { display: none; }
-
-  .processGrid {
-    grid-template-columns: 1fr;
+  /* Vertical line running down the left */
+  .timelineLine {
+    display: block;
+    top: 0; bottom: 0;
+    left: 0; right: auto;
+    width: 1px;
+    height: auto;
   }
+
+  /* Dots on the left side */
+  .timelineDot {
+    top: 0;
+    left: -2.1rem;
+    transform: translateX(50%);
+  }
+
+  .timelineStep { padding-top: 0; padding-bottom: var(--space-md); }
 }
 
 @media (max-width: 480px) {
-  .whoGrid {
-    grid-template-columns: repeat(2, 1fr);
-  }
+  .sizeSm .serviceTitle { font-size: 1rem; }
+  .sizeMd .serviceTitle { font-size: 1.25rem; }
+  .sizeLg .serviceTitle { font-size: 1.6rem; }
+}
+
+.introImg img,
+.ctaImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: var(--radius-md);
+  display: block;
 }
