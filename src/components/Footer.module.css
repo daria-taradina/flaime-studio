@@ -49,6 +49,7 @@
   padding-bottom: 0.1em;
   white-space: nowrap;
   overflow: hidden;
+  text-align: center;
 }
 
 .bigLogo em {
