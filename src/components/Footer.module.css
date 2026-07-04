@@ -39,11 +39,11 @@
 
 /* Big display logo — oversized, clips at edges intentionally */
 .bigLogo {
-  font-family: var(--ff-display);
-  font-weight: 900;
+  font-family: var(--ff-heading);
+  font-weight: 300;
   font-size: clamp(4rem, 18vw, 14rem);
   line-height: 0.85;
-  letter-spacing: -0.03em;
+  letter-spacing: -0.04em;
   color: var(--clr-white);
   padding-inline: clamp(1.25rem, 5vw, 3rem);
   padding-bottom: 0.1em;

@@ -107,6 +107,7 @@ function ServicesSection() {
 
         {/* Left / full-width on mobile: list */}
         <FadeIn className={styles.servicesList}>
+          <span className={`section-label ${styles.servicesLabel}`}>What We Do</span>
           <ul>
             {SERVICES.map((s, i) => (
               <li
@@ -198,19 +199,15 @@ export default function Home() {
         <div className={`container ${styles.introInner}`}>
           <FadeIn className={styles.introText}>
             <p>
-              Flaime Studio is a creative studio helping product-based brands communicate
+              Fl<em>ai</em>me Studio is a creative studio helping product-based brands communicate
               their value through design and creative direction.
             </p>
           </FadeIn>
-          <FadeIn delay={0.1} className={styles.introImg}>
+          {/*<FadeIn delay={0.1} className={styles.introImg}>
               <img src={INTRO_IMG} alt="Flaime Studio work sample" />
-          </FadeIn>
+          </FadeIn>*/}
         </div>
       </section>
-
-      {/* ── SERVICES ── */}
-      
-      <ServicesSection />
 
       {/* ── SELECTED WORKS ── */}
       <section className={styles.works}>
@@ -225,6 +222,12 @@ export default function Home() {
           <DragGallery items={GALLERY_ITEMS} />
         </FadeIn>
       </section>
+
+      {/* ── SERVICES ── */}
+      
+      <ServicesSection />
+
+      
 
       {/* ── PROCESS ── */}
       <section className={styles.process}>

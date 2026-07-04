@@ -17,7 +17,7 @@ function Logo() {
         }}
       />
       <span id="logo-fallback" className={styles.logoFallback} style={{ display: 'none' }}>
-        Flaime Studio
+        fl<em>ai</em>me studio
       </span>
     </>
   );

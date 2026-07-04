@@ -20,7 +20,7 @@ export default function Footer() {
 
       {/* Big footer logo */}
       <div className={styles.bigLogo} aria-hidden="true">
-        fla<em>ime</em> studio
+        fl<em>ai</em>me studio
       </div>
 
       <div className={`container ${styles.bottom}`}>
