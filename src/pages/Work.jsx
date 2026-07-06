@@ -1,12 +1,14 @@
-import { useState, useRef, useCallback } from 'react';
 import { Link } from 'react-router-dom';
 import FadeIn from '../components/FadeIn';
 import DragGallery from '../components/DragGallery';
+import Section from '../components/Section';
+import Button from '../components/Button';
+import { backgroundStyle } from '../utils/media';
 import styles from './Work.module.css';
 
 /* ─── Selected Works (hardcoded, hand-picked) ──────────────── */
 const SELECTED_WORKS = [
-  { id: 1, slug: 'loam-blends',            title: 'Loam Blends',            category: 'Wellness', bg: '#1c1812' },
+  { id: 1, slug: 'loam-blends',            title: 'Loam Blends',            category: 'Wellness', bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781228734/F-3_uunmgt.jpg' },
   { id: 2, slug: 'herbal-skin-solutions',  title: 'Herbal Skin Solutions',  category: 'Wellness', bg: '#0d1a14' },
   { id: 3, slug: 'milave',                 title: 'Milave',                 category: 'Beauty',   bg: '#1a1410' },
   { id: 4, slug: 'ettika',                 title: 'Ettika',                 category: 'Fashion',  bg: '#12091a' },
@@ -32,7 +34,7 @@ const PROJECTS = [
 function SelectedWorkCard({ work }) {
   return (
     <Link to={`/work/${work.slug}`} className={styles.selectedCard}>
-      <div className={styles.selectedImg} style={{ backgroundColor: work.bg }} />
+      <div className={styles.selectedImg} style={backgroundStyle(work.bg)} />
       <div className={styles.selectedText}>
         <span className={styles.selectedCategory}>{work.category}</span>
         <h3 className={styles.selectedTitle}>{work.title}</h3>
@@ -44,7 +46,7 @@ function SelectedWorkCard({ work }) {
 function CategorySection({ label, items }) {
   if (!items.length) return null;
   return (
-    <section className={styles.categorySection}>
+    <Section theme="dark" container={false} className={styles.categorySection}>
       <div className={`container ${styles.categoryHeader}`}>
         <FadeIn>
           <span className="section-label">{label}</span>
@@ -53,14 +55,14 @@ function CategorySection({ label, items }) {
       <FadeIn>
         <DragGallery items={items} />
       </FadeIn>
-    </section>
+    </Section>
   );
 }
 
 export default function Work() {
   return (
-    <main className={styles.page}>
-      <div className="container">
+    <main>
+      <Section theme="dark" className={styles.page}>
         <FadeIn>
           <div className={styles.header}>
             <h1 className={styles.title}>Our Work</h1>
@@ -77,7 +79,7 @@ export default function Work() {
             {SELECTED_WORKS.map((w) => <SelectedWorkCard key={w.id} work={w} />)}
           </div>
         </FadeIn>
-      </div>
+      </Section>
 
       {CATEGORIES.map((cat) => (
         <CategorySection
@@ -88,8 +90,8 @@ export default function Work() {
       ))}
 
       {/* ── CTA ── */}
-      <section className={styles.cta}>
-        <div className={`container ${styles.ctaInner}`}>
+      <Section theme="dark" className={styles.cta}>
+        <div className={styles.ctaInner}>
           <FadeIn className={styles.ctaText}>
             <h2 className={styles.ctaHeadline}>
               Have a Project<br />in Mind?<br />
@@ -99,10 +101,10 @@ export default function Work() {
               Tell us about your brand and what you're looking to achieve.
               We'll come back with a direction that fits.
             </p>
-            <Link to="/contact" className={styles.ctaBtn}>Let's Connect ↗</Link>
+            <Button to="/contact">Let's Connect ↗</Button>
           </FadeIn>
         </div>
-      </section>
+      </Section>
     </main>
   );
 }

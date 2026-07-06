@@ -1,8 +1,9 @@
 import { useRef, useState, useEffect } from 'react';
-import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import FadeIn from '../components/FadeIn';
 import DragGallery from '../components/DragGallery';
+import Section from '../components/Section';
+import Button from '../components/Button';
 import styles from './Home.module.css';
 
 /* ─── Hero video ───────────────────────────────────────────── */
@@ -126,8 +127,8 @@ function ServicesSection() {
   };
 
   return (
-    <section className={styles.services}>
-      <div className={`container ${styles.servicesInner}`}>
+    <Section theme="dark" className={styles.services}>
+      <div className={styles.servicesInner}>
         <FadeIn className={styles.servicesList}>
           <span className={`section-label ${styles.servicesLabel}`}>What We Do</span>
           <ul>
@@ -173,7 +174,7 @@ function ServicesSection() {
           </div>
         </FadeIn>
       </div>
-    </section>
+    </Section>
   );
 }
 
@@ -183,7 +184,7 @@ export default function Home() {
     <main>
 
       {/* ── HERO ── */}
-      <section className={styles.hero}>
+      <Section theme="dark" container={false} className={styles.hero}>
         <HeroBg />
         <div className={`container ${styles.heroContent}`}>
           <h1 className={styles.heroHeadline} aria-label="Transforming brands into visual experiences.">
@@ -210,16 +211,14 @@ export default function Home() {
               We shape how your brand is seen and perceived — helping people understand its
               value, connect with its story, and choose it with confidence.
             </p>
-            <Link to="/contact" className={styles.heroBtn}>
-              Let's Connect ↗
-            </Link>
+            <Button to="/contact">Let's Connect ↗</Button>
           </motion.div>
         </div>
-      </section>
+      </Section>
 
       {/* ── INTRO ── */}
-      <section className={styles.intro}>
-        <div className={`container ${styles.introInner}`}>
+      <Section theme="light" className={styles.intro}>
+        <div className={styles.introInner}>
           <FadeIn className={styles.introText}>
             <p>
               Fl<em>ai</em>me Studio is a creative studio helping product-based brands communicate
@@ -230,31 +229,31 @@ export default function Home() {
               <img src={INTRO_IMG} alt="Flaime Studio work sample" />
           </FadeIn>*/}
         </div>
-      </section>
+      </Section>
 
       {/* ── SELECTED WORKS ── */}
-      <section className={styles.works}>
+      <Section theme="dark" container={false} className={styles.works}>
         <div className={`container ${styles.worksHeader}`}>
           <FadeIn className={styles.worksHeaderRow}>
             <span className="section-label">Selected Works</span>
-            <Link to="/work" className={styles.seeAll}>See all work ↗</Link>
+            <Button to="/work" size="sm">See all work ↗</Button>
           </FadeIn>
         </div>
 
         <FadeIn>
           <DragGallery items={GALLERY_ITEMS} />
         </FadeIn>
-      </section>
+      </Section>
 
       {/* ── SERVICES ── */}
-      
+
       <ServicesSection />
 
-      
+
 
       {/* ── PROCESS ── */}
-      <section className={styles.process}>
-        <div className={`container ${styles.processInner}`}>
+      <Section theme="light" className={styles.process}>
+        <div className={styles.processInner}>
           <FadeIn>
             <p className={styles.processTagline}>
               Turning creative ideas into<br />memorable brand experiences.
@@ -275,11 +274,11 @@ export default function Home() {
             </div>
           </FadeIn>
         </div>
-      </section>
+      </Section>
 
       {/* ── CTA ── */}
-      <section className={styles.cta}>
-        <div className={`container ${styles.ctaInner}`}>
+      <Section theme="dark" className={styles.cta}>
+        <div className={styles.ctaInner}>
           <FadeIn className={styles.ctaImg}>
               <img src={CTA_IMG} alt="Get in touch with Flaime Studio" />
           </FadeIn>
@@ -292,10 +291,10 @@ export default function Home() {
               Tell us about your brand and what you're looking to achieve.
               We'll come back with a direction that fits.
             </p>
-            <Link to="/contact" className={styles.ctaBtn}>Let's Connect ↗</Link>
+            <Button to="/contact">Let's Connect ↗</Button>
           </FadeIn>
         </div>
-      </section>
+      </Section>
 
     </main>
   );

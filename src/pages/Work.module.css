@@ -20,15 +20,9 @@
   line-height: 1.05;
 }
 
-.empty {
-  color: var(--clr-muted);
-  padding-block: var(--space-xl);
-  text-align: center;
-}
-
 .desc {
   font-size: var(--step-0);
-  color: rgba(255,255,255,0.6);
+  color: color-mix(in srgb, var(--section-fg) 60%, transparent);
   line-height: 1.65;
   max-width: 60ch;
 }
@@ -47,6 +41,8 @@
   aspect-ratio: 4 / 5;
   border-radius: var(--radius-md);
   overflow: hidden;
+  background-size: cover;
+  background-position: center;
   transition: transform 0.5s cubic-bezier(0.25, 0.46, 0.45, 0.94);
 }
 .selectedCard:hover .selectedImg { transform: scale(1.02); }
@@ -70,13 +66,13 @@
   font-family: var(--ff-heading);
   font-size: var(--step-1);
   font-weight: 400;
-  color: var(--clr-white);
+  color: var(--section-fg);
 }
 
 /* ── CATEGORY ROWS ── */
 .categorySection {
   padding-block: var(--space-md);
-  border-top: 1px solid var(--clr-border);
+  border-top: 1px solid var(--section-border);
 }
 
 .categoryHeader {
@@ -86,7 +82,10 @@
 .categorySection .section-label { display: block; margin-bottom: var(--space-md); }
 
 /* ── CTA (matches Home) ── */
-.cta { padding-block: var(--space-xl); border-top: 1px solid var(--clr-border); }
+.cta {
+  padding-block: var(--space-xl);
+  border-top: 1px solid var(--section-border);
+}
 .ctaInner { display: flex; flex-direction: column; gap: var(--space-md); }
 .ctaText { display: flex; flex-direction: column; gap: var(--space-md); }
 .ctaHeadline {
@@ -96,24 +95,19 @@
   line-height: 1.1;
   letter-spacing: -0.02em;
 }
-.ctaHeadline em { 
-  font-style: italic; 
+.ctaHeadline em {
+  font-style: italic;
   color: var(--clr-accent);
   font-weight: 600;
- }
-.ctaBody { font-size: var(--step-0); color: rgba(255,255,255,0.6); line-height: 1.65; max-width: 36ch; }
-.ctaBtn {
-  display: inline-block;
-  font-size: var(--step--1);
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  padding: 0.75rem 2rem;
-  border: 1px solid var(--clr-white);
-  border-radius: 100px;
-  width: fit-content;
-  transition: background var(--transition), color var(--transition);
 }
-.ctaBtn:hover { background: var(--clr-white); color: var(--clr-bg-dark); }
+.ctaBody {
+  font-size: var(--step-0);
+  color: color-mix(in srgb, var(--section-fg) 60%, transparent);
+  line-height: 1.65;
+  max-width: 36ch;
+}
+
+/* .ctaBtn removed — now <Button to="/contact"> */
 
 @media (max-width: 600px) {
   .header {

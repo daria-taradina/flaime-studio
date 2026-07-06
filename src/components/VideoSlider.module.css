@@ -28,7 +28,10 @@
   width: clamp(1.25rem, 4vw, 3rem);
 }
 
-/* ── Card ── */
+/* ── Card ──
+   Can carry a background-color OR background-image directly (set via
+   the backgroundStyle helper) when it's a sound-card thumbnail or an
+   ambient card with no video wired up yet - see VideoSlider.jsx. */
 .card {
   flex-shrink: 0;
   /* peek-through: show ~80% of card + hint of next */
@@ -38,10 +41,14 @@
   overflow: hidden;
   position: relative;
   scroll-snap-align: center;
-  background: #111;
+  background-color: #111;
+  background-size: cover;
+  background-position: center;
   transition: transform 0.4s cubic-bezier(0.25, 0.46, 0.45, 0.94),
               opacity  0.4s ease;
-  /* non-active cards slightly scaled down */
+  /* non-active cards slightly scaled down (ambient mode only - see
+     .cardActive; sound-card thumbnails don't use this since there's
+     no "active" scroll-driven state for a static thumbnail) */
   transform: scale(0.94);
   opacity: 0.55;
 }
@@ -51,7 +58,7 @@
   opacity: 1;
 }
 
-/* ── Video fill ── */
+/* ── Ambient video fill ── */
 .video {
   position: absolute;
   inset: 0;
@@ -61,11 +68,12 @@
   display: block;
 }
 
-/* ── Placeholder (while real videos aren't wired up) ── */
-.placeholder {
+/* ── Sound-card play button — positions the shared PlayButton
+   (visuals live in PlayButton.module.css) ── */
+.playBtn {
   position: absolute;
   inset: 0;
-  background: inherit;
+  margin: auto;
 }
 
 /* ── Overlay — always visible at bottom ── */

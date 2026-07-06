@@ -1,5 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
   --clr-bg-dark:  #0D0D0D;
@@ -11,8 +12,14 @@
 
   --ff-display: 'Playfair Display', Georgia, serif;
 
-  --ff-heading: 'Inter Tight', system-ui, sans-serif;
-  --ff-body:    'Inter', system-ui, sans-serif;
+  --ff-heading: "Times New Roman", Times, serif;
+  
+  /*Helvetica, Arial, sans-serif;*/
+  /*"Times New Roman", Times, serif;*/
+  /*'Inter Tight', system-ui, sans-serif;*/
+  --ff-body:    'DM Sans', system-ui, sans-serif;
+  /*"DM Sans", sans-serif;*/
+  /*'Inter', system-ui, sans-serif;*/
 
   --step--1: clamp(0.75rem,  1.5vw, 0.875rem);
   --step-0:  clamp(1rem,     2vw,   1.125rem);
