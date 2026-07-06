@@ -3,7 +3,7 @@ import FadeIn from '../components/FadeIn';
 import DragGallery from '../components/DragGallery';
 import Section from '../components/Section';
 import Button from '../components/Button';
-import { isColor } from '../utils/media';
+import { backgroundStyle } from '../utils/media';
 import styles from './Work.module.css';
 
 /* ─── Selected Works (hardcoded, hand-picked) ──────────────── */
@@ -32,15 +32,9 @@ const PROJECTS = [
 ];
 
 function SelectedWorkCard({ work }) {
-  // work.bg can be a real image URL or a '#hex' placeholder (same convention
-  // as CaseStudyTemplate / FeatureMedia) — pick the right CSS property for it.
-  const imgStyle = isColor(work.bg)
-    ? { backgroundColor: work.bg }
-    : { backgroundImage: `url(${work.bg})` };
-
   return (
     <Link to={`/work/${work.slug}`} className={styles.selectedCard}>
-      <div className={styles.selectedImg} style={imgStyle} />
+      <div className={styles.selectedImg} style={backgroundStyle(work.bg)} />
       <div className={styles.selectedText}>
         <span className={styles.selectedCategory}>{work.category}</span>
         <h3 className={styles.selectedTitle}>{work.title}</h3>

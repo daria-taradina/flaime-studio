@@ -1,60 +1,81 @@
 import { useRef, useState, useCallback, useEffect } from 'react';
+import { backgroundStyle } from '../utils/media';
+import PlayButton from './PlayButton';
+import VideoLightbox from './VideoLightbox';
 import styles from './VideoSlider.module.css';
 
 /**
  * Manual drag/swipe horizontal video slider.
  *
- * Props:
- *   videos — array of:
- *     { id, title, category, cloudName, publicId, poster }
- *     OR for placeholders: { id, title, category, bg }
+ * Two modes per item, picked with `sound`:
  *
- * Videos autoplay muted while visible, pause when off-screen.
- * User drags/swipes to scroll — no auto-advance.
+ *  - Ambient (default, `sound` omitted/false): muted autoplay-on-scroll
+ *    preview, like before. Needs { cloudName, publicId, poster? }.
+ *    Browsers never allow this kind of autoplay to have sound - that's
+ *    a platform rule, not something to work around.
+ *
+ *  - Sound-on (`sound: true`): shows a static thumbnail only (bg color
+ *    or image, or a video `poster`) with a play button. Clicking opens
+ *    a full lightbox player with real controls and audio - unmuted
+ *    playback is only allowed right after a genuine click, which this
+ *    satisfies since the lightbox only ever mounts from that handler.
+ *    Needs { src (playable video url), poster?, bg? }.
+ *
+ * Before real assets exist, either mode can use a `bg` placeholder
+ * (color or image) via the shared backgroundStyle helper.
  */
 
-function VideoCard({ item, isActive }) {
+function VideoCard({ item, isActive, onOpenLightbox }) {
   const videoRef = useRef(null);
+  const isSoundCard = !!item.sound;
 
-  // Play/pause based on whether this card is the "active" visible one
-  useEffect(() => {
-    const v = videoRef.current;
-    if (!v) return;
-    if (isActive) {
-      v.play().catch(() => {}); // catch autoplay policy rejections silently
-    } else {
-      v.pause();
-    }
-  }, [isActive]);
-
-  const hasVideo = item.cloudName && item.publicId;
-  const src = hasVideo
+  const hasAmbientVideo = !isSoundCard && item.cloudName && item.publicId;
+  const ambientSrc = hasAmbientVideo
     ? `https://res.cloudinary.com/${item.cloudName}/video/upload/f_auto,q_auto/${item.publicId}`
     : null;
-  const posterSrc = hasVideo && item.poster
+  const ambientPoster = hasAmbientVideo && item.poster
     ? `https://res.cloudinary.com/${item.cloudName}/image/upload/f_auto,q_auto,w_900/${item.poster}`
     : undefined;
+
+  // Ambient videos play/pause themselves based on scroll position.
+  useEffect(() => {
+    if (!hasAmbientVideo) return;
+    const v = videoRef.current;
+    if (!v) return;
+    if (isActive) v.play().catch(() => {});
+    else v.pause();
+  }, [isActive, hasAmbientVideo]);
+
+  // Sound cards (and ambient cards with no video yet) show a static
+  // thumbnail - color placeholder, image, or the video's own poster frame.
+  const thumbnail = isSoundCard || !hasAmbientVideo
+    ? backgroundStyle(item.bg || item.poster)
+    : undefined;
+
+  const canOpen = isSoundCard && item.src;
 
   return (
     <div
       className={`${styles.card} ${isActive ? styles.cardActive : ''}`}
-      style={!hasVideo ? { backgroundColor: item.bg || '#1a1a1a' } : undefined}
+      style={thumbnail}
+      onClick={canOpen ? () => onOpenLightbox({ src: item.src, poster: item.poster, title: item.title }) : undefined}
+      role={canOpen ? 'button' : undefined}
+      aria-label={canOpen ? `Play ${item.title}` : undefined}
     >
-      {hasVideo ? (
+      {hasAmbientVideo && (
         <video
           ref={videoRef}
           className={styles.video}
-          src={src}
-          poster={posterSrc}
+          src={ambientSrc}
+          poster={ambientPoster}
           muted
           playsInline
           loop
           preload="none"
         />
-      ) : (
-        /* Placeholder — remove once real Cloudinary IDs are added */
-        <div className={styles.placeholder} aria-hidden="true" />
       )}
+
+      {canOpen && <PlayButton className={styles.playBtn} />}
 
       <div className={styles.cardOverlay}>
         <span className={styles.cardCategory}>{item.category}</span>
@@ -70,6 +91,7 @@ export default function VideoSlider({ videos = [] }) {
   const startX     = useRef(0);
   const scrollLeft = useRef(0);
   const [activeIdx, setActiveIdx] = useState(0);
+  const [openVideo, setOpenVideo] = useState(null);
   const hasMoved   = useRef(false);
 
   /* Update active index as user scrolls */
@@ -152,7 +174,12 @@ export default function VideoSlider({ videos = [] }) {
         <div className={styles.spacer} aria-hidden="true" />
 
         {videos.map((item, i) => (
-          <VideoCard key={item.id} item={item} isActive={i === activeIdx} />
+          <VideoCard
+            key={item.id}
+            item={item}
+            isActive={i === activeIdx}
+            onOpenLightbox={setOpenVideo}
+          />
         ))}
 
         {/* Right padding spacer */}
@@ -172,6 +199,8 @@ export default function VideoSlider({ videos = [] }) {
           />
         ))}
       </div>
+
+      <VideoLightbox video={openVideo} onClose={() => setOpenVideo(null)} />
     </div>
   );
 }

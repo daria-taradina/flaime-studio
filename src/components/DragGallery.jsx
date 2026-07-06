@@ -1,4 +1,5 @@
 import { useRef, useState, useCallback, useEffect } from 'react';
+import { backgroundStyle } from '../utils/media';
 import styles from './DragGallery.module.css';
 
 /**
@@ -96,25 +97,18 @@ export default function DragGallery({ items = [] }) {
       >
         <div className={styles.spacer} aria-hidden="true" />
 
-        {items.map((item) => {
-          const isUrl = typeof item.bg === 'string' && item.bg.startsWith('http');
-          return (
-            <div
-              key={item.id}
-              className={styles.card}
-              style={
-                isUrl
-                  ? { backgroundImage: `url(${item.bg})` }
-                  : { backgroundColor: item.bg || '#1a1a1a' }
-              }
-            >
-              <div className={styles.cardOverlay}>
-                <span className={styles.cardCategory}>{item.category}</span>
-                <span className={styles.cardTitle}>{item.title}</span>
-              </div>
+        {items.map((item) => (
+          <div
+            key={item.id}
+            className={styles.card}
+            style={backgroundStyle(item.bg)}
+          >
+            <div className={styles.cardOverlay}>
+              <span className={styles.cardCategory}>{item.category}</span>
+              <span className={styles.cardTitle}>{item.title}</span>
             </div>
-          );
-        })}
+          </div>
+        ))}
 
         <div className={styles.spacer} aria-hidden="true" />
       </div>
