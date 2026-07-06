@@ -100,7 +100,7 @@
   font-size: var(--step-1);
   line-height: 1.55;
   color: var(--section-fg);
-  max-width: 44ch;
+  max-width: 48ch;
 }
 
 .introImg {
