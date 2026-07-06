@@ -71,31 +71,21 @@
 
 .heroDesc {
   font-size: var(--step-0);
-  color: rgba(255,255,255,0.8);
+  /* was rgba(255,255,255,0.8) — same weight, now tied to the section's fg
+     color so it re-tints correctly if this section's theme ever flips */
+  color: color-mix(in srgb, var(--section-fg) 80%, transparent);
   line-height: 1.65;
   max-width: 36ch;
 }
 
-.heroBtn {
-  font-size: var(--step--1);
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  padding: 0.7rem 1.8rem;
-  border: 1px solid rgba(255,255,255,0.6);
-  border-radius: 100px;
-  transition: background var(--transition), color var(--transition), border-color var(--transition);
-}
-.heroBtn:hover {
-  background: var(--clr-white);
-  color: var(--clr-bg-dark);
-  border-color: var(--clr-white);
-}
+/* .heroBtn removed — now <Button to="/contact"> in Home.jsx */
 
 /* ── INTRO ─────────────────────────────────────────────────── */
 .intro {
   padding-block: var(--space-lg);
+  /* seam border between two different-themed sections stays literal,
+     not theme-derived — see note in section-theme.css */
   border-bottom: 1px solid var(--clr-border);
-  background: var(--clr-bg-light);
 }
 
 .introInner {
@@ -109,7 +99,7 @@
   font-family: var(--ff-heading);
   font-size: var(--step-1);
   line-height: 1.55;
-  color: var(--clr-bg-dark);
+  color: var(--section-fg);
   max-width: 44ch;
 }
 
@@ -122,10 +112,59 @@
   /* swap: background-image: url(cloudinaryUrl); background-size: cover; */
 }
 
+.circled {
+  position: relative;
+  display: inline-block;
+}
+
+.circled svg {
+  position: absolute;
+  inset: -10px;
+  width: calc(100% + 20px);
+  height: calc(100% + 20px);
+  fill: none;
+  stroke: chocolate;
+  stroke-width: 2.5px;
+  stroke-dasharray: 400;
+  stroke-dashoffset: 400;
+  animation: drawCircle 0.9s ease forwards;
+  pointer-events: none;
+}
+
+.underlined {
+  position: relative;
+  display: inline-block;
+}
+
+.underlined svg {
+  position: absolute;
+  left: 0;
+  bottom: -6px;
+  width: 100%;
+  height: 14px;
+  fill: none;
+  stroke: var(--section-fg);
+  stroke-width: 2.5px;
+  stroke-linecap: round;
+  stroke-dasharray: 300;
+  stroke-dashoffset: 300;
+  animation: drawUnderline 0.8s ease forwards;
+  pointer-events: none;
+}
+
+@keyframes drawCircle {
+  to { stroke-dashoffset: 0;}  
+}
+
+@keyframes drawUnderline {
+  to { stroke-dashoffset: 0;}  
+}
+
+
 /* ── SERVICES ──────────────────────────────────────────────── */
 .services {
   padding-block: var(--space-xl);
-  border-top: 1px solid var(--clr-border);
+  border-top: 1px solid var(--clr-border); /* seam border — literal, see intro note */
 }
 
 /* Two-col on desktop: list left, image right */
@@ -140,7 +179,8 @@
 .servicesList { width: 100%; }
 
 .servicesList ul {
-  border-top: 1px solid var(--clr-border);
+  /* internal divider, lives entirely within this section's own theme */
+  border-top: 1px solid var(--section-border);
 }
 
 .servicesLabel {
@@ -149,7 +189,7 @@
 }
 
 .serviceItem {
-  border-bottom: 1px solid var(--clr-border);
+  border-bottom: 1px solid var(--section-border);
   padding: 1rem 0;
   cursor: pointer;
   transition: background var(--transition);
@@ -166,14 +206,14 @@
   font-family: var(--ff-heading);
   font-size: var(--step-1);
   font-weight: 400;
-  color: rgba(255,255,255,0.35);
+  color: color-mix(in srgb, var(--section-fg) 35%, transparent);
   transition: color var(--transition), font-size var(--transition);
   line-height: 1.2;
 }
 
 .serviceArrow {
   font-size: var(--step-0);
-  color: rgba(255,255,255,0.15);
+  color: color-mix(in srgb, var(--section-fg) 15%, transparent);
   transition: color var(--transition), opacity var(--transition);
   opacity: 0;
   flex-shrink: 0;
@@ -181,7 +221,7 @@
 
 /* Active state */
 .serviceItemActive .serviceTitle {
-  color: var(--clr-white);
+  color: var(--section-fg);
   font-size: var(--step-2);
   font-weight: 400;
 }
@@ -194,7 +234,7 @@
 /* Desc — hidden by default, visible on active */
 .serviceDesc {
   font-size: var(--step--1);
-  color: rgba(255,255,255,0.45);
+  color: color-mix(in srgb, var(--section-fg) 45%, transparent);
   line-height: 1.5;
   max-height: 0;
   overflow: hidden;
@@ -269,26 +309,12 @@
   align-items: center;
 }
 
-.seeAll {
-  font-size: var(--step--1);
-  color: rgba(255,255,255,0.5);
-  transition: color var(--transition);
-  padding: 0.5rem 1.5rem;
-  border: 1px solid rgba(255,255,255,0.6);
-  border-radius: 100px;
-  transition: background var(--transition), color var(--transition), border-color var(--transition);
-}
-.seeAll:hover {   
-  background: var(--clr-white);
-  color: var(--clr-bg-dark);
-  border-color: var(--clr-white);
-}
+/* .seeAll removed — now <Button to="/work" size="sm"> */
 
 /* ── PROCESS ───────────────────────────────────────────────── */
 .process {
-  background: var(--clr-bg-light);
   padding-block: var(--space-xl);
-  border-top: 1px solid var(--clr-border);
+  border-top: 1px solid var(--clr-border); /* seam border — literal, see intro note */
 }
 
 .processInner {
@@ -299,7 +325,7 @@
 
 .processTagline {
   font-family: var(--ff-heading);
-  color: var(--clr-bg-dark);
+  color: var(--section-fg);
   letter-spacing: -0.04em;
   font-size: var(--step-3);
   font-weight: 300;
@@ -323,7 +349,7 @@
   top: 8px; /* vertically centered on dot */
   left: 0; right: 0;
   height: 1px;
-  background: var(--clr-bg-dark);
+  background: var(--section-fg);
   z-index: 0;
 }
 
@@ -342,15 +368,15 @@
   width: 10px;
   height: 10px;
   border-radius: 50%;
-  background: var(--clr-bg-dark);
-  border: 2px solid var(--clr-bg-light);
-  outline: 1px solid var(--clr-bg-dark);
+  background: var(--section-fg);
+  border: 2px solid var(--section-bg);
+  outline: 1px solid var(--section-fg);
   z-index: 1;
 }
 
 .stepTitle {
   font-family: var(--ff-heading);
-  color: var(--clr-bg-dark);
+  color: var(--section-fg);
   font-size: var(--step-0);
   font-weight: 300;
   line-height: 1.2;
@@ -358,14 +384,14 @@
 
 .stepBody {
   font-size: var(--step--1);
-  color: var(--clr-bg-dark);
+  color: var(--section-fg);
   line-height: 1.6;
 }
 
 /* ── CTA ───────────────────────────────────────────────────── */
 .cta {
   padding-block: var(--space-xl);
-  border-top: 1px solid var(--clr-border);
+  border-top: 1px solid var(--clr-border); /* seam border — literal, see intro note */
 }
 
 .ctaInner {
@@ -404,23 +430,12 @@
 
 .ctaBody {
   font-size: var(--step-0);
-  color: rgba(255,255,255,0.6);
+  color: color-mix(in srgb, var(--section-fg) 60%, transparent);
   line-height: 1.65;
   max-width: 36ch;
 }
 
-.ctaBtn {
-  display: inline-block;
-  font-size: var(--step--1);
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  padding: 0.75rem 2rem;
-  border: 1px solid var(--clr-white);
-  border-radius: 100px;
-  width: fit-content;
-  transition: background var(--transition), color var(--transition);
-}
-.ctaBtn:hover { background: var(--clr-white); color: var(--clr-bg-dark); }
+/* .ctaBtn removed — now <Button to="/contact"> */
 
 /* ── RESPONSIVE ────────────────────────────────────────────── */
 @media (max-width: 900px) {
@@ -464,7 +479,7 @@
 
   .serviceArrow {
     opacity: 1;
-    color: rgba(255,255,255,0.35);
+    color: color-mix(in srgb, var(--section-fg) 35%, transparent);
   }
 
   .serviceImageWrap { display: none; }   /* hide desktop image */

@@ -1,0 +1,198 @@
+/* ── HEADER ─────────────────────────────────────────────── */
+.header {
+  padding-top: 8rem;
+  padding-bottom: var(--space-lg);
+}
+
+.headerRow {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: var(--space-xl);
+  align-items: flex-end;
+}
+
+.title {
+  font-family: var(--ff-heading);
+  font-size: var(--step-4);
+  font-weight: 350;
+  line-height: 0.9;
+  letter-spacing: -0.02em;
+}
+
+.tagline {
+  font-size: var(--step-0);
+  color: var(--section-muted);
+  line-height: 1.65;
+  max-width: 42ch;
+}
+
+/* ── HERO IMAGE ─────────────────────────────────────────── */
+.heroImage {
+  width: 100%;
+  aspect-ratio: 16 / 9;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── SUMMARY + BREAKDOWN ───────────────────────────────────*/
+.summary {
+  padding-block: var(--space-xl);
+}
+
+.summaryHeading {
+  font-family: var(--ff-heading);
+  font-weight: 300;
+  font-size: var(--step-3);
+  line-height: 1.15;
+  letter-spacing: -0.02em;
+  text-align: center;
+  max-width: 46ch;
+  margin-inline: auto;
+  margin-bottom: var(--space-xl);
+}
+
+/* ── BREAKDOWN TIMELINE ─────────────────────────────────────
+   Same technique as Home's Process section timeline: a connecting
+   line + dot per step, horizontal on desktop, flips to a vertical
+   line down the left on mobile. Every piece is named for what it is
+   so this is easy to scan: Line, Step (one column), Dot, Label
+   (the small uppercase caption), Card (title + body).
+*/
+.breakdownTimeline {
+  position: relative;
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: var(--space-md);
+}
+
+/* The connecting line running behind every dot */
+.breakdownLine {
+  position: absolute;
+  top: 8px; /* matches Home's .timelineLine offset exactly */
+  left: 0;
+  right: 0;
+  height: 1px;
+  background: var(--section-fg);
+  z-index: 0;
+}
+
+/* One column: dot, then label, then card - all in normal document
+   flow except the dot itself, so text reflowing at different sizes
+   never throws off the alignment. */
+.breakdownStep {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 0.6rem;
+  padding-top: 1.5rem; /* reserved space for the dot above the content */
+}
+
+/* Matches Home's .timelineDot exactly */
+.breakdownDot {
+  position: absolute;
+  top: 0.3rem;
+  left: 0;
+  width: 10px;
+  height: 10px;
+  border-radius: 50%;
+  background: var(--section-fg);
+  border: 2px solid var(--section-bg);
+  outline: 1px solid var(--section-fg);
+  z-index: 1;
+}
+
+.breakdownLabel {
+  display: block;
+}
+
+.breakdownCard {
+  background: var(--section-card-bg);
+  border: 1px solid var(--section-border);
+  border-radius: var(--radius-md);
+  padding: var(--space-md);
+}
+
+.breakdownCardTitle {
+  font-family: var(--ff-heading);
+  font-size: var(--step-1);
+  font-weight: 400;
+  line-height: 1.25;
+  margin-bottom: 0.75rem;
+}
+
+.breakdownCardBody {
+  font-size: var(--step--1);
+  color: var(--section-muted);
+  line-height: 1.6;
+}
+
+/* ── GALLERY ────────────────────────────────────────────── */
+.galleryGrid {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 4px;
+}
+
+.galleryItem {
+  aspect-ratio: 3 / 4;
+  overflow: hidden;
+}
+
+.galleryItem img,
+.galleryColor {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+/* ── RESPONSIVE ─────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .breakdownTimeline {
+    grid-template-columns: repeat(2, 1fr);
+    row-gap: var(--space-md);
+  }
+  /* Line only makes sense spanning a full single row - hide on 2-col */
+  .breakdownLine { display: none; }
+
+  .galleryGrid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 3px;
+  }
+}
+
+@media (max-width: 768px) {
+  .header { padding-top: 7rem; }
+  .headerRow {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    align-items: flex-start;
+  }
+
+  /* Breakdown flips to a vertical timeline - line runs down the left,
+     dots sit on it, each step's label + card follow to the right. */
+  .breakdownTimeline {
+    grid-template-columns: 1fr;
+    padding-left: 1.5rem;
+  }
+  .breakdownLine {
+    display: block;
+    top: 0;
+    bottom: 0;
+    left: 0;
+    right: auto;
+    width: 1px;
+    height: auto;
+  }
+  .breakdownDot {
+    top: 0;
+    left: -2.1rem;
+    transform: translateX(50%);
+  }
+  .breakdownStep {
+    padding-top: 0;
+    padding-bottom: var(--space-md);
+  }
+
+  .heroImage { aspect-ratio: 4 / 5; }
+}
