@@ -262,7 +262,7 @@ export default function Home() {
       </Section>
 
       {/* ── CTA ── */}
-      <Section theme="dark" className={styles.cta}>
+      <Section theme="dark" container={false} className={styles.cta}>
         <div className={styles.ctaInner}>
           <FadeIn className={styles.ctaImg}>
               <img src={CTA_IMG} alt="Get in touch with Flaime Studio" />
