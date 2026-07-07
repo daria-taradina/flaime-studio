@@ -7,9 +7,16 @@ import styles from './DragGallery.module.css';
  * Desktop: shows prev/next arrow buttons + drag.
  * Mobile: swipe only (arrows hidden).
  *
- * items: array of { id, bg (css color or full cloudinary URL), title, category }
+ * items: array of either
+ *   { id, type: 'image', bg: <url>, title?, category? }
+ *   { id, type: 'video', src: <url>, poster?: <url>, title?, category? }
+ * (type defaults to 'image' if omitted, for backwards compatibility)
+ *
+ * props:
+ *   ratio        — CSS aspect-ratio for cards, e.g. '3 / 4' or '9 / 16' (default '3 / 4')
+ *   showOverlay  — whether to render the title/category overlay (default true)
  */
-export default function DragGallery({ items = [] }) {
+export default function DragGallery({ items = [], ratio = '3 / 4', showOverlay = true }) {
   const trackRef    = useRef(null);
   const isDragging  = useRef(false);
   const startX      = useRef(0);
@@ -65,7 +72,6 @@ export default function DragGallery({ items = [] }) {
 
   return (
     <div className={styles.wrapper}>
-      {/* Arrows — desktop only via CSS */}
       <button
         className={`${styles.arrow} ${styles.arrowPrev} ${!canPrev ? styles.arrowHidden : ''}`}
         onClick={() => scrollBy(-1)}
@@ -86,7 +92,6 @@ export default function DragGallery({ items = [] }) {
         </svg>
       </button>
 
-      {/* Track */}
       <div
         ref={trackRef}
         className={styles.track}
@@ -98,20 +103,66 @@ export default function DragGallery({ items = [] }) {
         <div className={styles.spacer} aria-hidden="true" />
 
         {items.map((item) => (
-          <div
-            key={item.id}
-            className={styles.card}
-            style={backgroundStyle(item.bg)}
-          >
-            <div className={styles.cardOverlay}>
-              <span className={styles.cardCategory}>{item.category}</span>
-              <span className={styles.cardTitle}>{item.title}</span>
-            </div>
-          </div>
+          <GalleryCard key={item.id} item={item} ratio={ratio} showOverlay={showOverlay} />
         ))}
 
         <div className={styles.spacer} aria-hidden="true" />
       </div>
+    </div>
+  );
+}
+
+function GalleryCard({ item, ratio, showOverlay }) {
+  const cardRef  = useRef(null);
+  const videoRef = useRef(null);
+  const isVideo  = item.type === 'video';
+
+  // Pause video when it scrolls out of view; play when it's visible.
+  useEffect(() => {
+    if (!isVideo) return;
+    const el = cardRef.current;
+    const vid = videoRef.current;
+    if (!el || !vid) return;
+
+    const io = new IntersectionObserver(
+      ([entry]) => {
+        if (entry.isIntersecting) {
+          vid.play().catch(() => {});
+        } else {
+          vid.pause();
+        }
+      },
+      { threshold: 0.25 }
+    );
+    io.observe(el);
+    return () => io.disconnect();
+  }, [isVideo]);
+
+  return (
+    <div
+      ref={cardRef}
+      className={styles.card}
+      style={{ aspectRatio: ratio, ...(isVideo ? {} : backgroundStyle(item.bg)) }}
+    >
+      {isVideo && (
+        <video
+          ref={videoRef}
+          className={styles.cardVideo}
+          src={item.src}
+          poster={item.poster}
+          muted
+          loop
+          playsInline
+          preload="metadata"
+        />
+      )}
+
+      {showOverlay && (item.title || item.category) && (
+        <div className={styles.cardOverlay}>
+          {item.category && <span className={styles.cardCategory}>{item.category}</span>}
+          {item.title && <span className={styles.cardTitle}>{item.title}</span>}
+        </div>
+      )}
     </div>
   );
 }

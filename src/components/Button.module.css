@@ -3,6 +3,8 @@
   font-size: var(--step--1);
   font-weight: 500;
   letter-spacing: 0.06em;
+  white-space: nowrap;      /* new — never let label wrap inside the pill */
+  flex-shrink: 0;           /* new — never let flex parent squeeze it */
   border: 1px solid currentColor;
   border-radius: 100px;
   width: fit-content;
