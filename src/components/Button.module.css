@@ -1,10 +1,11 @@
 .btn {
   display: inline-block;
-  font-size: var(--step--1);
-  font-weight: 500;
-  letter-spacing: 0.06em;
-  white-space: nowrap;      /* new — never let label wrap inside the pill */
-  flex-shrink: 0;           /* new — never let flex parent squeeze it */
+  font-family: var(--ff-ui);
+  font-size: var(--fs-btn);
+  font-weight: 400;
+  letter-spacing: var(--ls-btn);
+  white-space: nowrap;
+  flex-shrink: 0;
   border: 1px solid currentColor;
   border-radius: 100px;
   width: fit-content;
@@ -17,5 +18,6 @@
   border-color: var(--section-fg);
 }
 
-.md { padding: 0.75rem 2rem; }
-.sm { padding: 0.5rem 1.5rem; }
+/* (71.8px height ÷ 2) − half the 13.8px line ≈ 29px vertical; horizontal kept generous per her pill proportions */
+.md { padding: 1.8rem 3rem; }
+.sm { padding: 1.2rem 2.25rem; }

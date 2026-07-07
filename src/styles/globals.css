@@ -1,3 +1,4 @@
+@import url('https://fonts.googleapis.com/css2?family=Epilogue:ital,wght@0,300;0,400;0,500;0,600;1,400&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
@@ -12,10 +13,9 @@
 
   --ff-display: 'Playfair Display', Georgia, serif;
   --ff-heading: "Times New Roman", Times, serif;
-  --ff-ui:      'Inter', system-ui, sans-serif; /* new — per type spec */
+  --ff-ui:      'Epilogue', 'Inter', system-ui, sans-serif; /* switched from Inter — her live site is actually loading Epilogue */
   --ff-body:    'DM Sans', system-ui, sans-serif;
 
-  /* existing fluid scale — kept for anything not covered by the new spec */
   --step--1: clamp(0.75rem,  1.5vw, 0.875rem);
   --step-0:  clamp(1rem,     2vw,   1.125rem);
   --step-1:  clamp(1.25rem,  3vw,   1.5rem);
@@ -23,31 +23,26 @@
   --step-3:  clamp(2.5rem,   6vw,   3.5rem);
   --step-4:  clamp(3.5rem,   9vw,   5.5rem);
 
-  /* ── New type spec (Inter, ratios from your guide, base = 16px paragraph) ── */
-  --fs-h1: clamp(2.5rem, 1.9rem + 3vw, 5.5rem);
-  --fs-h2: clamp(2.25rem, 5vw, 3.6rem);   --ls-h2: -0.05em;  --fw-h2: 400;
-  --fs-h3: clamp(1.5rem,  3vw, 2rem);     --ls-h3: -0.06em;  --fw-h3: 400;
-  --fs-h4: 1.3rem;                         --ls-h4: -0.025em; --fw-h4: 600;
-  --fs-p:  1rem;                           --ls-p:  -0.06em;
-  --fs-btn: 1.5rem;                        --ls-btn: -0.05em;
-
-  /* font-size = min + (max - min) * ((100vw - minVw) / (maxVw - minVw)), clamped */
-  /*--fs-h1: clamp(2.5rem, 1.9rem + 3vw, 5.5rem);
-  --fs-h2: clamp(2rem,   1.5rem + 2.5vw, 4.5rem);
-  --fs-h3: clamp(1.5rem, 1.1rem + 2vw, 2.75rem);
-  --fs-h4: clamp(1.1rem, 1rem + 0.5vw, 1.4rem);
-  --fs-p:  clamp(1rem,   0.95rem + 0.25vw, 1.15rem);
-  --fs-btn: clamp(1rem,  0.9rem + 0.3vw, 1.3rem);*/
-
+  /* ── Type spec — real px values measured from her live site via DevTools ──
+     H1 98.6px | H2 58px | H3 26.7px | H4 21.2px | P 21px | Button text 13.8px
+     Converted to rem (16px base), with a fluid min for narrow viewports so
+     they don't feel oversized on mobile before your existing --page-pad
+     breakpoint kicks in. */
+  --fs-h1: clamp(2.75rem, 1.5rem + 5vw, 6.1625rem);   --ls-h1: -0.05em;   --fw-h1: 400; --lh-h1: 1.0;
+  --fs-h2: clamp(2rem,    1.2rem + 3.5vw, 3.625rem);  --ls-h2: -0.05em;   --fw-h2: 400; --lh-h2: 1.0;
+  --fs-h3: clamp(1.35rem, 1rem + 1.5vw, 1.669rem);    --ls-h3: -0.06em;   --fw-h3: 400; --lh-h3: 1.35;
+  --fs-h4: 1.325rem;                                   --ls-h4: -0.025em;  --fw-h4: 600; --lh-h4: 1.1;
+  --fs-p:  1.3125rem;                                  --ls-p:  -0.06em;                 --lh-p:  1.5;
+  --fs-btn: 0.8625rem;                                 --ls-btn: -0.05em;
 
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 2.5rem;
   --space-lg: 5rem;
-  --space-xl: 90px;   /* was 4rem — more room between blocks per your note */
+  --space-xl: 90px;
   --space-2xl: 9rem;
 
-  --page-pad: 60px;   /* new — consistent 60px left/right/top edge */
+  --page-pad: 60px;
 
   --radius-sm: 4px;
   --radius-md: 10px;
@@ -76,7 +71,7 @@ ul, ol { list-style: none; }
 }
 
 .section-label {
-  font-family: var(--ff-body);
+  font-family: var(--ff-ui);
   font-size: var(--step--1);
   font-weight: 500;
   letter-spacing: 0.12em;
