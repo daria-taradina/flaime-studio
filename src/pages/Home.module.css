@@ -56,7 +56,7 @@
   font-size: var(--fs-h1);
   font-weight: var(--fw-h1);
   letter-spacing: var(--ls-h1);
-  line-height: 1;
+  line-height: var(--lh-h1);
   display: flex;
   flex-wrap: wrap;
   gap: 0.2em;
@@ -86,31 +86,35 @@
 
 /* ── INTRO ─────────────────────────────────────────────────── */
 .intro {
+  position: relative;
+  z-index: 1; /* lets this section's diagonal edge paint over the section below it */
   padding-block: var(--space-xl);
-  border-bottom: 1px solid var(--clr-border);
+  padding-bottom: calc(var(--space-xl) + 70px); /* extra room so content clears the slant */
+  margin-bottom: -70px; /* pulls the next section up to sit underneath the diagonal */
+  clip-path: polygon(0 0, 100% 0, 100% 100%, 0 calc(100% - 70px));
 }
 
-/* ── INTRO — fix invalid align-items value ── */
 .introInner {
-  display: flex;
-  align-items: flex-start; /* was "top" — not a valid CSS value, was silently
-    falling back to stretch instead of actually top-aligning like the mockup */
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  align-items: flex-start;
   gap: var(--space-xl);
 }
 
-/* H3 — per type spec */
+.introLabel {
+  padding-top: 0.3em; /* optical alignment with the first line of the paragraph */
+}
+
 .introText p {
   font-family: var(--ff-ui);
   font-size: var(--fs-h3);
   font-weight: var(--fw-h3);
   letter-spacing: var(--ls-h3);
-  line-height: 1.4;
+  line-height: var(--lh-h3);
   color: var(--section-fg);
   max-width: 42ch;
 }
 
-/* Two images, side by side, next to the intro text */
 .introImages {
   display: flex;
   gap: var(--space-sm);
@@ -138,6 +142,16 @@
 .services {
   padding-block: var(--space-xl);
   border-top: 1px solid var(--clr-border);
+}
+
+.servicesInner {
+  position: relative;
+}
+
+.servicesLabelCol {
+  position: absolute;
+  top: 0.3em;
+  left: 0;
 }
 
 .servicesList {
@@ -293,7 +307,7 @@
   letter-spacing: var(--ls-h4);
   color: var(--section-fg);
   font-size: var(--fs-h4);
-  line-height: 1.2;
+  line-height: var(--lh-h4);
 }
 
 /* Paragraph — per type spec */
@@ -302,7 +316,7 @@
   font-size: var(--fs-p);
   letter-spacing: var(--ls-p);
   color: var(--section-fg);
-  line-height: 1.6;
+  line-height: var(--lh-p);
 }
 
 /* ── CTA ───────────────────────────────────────────────────── */
@@ -388,9 +402,25 @@
   
   .heroBgVideo { object-position: 70% top; }
 
-  .introInner { flex-direction: column; align-items: flex-start; gap: var(--space-md); }
+  .introInner {
+    grid-template-columns: 1fr;
+    align-items: flex-start;
+    gap: var(--space-md);
+  }
+  .introLabel { padding-top: 0; }
   .introImages { width: 100%; }
   .introImg { flex: 1; aspect-ratio: 4 / 5; }
+
+  .servicesInner {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: var(--space-md);
+  }
+  .servicesLabelCol {
+    position: static;
+    text-align: center;
+  }
 
   .worksFooter {
     flex-direction: column;

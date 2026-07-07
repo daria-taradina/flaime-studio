@@ -123,27 +123,32 @@ function ServicesSection() {
 
   return (
     <Section theme="dark" className={styles.services}>
-      <FadeIn className={styles.servicesList}>
-        <span className={`section-label ${styles.servicesLabel}`}>What We Do</span>
-        <ul>
-          {SERVICES.map((title, i) => {
-            const distance = active === null ? undefined : Math.abs(i - active);
-            return (
-              <li
-                key={title}
-                ref={(el) => (itemRefs.current[i] = el)}
-                data-index={i}
-                className={styles.serviceItem}
-                style={distance !== undefined ? { '--distance': distance } : undefined}
-                onMouseEnter={() => { if (!isMobile) setActive(i); }}
-                onMouseLeave={() => { if (!isMobile) setActive(null); }}
-              >
-                <span className={styles.serviceTitle}>{title}</span>
-              </li>
-            );
-          })}
-        </ul>
-      </FadeIn>
+      <div className={styles.servicesInner}>
+        <FadeIn className={styles.servicesLabelCol}>
+          <span className="section-label">What We Do</span>
+        </FadeIn>
+
+        <FadeIn delay={0.05} className={styles.servicesList}>
+          <ul>
+            {SERVICES.map((title, i) => {
+              const distance = active === null ? undefined : Math.abs(i - active);
+              return (
+                <li
+                  key={title}
+                  ref={(el) => (itemRefs.current[i] = el)}
+                  data-index={i}
+                  className={styles.serviceItem}
+                  style={distance !== undefined ? { '--distance': distance } : undefined}
+                  onMouseEnter={() => { if (!isMobile) setActive(i); }}
+                  onMouseLeave={() => { if (!isMobile) setActive(null); }}
+                >
+                  <span className={styles.serviceTitle}>{title}</span>
+                </li>
+              );
+            })}
+          </ul>
+        </FadeIn>
+      </div>
     </Section>
   );
 }
@@ -186,15 +191,20 @@ export default function Home() {
         </div>
       </Section>
 
-      {/* ── INTRO ── */}
+  {/* ── INTRO ── */}
       <Section theme="light" className={styles.intro}>
         <div className={styles.introInner}>
-          <FadeIn className={styles.introText}>
+          <FadeIn className={styles.introLabel}>
+            <span className="section-label">Who We Are</span>
+          </FadeIn>
+
+          <FadeIn delay={0.05} className={styles.introText}>
             <p>
               Flaime Studio is a creative studio helping product-based brands communicate
               their value through design and creative direction.
             </p>
           </FadeIn>
+
           <FadeIn delay={0.1} className={styles.introImages}>
             <div className={styles.introImg}>
               <img src={INTRO_IMG_1} alt="Flaime Studio work sample" />
