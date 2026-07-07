@@ -4,6 +4,7 @@ import Navbar from './components/Navbar';
 import Footer from './components/Footer';
 import Home from './pages/Home';
 import Work from './pages/Work';
+import About from './pages/About';
 import Contact from './pages/Contact';
 import CaseStudy from './pages/CaseStudy';
 import './styles/globals.css';
@@ -23,6 +24,7 @@ export default function App() {
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/work" element={<Work />} />
+        <Route path="/about" element={<About />} />
         <Route path="/work/:slug" element={<CaseStudy />} />
         <Route path="/contact" element={<Contact />} />
       </Routes>

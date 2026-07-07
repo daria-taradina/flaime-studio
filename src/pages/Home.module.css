@@ -61,7 +61,7 @@
   flex-wrap: wrap;
   gap: 0.2em;
   align-content: flex-end;
-  max-width: 10ch;
+  width: 12ch;
 }
 
 .heroWord { display: inline-block; }

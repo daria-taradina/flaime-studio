@@ -21,13 +21,8 @@
 }
 
 /* Logo */
-.logo {
-  display: flex;
-  align-items: center;
-  flex-shrink: 0;
-  margin-right: auto;
-}
-.logoImg   { display: block; height: 28px; width: auto; }
+.logo { display: flex; align-items: center; flex-shrink: 0; margin-right: auto; }
+.logoImg { display: block; height: 28px; width: auto; }
 .logoFallback {
   font-family: var(--ff-heading);
   font-weight: 200;
@@ -35,18 +30,14 @@
   font-size: 1.4rem;
   color: var(--clr-white);
 }
+.logoFallback em { font-style: italic; color: var(--clr-accent); }
 
-.logoFallback em {
-  font-style: italic;
-  color: var(--clr-accent);
-}
-
-/* Nav */
+/* Desktop nav */
 .nav { display: flex; gap: var(--space-md); }
 
 .navLink {
   font-size: var(--step--1);
-  font-weight: 400;
+  font-weight: 300;
   letter-spacing: 0.04em;
   color: rgba(255,255,255,0.65);
   transition: color var(--transition);
@@ -79,9 +70,55 @@
 }
 .cta:hover { background: var(--clr-white); color: var(--clr-bg-dark); }
 
-/* Mobile — everything still fits, just tighten gaps */
-@media (max-width: 480px) {
-  .inner { gap: var(--space-sm); }
-  .cta { padding: 0.5rem 1rem; font-size: 0.7rem; }
-  .navLink { font-size: 1.1rem; }
+/* Hamburger button — hidden on desktop */
+.burger {
+  display: none;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  width: 32px;
+  height: 32px;
+  flex-shrink: 0;
+  z-index: 210;
+}
+.burger span {
+  display: block;
+  width: 100%;
+  height: 1.5px;
+  background: var(--clr-white);
+  transition: transform var(--transition), opacity var(--transition);
+}
+.menuOpen .burger span:nth-child(1) { transform: translateY(6.5px) rotate(45deg); }
+.menuOpen .burger span:nth-child(2) { opacity: 0; }
+.menuOpen .burger span:nth-child(3) { transform: translateY(-6.5px) rotate(-45deg); }
+
+/* Mobile fullscreen panel */
+.mobileNav {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 190;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--space-md);
+  background: rgba(13,13,13,0.98);
+  backdrop-filter: blur(12px);
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity var(--transition);
+}
+.menuOpen .mobileNav {
+  opacity: 1;
+  pointer-events: auto;
+}
+
+@media (max-width: 768px) {
+  .nav, .header .inner > .cta { display: none; }
+  .burger { display: flex; }
+  .mobileNav { display: flex; }
+
+  /* same font/weight/letter-spacing/color as desktop .navLink — just bigger */
+  .mobileNav .navLink { font-size: 1.6rem; }
+  .mobileNav .cta { font-size: 0.9rem; padding: 0.75rem 1.75rem; }
 }

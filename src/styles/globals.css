@@ -14,7 +14,7 @@
 
   --ff-display: 'Playfair Display', Georgia, serif;
   --ff-heading: "Times New Roman", Times, serif;
-  --ff-ui:      'Plus Jakarta Sans', system-ui, sans-serif;
+  --ff-ui:      'Inter', system-ui, sans-serif;
   /*'Epilogue', 'Inter', system-ui, sans-serif; /* switched from Inter — her live site is actually loading Epilogue */
   --ff-body:    'DM Sans', system-ui, sans-serif;
 
@@ -30,7 +30,7 @@
      Converted to rem (16px base), with a fluid min for narrow viewports so
      they don't feel oversized on mobile before your existing --page-pad
      breakpoint kicks in. */
-  --fs-h1: clamp(2.75rem, 1.5rem + 5vw, 6.1625rem);   --ls-h1: -0.07em;   --fw-h1: 300; --lh-h1: 1.0;
+  --fs-h1: clamp(2.75rem, 1.5rem + 5vw, 6.1625rem);   --ls-h1: -0.05em;   --fw-h1: 300; --lh-h1: 1.0;
   --fs-h2: clamp(2rem,    1.2rem + 3.5vw, 3.625rem);  --ls-h2: -0.05em;   --fw-h2: 400; --lh-h2: 1.0;
   --fs-h3: clamp(1.35rem, 1rem + 1.5vw, 1.669rem);    --ls-h3: -0.06em;   --fw-h3: 400; --lh-h3: 1.35;
   --fs-h4: 1.325rem;                                   --ls-h4: -0.025em;  --fw-h4: 600; --lh-h4: 1.1;
