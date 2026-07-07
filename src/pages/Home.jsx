@@ -43,50 +43,39 @@ function HeroBg() {
 /* ─── Data ─────────────────────────────────────────────────── */
 const WORDS = ['Transforming', 'brands', 'into', 'visual', 'experiences.'];
 
-const INTRO_IMG = 'https://res.cloudinary.com/dgad4xyuc/image/upload/v1781228731/4f_feyshi.png';
+// Reused for the two intro images (placeholders — swap for final picks anytime)
+const INTRO_IMG_1 = 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781228733/hf_20260403_215802_26dda678-2f90-4fe0-b5d7-39a55f0f377b_1_jgsrxl.png';
+const INTRO_IMG_2 = 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781228734/F-3_uunmgt.jpg';
 
+// Services — plain list, no images, no descriptions (per updated spec)
 const SERVICES = [
-  {
-    title: 'Creative Concept',
-    desc: 'Brand strategy · creative direction · mood boards',
-    img: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781229102/d-10_geiek8.jpg',
-  },
-  {
-    title: 'Visual Identity',
-    desc: 'Logo systems · colour palettes · typography',
-    img: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781229106/6db9025c_nano_2K_f9vofx.jpg',
-  },
-  {
-    title: 'AI Generated Content',
-    desc: 'AI video & photo · art direction · post-processing',
-    img: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781228733/hf_20260403_215802_26dda678-2f90-4fe0-b5d7-39a55f0f377b_1_jgsrxl.png',
-  },
-  {
-    title: 'Social Media Content',
-    desc: 'Content roadmaps · short-form video · campaigns',
-    img: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781229106/d-9_jrekkm.jpg',
-  },
-  {
-    title: 'Packaging Design',
-    desc: 'Print · digital assets · marketing materials',
-    img: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781228734/F-3_uunmgt.jpg',
-  },
-  {
-    title: 'Web Design & Development',
-    desc: 'Portfolio sites · brand sites · landing pages',
-    img: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781229106/a06b97ea_nano_2K_xy3svv.jpg',
-  },
+  'Web Design',
+  'Visual Identity',
+  'Packaging Design',
+  'Social Media Assets',
+  'AI-Generated Content',
+  'Motion Design',
 ];
 
+// Selected Works — 9:16 media items. `type: 'video'` ready for real footage;
+// using existing images as placeholders until video assets land.
 const GALLERY_ITEMS = [
-  { id: 1, title: 'Campaign',         category: 'AI Generated Content', bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781228733/hf_20260403_215802_26dda678-2f90-4fe0-b5d7-39a55f0f377b_1_jgsrxl.png' },
-  { id: 2, title: 'Editorial Series', category: 'AI Generated Content', bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781228731/4f_feyshi.png' },
-  { id: 3, title: 'Social Campaign',  category: 'Social Media Content', bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781229106/d-9_jrekkm.jpg' },
-  { id: 4, title: 'Focus',            category: 'Marketing Materials',  bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781228734/F-3_uunmgt.jpg' },
-  { id: 5, title: 'Creative Direction', category: 'Creative Concept',  bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781229102/d-10_geiek8.jpg' },
-  { id: 6, title: 'Product Campaign', category: 'AI Generated Content', bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781229106/a06b97ea_nano_2K_xy3svv.jpg' },
-  { id: 7, title: 'Visual Identity',  category: 'Visual Identity',      bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781229106/6db9025c_nano_2K_f9vofx.jpg' },
+  { id: 1, type: 'video', src: 'https://res.cloudinary.com/dgad4xyuc/video/upload/v1781227448/hf_20260611_231757_26018a0c-efd2-4af3-a5a5-1c4fe405b2dd_efvzeg.mp4' },
+  { id: 2, type: 'image', bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781228731/4f_feyshi.png' },
+  { id: 3, type: 'image', bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781229106/d-9_jrekkm.jpg' },
+  { id: 4, type: 'image', bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781228734/F-3_uunmgt.jpg' },
+  { id: 5, type: 'image', bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781229102/d-10_geiek8.jpg' },
+  { id: 6, type: 'image', bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781229106/a06b97ea_nano_2K_xy3svv.jpg' },
+  { id: 7, type: 'image', bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781229106/6db9025c_nano_2K_f9vofx.jpg' },
+  // Example of how a real video item will look once footage is ready:
+  // { id: 8, type: 'video', src: 'https://res.cloudinary.com/dgad4xyuc/video/upload/f_auto,q_auto/your_clip_id', poster: 'optional_poster_id' },
 ];
+
+const WORKS_BLURB =
+  "We're not here to follow trends—we're here to build something timeless. " +
+  "With a blend of creativity, strategy, and heart, we help ideas come to life. " +
+  "Every project we take on is an opportunity to learn, grow, and do something meaningful. " +
+  "We treat our clients like partners and our work like craft.";
 
 const PROCESS = [
   { title: 'Define Your Goals',  body: 'We start by understanding your brand, audience, and the specific challenge we\'re solving.' },
@@ -97,13 +86,17 @@ const PROCESS = [
 
 const CTA_IMG = 'https://res.cloudinary.com/dgad4xyuc/image/upload/v1781229106/6db9025c_nano_2K_f9vofx.jpg';
 
-/* ─── Services interactive section ─────────────────────────── */
+/* ─── Services section ──────────────────────────────────────
+   Desktop: hover enlarges the name (not clickable, no image swap).
+   Mobile: whichever item is centered in the viewport enlarges;
+   others shrink back — driven by IntersectionObserver, not tap.
+──────────────────────────────────────────────────────────── */
 function ServicesSection() {
-  const [active, setActive] = useState(0); // desktop only: drives hover + crossfade image
-  const [openItems, setOpenItems] = useState(new Set()); // mobile only: independently toggled
+  const [active, setActive] = useState(null);
   const [isMobile, setIsMobile] = useState(() =>
     window.matchMedia('(max-width: 768px)').matches
   );
+  const itemRefs = useRef([]);
 
   useEffect(() => {
     const mq = window.matchMedia('(max-width: 768px)');
@@ -112,68 +105,45 @@ function ServicesSection() {
     return () => mq.removeEventListener('change', handleChange);
   }, []);
 
-  const isItemActive = (i) => (isMobile ? openItems.has(i) : i === active);
-
-  const handleSelect = (i) => {
-    if (isMobile) {
-      setOpenItems((prev) => {
-        const next = new Set(prev);
-        next.has(i) ? next.delete(i) : next.add(i);
-        return next;
-      });
-    } else {
-      setActive(i);
-    }
-  };
+  useEffect(() => {
+    if (!isMobile) return;
+    const observer = new IntersectionObserver(
+      (entries) => {
+        entries.forEach((entry) => {
+          if (entry.isIntersecting) {
+            setActive(Number(entry.target.dataset.index));
+          }
+        });
+      },
+      { rootMargin: '-45% 0px -45% 0px', threshold: 0 }
+    );
+    itemRefs.current.forEach((el) => el && observer.observe(el));
+    return () => observer.disconnect();
+  }, [isMobile]);
 
   return (
     <Section theme="dark" className={styles.services}>
-      <div className={styles.servicesInner}>
-        <FadeIn className={styles.servicesList}>
-          <span className={`section-label ${styles.servicesLabel}`}>What We Do</span>
-          <ul>
-            {SERVICES.map((s, i) => {
-              const isActive = isItemActive(i);
-              return (
-                <li
-                  key={s.title}
-                  className={`${styles.serviceItem} ${isActive ? styles.serviceItemActive : ''}`}
-                  onClick={() => handleSelect(i)}
-                  onMouseEnter={() => { if (!isMobile) setActive(i); }}
-                >
-                  <div className={styles.serviceRow}>
-                    <span className={styles.serviceTitle}>{s.title}</span>
-                    <span className={styles.serviceArrow}>
-                      {isMobile ? (isActive ? '−' : '+') : '↗'}
-                    </span>
-                  </div>
-                  <p className={`${styles.serviceDesc} ${isActive ? styles.serviceDescVisible : ''}`}>
-                    {s.desc}
-                  </p>
-                  {isActive && (
-                    <div className={styles.serviceMobileImg}>
-                      <img src={s.img} alt={s.title} />
-                    </div>
-                  )}
-                </li>
-              );
-            })}
-          </ul>
-        </FadeIn>
-
-        <FadeIn delay={0.1} className={styles.serviceImageWrap}>
-          <div className={styles.serviceImageInner}>
-            {SERVICES.map((s, i) => (
-              <img
-                key={s.title}
-                src={s.img}
-                alt={s.title}
-                className={`${styles.serviceImage} ${i === active ? styles.serviceImageActive : ''}`}
-              />
-            ))}
-          </div>
-        </FadeIn>
-      </div>
+      <FadeIn className={styles.servicesList}>
+        <span className={`section-label ${styles.servicesLabel}`}>What We Do</span>
+        <ul>
+          {SERVICES.map((title, i) => {
+            const distance = active === null ? undefined : Math.abs(i - active);
+            return (
+              <li
+                key={title}
+                ref={(el) => (itemRefs.current[i] = el)}
+                data-index={i}
+                className={styles.serviceItem}
+                style={distance !== undefined ? { '--distance': distance } : undefined}
+                onMouseEnter={() => { if (!isMobile) setActive(i); }}
+                onMouseLeave={() => { if (!isMobile) setActive(null); }}
+              >
+                <span className={styles.serviceTitle}>{title}</span>
+              </li>
+            );
+          })}
+        </ul>
+      </FadeIn>
     </Section>
   );
 }
@@ -221,33 +191,39 @@ export default function Home() {
         <div className={styles.introInner}>
           <FadeIn className={styles.introText}>
             <p>
-              Fl<em>ai</em>me Studio is a creative studio helping product-based brands communicate
+              Flaime Studio is a creative studio helping product-based brands communicate
               their value through design and creative direction.
             </p>
           </FadeIn>
-          {/*<FadeIn delay={0.1} className={styles.introImg}>
-              <img src={INTRO_IMG} alt="Flaime Studio work sample" />
-          </FadeIn>*/}
-        </div>
-      </Section>
-
-      {/* ── SELECTED WORKS ── */}
-      <Section theme="dark" container={false} className={styles.works}>
-        <div className={`container ${styles.worksHeader}`}>
-          <FadeIn className={styles.worksHeaderRow}>
-            <span className="section-label">Selected Works</span>
-            <Button to="/work" size="sm">See all work ↗</Button>
+          <FadeIn delay={0.1} className={styles.introImages}>
+            <div className={styles.introImg}>
+              <img src={INTRO_IMG_1} alt="Flaime Studio work sample" />
+            </div>
+            <div className={styles.introImg}>
+              <img src={INTRO_IMG_2} alt="Flaime Studio work sample" />
+            </div>
           </FadeIn>
         </div>
-
-        <FadeIn>
-          <DragGallery items={GALLERY_ITEMS} />
-        </FadeIn>
       </Section>
 
       {/* ── SERVICES ── */}
-
       <ServicesSection />
+
+      {/* ── SELECTED WORKS ── */}
+      <Section theme="dark" container={false} className={styles.works}>
+        <FadeIn>
+          <DragGallery items={GALLERY_ITEMS} ratio="9 / 16" showOverlay={false} />
+        </FadeIn>
+
+        <div className={`container ${styles.worksFooter}`}>
+          <FadeIn className={styles.worksBlurb}>
+            <p>{WORKS_BLURB}</p>
+          </FadeIn>
+          <FadeIn delay={0.1}>
+            <Button to="/work" size="sm">See More Work ↗</Button>
+          </FadeIn>
+        </div>
+      </Section>
 
 
 
@@ -260,11 +236,10 @@ export default function Home() {
             </p>
           </FadeIn>
 
-          {/* Dot timeline — horizontal desktop, vertical mobile */}
           <FadeIn delay={0.1}>
             <div className={styles.timeline}>
               <div className={styles.timelineLine} />
-              {PROCESS.map((step, i) => (
+              {PROCESS.map((step) => (
                 <div key={step.title} className={styles.timelineStep}>
                   <div className={styles.timelineDot} />
                   <h3 className={styles.stepTitle}>{step.title}</h3>

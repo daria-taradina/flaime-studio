@@ -13,6 +13,16 @@
   gap: var(--space-lg);
 }
 
+/* Fixed to one line — was wrapping because of max-width: 22ch */
+.location {
+  font-family: var(--ff-ui);
+  font-size: var(--fs-p);
+  letter-spacing: var(--ls-p);
+  color: var(--clr-muted);
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
 .links {
   display: flex;
   gap: var(--space-xl);
@@ -25,31 +35,40 @@
 }
 
 .col a {
-  font-size: var(--step--1);
-  color: rgba(255,255,255,0.5);
+  font-family: var(--ff-ui);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-h4);
+  letter-spacing: var(--ls-h4);
+  color: rgba(255, 255, 255, 0.5);
   transition: color var(--transition);
 }
 .col a:hover { color: var(--clr-white); }
 
-.location {
-  font-size: var(--step--1);
+.copyright {
+  font-family: var(--ff-ui);
+  font-size: var(--fs-p);
+  letter-spacing: var(--ls-p);
   color: var(--clr-muted);
-  align-self: flex-end;
+  white-space: nowrap;
+  flex-shrink: 0;
 }
 
-/* Big display logo — oversized, clips at edges intentionally */
+/* Wordmark row — width is the source of truth; font-size is set inline by JS to fit it exactly */
+.bigLogoRow {
+  position: relative;
+  width: 100%;
+  overflow: hidden; /* guards against a 1px overflow flash before the fit effect runs */
+}
+
 .bigLogo {
+  display: block;
+  width: 100%;
   font-family: var(--ff-heading);
   font-weight: 300;
-  font-size: clamp(4rem, 18vw, 14rem);
   line-height: 0.85;
   letter-spacing: -0.04em;
   color: var(--clr-white);
-  padding-inline: clamp(1.25rem, 5vw, 3rem);
-  padding-bottom: 0.1em;
   white-space: nowrap;
-  overflow: hidden;
-  text-align: center;
 }
 
 .bigLogo em {
@@ -57,19 +76,19 @@
   color: var(--clr-accent);
 }
 
-.bottom {
-  padding-bottom: var(--space-md);
-  padding-top: var(--space-sm);
-  border-top: 1px solid var(--clr-border);
-}
-
-.bottom span {
-  font-size: var(--step--1);
-  color: var(--clr-muted);
+/* © mark — pinned to the same 60px edge as everything else, positioned independently
+   of the logo so it never eats into the logo's fit-to-width measurement */
+.bigLogoMark {
+  position: absolute;
+  right: var(--page-pad, 60px);
+  bottom: 0.35em;
+  font-family: var(--ff-ui);
+  font-size: clamp(0.9rem, 1.5vw, 1.25rem);
+  color: var(--clr-white);
 }
 
 @media (max-width: 600px) {
   .top { flex-direction: column; gap: var(--space-md); }
-  .location { align-self: flex-start; }
   .links { gap: var(--space-lg); }
+  .copyright { align-self: flex-start; }
 }
