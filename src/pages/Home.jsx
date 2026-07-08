@@ -86,11 +86,7 @@ const PROCESS = [
 
 const CTA_IMG = 'https://res.cloudinary.com/dgad4xyuc/image/upload/v1781229106/6db9025c_nano_2K_f9vofx.jpg';
 
-/* ─── Services section ──────────────────────────────────────
-   Desktop: hover enlarges the name (not clickable, no image swap).
-   Mobile: whichever item is centered in the viewport enlarges;
-   others shrink back — driven by IntersectionObserver, not tap.
-──────────────────────────────────────────────────────────── */
+/* ─── Services section ───────── */
 function ServicesSection() {
   const [active, setActive] = useState(null);
   const [isMobile, setIsMobile] = useState(() =>
@@ -130,22 +126,18 @@ function ServicesSection() {
 
         <FadeIn delay={0.05} className={styles.servicesList}>
           <ul>
-            {SERVICES.map((title, i) => {
-              const distance = active === null ? undefined : Math.abs(i - active);
-              return (
-                <li
-                  key={title}
-                  ref={(el) => (itemRefs.current[i] = el)}
-                  data-index={i}
-                  className={styles.serviceItem}
-                  style={distance !== undefined ? { '--distance': distance } : undefined}
-                  onMouseEnter={() => { if (!isMobile) setActive(i); }}
-                  onMouseLeave={() => { if (!isMobile) setActive(null); }}
-                >
-                  <span className={styles.serviceTitle}>{title}</span>
-                </li>
-              );
-            })}
+            {SERVICES.map((title, i) => (
+              <li
+                key={title}
+                ref={(el) => (itemRefs.current[i] = el)}
+                data-index={i}
+                className={`${styles.serviceItem} ${isMobile && active === i ? styles.isNear : ''}`}
+                onMouseEnter={() => { if (!isMobile) setActive(i); }}
+                onMouseLeave={() => { if (!isMobile) setActive(null); }}
+              >
+                <span className={styles.serviceTitle}>{title}</span>
+              </li>
+            ))}
           </ul>
         </FadeIn>
       </div>
@@ -186,7 +178,7 @@ export default function Home() {
               We shape how your brand is seen and perceived — helping people understand its
               value, connect with its story, and choose it with confidence.
             </p>
-            <Button to="/contact">Let's Connect ↗</Button>
+            <Button to="/contact" size="full">Let's Connect ↗</Button>
           </motion.div>
         </div>
       </Section>

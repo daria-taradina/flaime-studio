@@ -67,24 +67,24 @@
 .heroWord { display: inline-block; }
 
 .heroRight {
+  container-type: inline-size;   /* new — both heroDesc and the button size off this */
   display: flex;
   flex-direction: column;
-  align-items: flex-start;   /* was flex-start — right-aligns text/button to the 60px edge */
-  text-align: left;       /* new — so wrapped paragraph lines also right-align */
+  align-items: stretch;
+  text-align: left;
   gap: var(--space-md);
   padding-bottom: 0.5rem;
   width: var(--img-pair-width);
   max-width: var(--img-pair-width);
 }
 
-/* Paragraph — per type spec */
 .heroDesc {
   font-family: var(--ff-ui);
-  font-size: var(--fs-h4);
+  font-size: clamp(0.85rem, 5.1cqw, var(--fs-h4));
   letter-spacing: var(--ls-p);
   color: color-mix(in srgb, var(--section-fg) 80%, transparent);
   line-height: 1.65;
-  max-width: 100%;
+  width: 100%;
 }
 
 /* ── INTRO ─────────────────────────────────────────────────── */
@@ -190,18 +190,15 @@
   font-weight: var(--fw-h2);
   letter-spacing: var(--ls-h2);
   line-height: 1.2;
-  transition: font-size var(--transition), color var(--transition);
-  font-size: clamp(1.1rem, calc(var(--fs-h2) - var(--distance, 3) * 0.3rem), var(--fs-h2));
-  color: color-mix(
-    in srgb,
-    var(--section-fg) max(20%, calc(100% - var(--distance, 3) * 18%)),
-    transparent
-  );
+  font-size: var(--fs-h2);
+  color: var(--section-fg);
+  transition: font-size var(--transition);
 }
 
-.serviceItemActive .serviceTitle {
-  color: var(--section-fg);
-  font-size: var(--fs-h2);
+@media (hover: hover) {
+  .serviceItem:hover .serviceTitle {
+    font-size: calc(var(--fs-h2) * 1.08);
+  }
 }
 
 /* ── SELECTED WORKS ────────────────────────────────────────── */
@@ -400,10 +397,17 @@
   }
 
   .heroRight {
-    align-items: flex-start; /* back to left-aligned once stacked on mobile */
+    align-items: flex-start;
     text-align: left;
+    width: 80%;
+    max-width: 480px;   /* new — stops the button/text from stretching edge-to-edge */
   }
-  
+
+  .heroDesc {
+    font-size: 1.05rem;   /* new — flat mobile size, bigger than the cqw min was landing at */
+    line-height: 1.6;
+  }
+
   .heroBgVideo { object-position: 70% top; }
 
   .introInner {
@@ -463,4 +467,10 @@
     transform: translateX(50%);
   }
   .timelineStep { padding-top: 0; padding-bottom: var(--space-md); }
+}
+
+@media (hover: none) {
+  .serviceItem.isNear .serviceTitle {
+    font-size: calc(var(--fs-h2) * 1.05);
+  }
 }

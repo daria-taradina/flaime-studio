@@ -1,11 +1,12 @@
 .btn {
-  display: inline-block;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
   font-family: var(--ff-ui);
   font-size: var(--fs-btn);
   font-weight: 400;
   letter-spacing: var(--ls-btn);
   white-space: nowrap;
-  flex-shrink: 0;
   border: 1px solid currentColor;
   border-radius: 100px;
   width: fit-content;
@@ -18,6 +19,22 @@
   border-color: var(--section-fg);
 }
 
-/* (71.8px height ÷ 2) − half the 13.8px line ≈ 29px vertical; horizontal kept generous per her pill proportions */
 .md { padding: 0.5rem 2rem; }
 .sm { padding: 0.5rem 2.25rem; }
+
+/* Full-width variant — same container-relative shrink as .heroDesc, so
+   button and paragraph stay proportionally in sync as the column narrows */
+.full {
+  width: 100%;
+  padding: 0.9rem 1.5rem;
+  font-size: clamp(0.8rem, 4.2cqw, var(--fs-btn));
+  text-align: center;
+  white-space: nowrap;
+}
+
+@media (max-width: 768px) {
+  .full {
+    font-size: 1.1rem;   /* new — was landing near the 0.8rem clamp floor on the wider mobile container */
+    padding: 1rem 1.5rem;
+  }
+}
