@@ -1,0 +1,341 @@
+/* ── Fonts ── */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Playfair+Display:ital,wght@1,400;1,500;1,600&display=swap');
+
+/* ── Animations ── */
+@keyframes heroReveal {
+  0%   { opacity: 0; transform: translateY(28px); filter: blur(12px); }
+  100% { opacity: 1; transform: translateY(0);    filter: blur(0); }
+}
+@keyframes heroFadeUp {
+  0%   { opacity: 0; transform: translateY(20px); }
+  100% { opacity: 1; transform: translateY(0); }
+}
+@keyframes heroZoom {
+  0%   { transform: scale(1.12); }
+  100% { transform: scale(1); }
+}
+
+/* ── Root ── */
+.root {
+  min-height: 100vh;
+  background: #fff;
+  letter-spacing: -0.02em;
+  font-family: 'Inter', sans-serif;
+}
+
+/* ── Hero section ── */
+.hero {
+  position: relative;
+  width: 100%;
+  overflow: hidden;
+  height: 100vh;
+  background: #000;
+}
+
+/* ── Base image ── */
+.baseImage {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  background-center: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+/* ── Reveal layer ── */
+.hiddenCanvas {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  display: none;
+}
+
+.revealDiv {
+  position: absolute;
+  inset: 0;
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  z-index: 30;
+  pointer-events: none;
+}
+
+/* ── Heading ── */
+.headingWrap {
+  position: absolute;
+  top: 14%;
+  left: 0;
+  right: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 0 20px;
+  pointer-events: none;
+  z-index: 50;
+}
+
+.heading {
+  color: #fff;
+  line-height: 0.95;
+}
+
+.line1 {
+  display: block;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: clamp(3rem, 8vw, 6rem);
+}
+
+.line2 {
+  display: block;
+  font-weight: 400;
+  font-size: clamp(3rem, 8vw, 6rem);
+  margin-top: -4px;
+}
+
+/* ── Bottom-left paragraph ── */
+.bottomLeft {
+  display: none;
+  position: absolute;
+  bottom: 56px;
+  left: 40px;
+  max-width: 260px;
+  z-index: 50;
+}
+
+.bottomLeft p {
+  font-size: 0.875rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.625;
+}
+
+/* ── Bottom-right block ── */
+.bottomRight {
+  position: absolute;
+  bottom: 40px;
+  left: 20px;
+  right: 20px;
+  max-width: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  gap: 16px;
+  z-index: 50;
+}
+
+.bottomRight p {
+  font-size: 0.75rem;
+  color: rgba(255, 255, 255, 0.8);
+  line-height: 1.625;
+}
+
+/* ── Start Digging button ── */
+.digButton {
+  background: #e8702a;
+  color: #fff;
+  font-size: 0.875rem;
+  font-weight: 500;
+  padding: 12px 28px;
+  border-radius: 9999px;
+  transition: all 0.2s;
+  cursor: pointer;
+  border: none;
+}
+.digButton:hover {
+  background: #d2611f;
+  transform: scale(1.03);
+  box-shadow: 0 10px 25px rgba(232, 112, 42, 0.3);
+}
+.digButton:active {
+  transform: scale(0.95);
+}
+
+/* ── Navigation ── */
+.nav {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  z-index: 100;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+}
+
+.navLeft {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.wordmark {
+  color: #fff;
+  font-size: 1.5rem;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+}
+
+/* ── Center pill ── */
+.navPill {
+  display: none;
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(255, 255, 255, 0.3);
+  border-radius: 9999px;
+  padding: 8px;
+  align-items: center;
+  gap: 4px;
+}
+
+.navLink,
+.navLinkActive {
+  padding: 6px 16px;
+  border-radius: 9999px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  transition: background 0.2s, color 0.2s;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+.navLink {
+  color: rgba(255, 255, 255, 0.8);
+}
+.navLink:hover {
+  background: rgba(255, 255, 255, 0.2);
+  color: #fff;
+}
+
+.navLinkActive {
+  background: #fff;
+  color: #111;
+}
+
+/* ── Sign Up button ── */
+.signUp {
+  display: none;
+  background: #fff;
+  color: #111;
+  font-size: 0.875rem;
+  font-weight: 600;
+  padding: 10px 24px;
+  border-radius: 9999px;
+  cursor: pointer;
+  border: none;
+  transition: background 0.2s;
+}
+.signUp:hover {
+  background: #f3f4f6;
+}
+
+/* ── Hamburger (mobile) ── */
+.hamburger {
+  display: flex;
+  flex-direction: column;
+  gap: 5px;
+  padding: 8px;
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+.hamburger span {
+  display: block;
+  width: 22px;
+  height: 2px;
+  background: #fff;
+  border-radius: 2px;
+}
+
+/* ── Animations ── */
+.heroAnim {
+  opacity: 0;
+  animation-fill-mode: forwards;
+  animation-timing-function: cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.heroReveal {
+  animation-name: heroReveal;
+  animation-duration: 1.1s;
+}
+
+.heroFade {
+  animation-name: heroFadeUp;
+  animation-duration: 1s;
+}
+
+.heroZoom {
+  animation: heroZoom 1.8s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+}
+
+/* ── Responsive ── */
+@media (min-width: 640px) {
+  .nav {
+    padding: 20px;
+  }
+
+  .bottomLeft {
+    display: block;
+  }
+
+  .bottomRight {
+    bottom: 96px;
+    left: auto;
+    right: 40px;
+    max-width: 260px;
+    gap: 20px;
+  }
+
+  .bottomRight p {
+    font-size: 0.875rem;
+  }
+
+  .line1,
+  .line2 {
+    font-size: clamp(4rem, 9vw, 7rem);
+  }
+}
+
+@media (min-width: 768px) {
+  .navPill {
+    display: flex;
+  }
+
+  .signUp {
+    display: block;
+  }
+
+  .hamburger {
+    display: none;
+  }
+
+  .bottomLeft {
+    left: 56px;
+  }
+
+  .bottomRight {
+    right: 56px;
+  }
+
+  .line1,
+  .line2 {
+    font-size: clamp(5rem, 10vw, 8rem);
+  }
+}
+
+/* ── Reduced motion ── */
+@media (prefers-reduced-motion: reduce) {
+  .heroAnim,
+  .heroZoom {
+    animation: none;
+    opacity: 1;
+  }
+}
