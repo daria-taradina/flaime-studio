@@ -31,10 +31,11 @@ export default function About() {
 
         <HoverPlayground />
         <ParallaxDepth />
-        <ParallaxHero />
+        
         
            
       </div>
+      <ParallaxHero />
     </main>
   );
 }

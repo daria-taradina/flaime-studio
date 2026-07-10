@@ -7,6 +7,7 @@ import Work from './pages/Work';
 import About from './pages/About';
 import Contact from './pages/Contact';
 import CaseStudy from './pages/CaseStudy';
+import Lithos from './pages/Lithos';
 import './styles/globals.css';
 import './styles/section-theme.css'; // after globals.css - reads its variables
 
@@ -16,19 +17,31 @@ function ScrollToTop() {
   return null;
 }
 
-export default function App() {
+function AppLayout() {
+  const { pathname } = useLocation();
+  const isLithos = pathname === '/lithos';
+
   return (
-    <BrowserRouter>
-      <ScrollToTop />
-      <Navbar />
+    <>
+      {!isLithos && <Navbar />}
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/work" element={<Work />} />
         <Route path="/about" element={<About />} />
         <Route path="/work/:slug" element={<CaseStudy />} />
         <Route path="/contact" element={<Contact />} />
+        <Route path="/lithos" element={<Lithos />} />
       </Routes>
-      <Footer />
+      {!isLithos && <Footer />}
+    </>
+  );
+}
+
+export default function App() {
+  return (
+    <BrowserRouter>
+      <ScrollToTop />
+      <AppLayout />
     </BrowserRouter>
   );
 }
