@@ -28,14 +28,60 @@ export default function About() {
           </div>
           
         </FadeIn>
-
+        <ParallaxDepth />    
         <HoverPlayground />
-        <ParallaxDepth />
+        <ParallaxHero />
         
         
-           
+      <section className={styles.fontTest} data-theme="light">
+        <p className={styles.testN}>Flaime Studio is a creative studio helping product-based brands communicate their value through design and creative direction.
+        - Neue Haas Grotesk Display Pro
+        </p>
+      </section>
+      <section className={styles.fontTest} data-theme="light">
+        <p className={styles.testG}>Flaime Studio is a creative studio helping product-based brands communicate their value through design and creative direction.
+          - Geist
+        </p>
+      </section>
+
+      <section className={styles.fontTest} data-theme="light">
+        <p className={styles.testJ}>Flaime Studio is a creative studio helping product-based brands communicate their value through design and creative direction.
+          - Plus Jakarta Sans
+        </p>
+      </section>
+
+      <section className={styles.fontTest} data-theme="light">
+        <p className={styles.testM}>Flaime Studio is a creative studio helping product-based brands communicate their value through design and creative direction.
+          - Manrope
+        </p>
+      </section>
+
+      <section className={styles.fontTest} data-theme="light">
+        <p className={styles.testR}>Flaime Studio is a creative studio helping product-based brands communicate their value through design and creative direction.
+          - Roboto Flex
+        </p>
+      </section>
+
+      <section className={styles.fontTest} data-theme="light">
+        <p className={styles.testD}>Flaime Studio is a creative studio helping product-based brands communicate their value through design and creative direction.
+          - DM Sans
+        </p>
+      </section>
+
+      <section className={styles.fontTest} data-theme="light">
+        <p className={styles.testI}>Flaime Studio is a creative studio helping product-based brands communicate their value through design and creative direction.
+          - Inter Tight
+        </p>
+      </section>
+
+      <section className={styles.fontTest} data-theme="light">
+        <p className={styles.testB}>Flaime Studio is a creative studio helping product-based brands communicate their value through design and creative direction.
+          - Barlow
+        </p>
+      </section>
+                
       </div>
-      <ParallaxHero />
+      
     </main>
   );
 }

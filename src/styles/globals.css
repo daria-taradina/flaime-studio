@@ -2,7 +2,10 @@
 @import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;0,900;1,400&family=Inter:wght@300;400;500;600&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
 @import url('https://fonts.googleapis.com/css2?family=DM+Sans:ital,opsz,wght@0,9..40,100..1000;1,9..40,100..1000&family=Inter+Tight:ital,wght@0,100..900;1,100..900&display=swap');
-@import url('https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&display=swap');
+
+@import url('https://fonts.cdnfonts.com/css/neue-haas-grotesk-display-pro');
+@import url('https://fonts.googleapis.com/css2?family=Barlow:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;0,800;0,900;1,100;1,200;1,300;1,400;1,500;1,600;1,700;1,800;1,900&family=Geist:ital,wght@0,100..900;1,100..900&family=Manrope:wght@200..800&family=Plus+Jakarta+Sans:ital,wght@0,200..800;1,200..800&family=Roboto+Flex:opsz,wght,XOPQ,XTRA,YOPQ,YTDE,YTFI,YTLC,YTUC@8..144,100..1000,96,468,79,-203,738,514,712&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Geist:ital,wght@0,100..900;1,100..900&display=swap');
 
 :root {
   --clr-bg-dark:  #0D0D0D;
@@ -17,6 +20,16 @@
   --ff-ui:      'Inter', system-ui, sans-serif;
   /*'Epilogue', 'Inter', system-ui, sans-serif; /* switched from Inter — her live site is actually loading Epilogue */
   --ff-body:    'DM Sans', system-ui, sans-serif;
+
+  --ff-neue:      'Neue Haas Grotesk Display Pro', system-ui, sans-serif;
+  --ff-jak:      'Plus Jakarta Sans', system-ui, sans-serif;
+  --ff-mon:      'Manrope', system-ui, sans-serif;
+  --ff-rob:      'Roboto Flex', system-ui, sans-serif;
+  --ff-dm:       'DM Sans', system-ui, sans-serif;
+  --ff-int:      'Inter Tight', system-ui, sans-serif;
+  --ff-bar:      'Barlow', system-ui, sans-serif;
+  --ff-ges:      'Geist', system-ui, sans-serif;
+
 
   --step--1: clamp(0.75rem,  1.5vw, 0.875rem);
   --step-0:  clamp(1rem,     2vw,   1.125rem);

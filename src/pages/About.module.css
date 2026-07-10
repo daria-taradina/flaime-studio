@@ -160,3 +160,27 @@
     padding-bottom: var(--space-xl);
   }
 }
+
+.fontTest {
+  padding: var(--space-sm) var(--page-pad);
+}
+
+.fontTest[data-theme="light"] {
+  background: var(--clr-bg-light);
+  color: var(--clr-bg-dark);
+}
+
+.fontTest[data-theme="dark"] {
+  background: var(--clr-bg-dark);
+  color: var(--clr-white);
+}
+
+.testN { font-family: var(--ff-neue); font-size: var(--step-2); }
+.testJ { font-family: var(--ff-jak); font-size: var(--step-2); font-weight: 300; }
+.testM { font-family: var(--ff-mon); font-size: var(--step-2); font-weight: 300; }
+.testR { font-family: var(--ff-rob); font-size: var(--step-2); font-weight: 300; }
+.testD { font-family: var(--ff-dm);  font-size: var(--step-2); font-weight: 200; }
+.testI { font-family: var(--ff-int); font-size: var(--step-2); font-weight: 200;}
+.testB { font-family: var(--ff-bar); font-size: var(--step-2); font-weight: 300; }
+.testG { font-family: var(--ff-ges); font-size: var(--step-2); font-weight: 270; }
+
