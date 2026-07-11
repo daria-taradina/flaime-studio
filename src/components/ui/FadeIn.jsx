@@ -1,13 +1,14 @@
 import { motion } from 'framer-motion';
+import { EASE_DEFAULT, DURATION_DEFAULT } from '../../utils/constants';
 
-export default function FadeIn({ children, delay = 0, duration = 0.6, y = 28, className = '' }) {
+export default function FadeIn({ children, delay = 0, duration = DURATION_DEFAULT, y = 28, className = '' }) {
   return (
     <motion.div
       className={className}
       initial={{ opacity: 0, y }}
       whileInView={{ opacity: 1, y: 0 }}
       viewport={{ once: true, margin: '-60px' }}
-      transition={{ duration, delay, ease: [0.25, 0.46, 0.45, 0.94] }}
+      transition={{ duration, delay, ease: EASE_DEFAULT }}
     >
       {children}
     </motion.div>

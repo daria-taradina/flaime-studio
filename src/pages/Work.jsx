@@ -1,35 +1,12 @@
 import { Link } from 'react-router-dom';
-import FadeIn from '../components/FadeIn';
-import DragGallery from '../components/DragGallery';
-import Section from '../components/Section';
-import Button from '../components/Button';
+import FadeIn from '../components/ui/FadeIn';
+import DragGallery from '../components/media/DragGallery';
+import Section from '../components/layout/Section';
+import Button from '../components/ui/Button';
 import { backgroundStyle } from '../utils/media';
+import { WORK_HEADER, SELECTED_WORKS, CATEGORIES, PROJECTS } from '../data/work';
+import { CTA } from '../data/home';
 import styles from './Work.module.css';
-
-/* ─── Selected Works (hardcoded, hand-picked) ──────────────── */
-const SELECTED_WORKS = [
-  { id: 1, slug: 'loam-blends',            title: 'Loam Blends',            category: 'Wellness', bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781228734/F-3_uunmgt.jpg' },
-  { id: 2, slug: 'herbal-skin-solutions',  title: 'Herbal Skin Solutions',  category: 'Wellness', bg: '#0d1a14' },
-  { id: 3, slug: 'milave',                 title: 'Milave',                 category: 'Beauty',   bg: '#1a1410' },
-  { id: 4, slug: 'ettika',                 title: 'Ettika',                 category: 'Fashion',  bg: '#12091a' },
-];
-
-/* ─── Category rows (real categories going forward) ────────── */
-const CATEGORIES = ['Wellness', 'Beauty', 'Fashion'];
-
-const PROJECTS = [
-  { id: 1, title: 'Loam Blends',           category: 'Wellness', bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781228733/hf_20260403_215802_26dda678-2f90-4fe0-b5d7-39a55f0f377b_1_jgsrxl.png' },
-  { id: 2, title: 'Herbal Skin Solutions', category: 'Wellness', bg: 'https://res.cloudinary.com/dgad4xyuc/image/upload/q_auto/f_auto/v1781228734/F-3_uunmgt.jpg' },
-  { id: 3, title: 'Root & Bloom',          category: 'Wellness', bg: '#12181a' },
-  { id: 4, title: 'Root & Bloom',          category: 'Wellness', bg: '#12181a' },
-  { id: 5, title: 'Root & Bloom',          category: 'Wellness', bg: '#12181a' },
-  { id: 6, title: 'Root & Bloom',          category: 'Wellness', bg: '#12181a' },
-  { id: 7, title: 'Root & Bloom',          category: 'Wellness', bg: '#12181a' },
-  { id: 8, title: 'Milave',                category: 'Beauty',   bg: '#1a1410' },
-  { id: 9, title: 'Glass Skin Co.',        category: 'Beauty',   bg: '#181012' },
-  { id: 10, title: 'Ettika',                category: 'Fashion',  bg: '#12091a' },
-  { id: 11, title: 'Sable Studio',          category: 'Fashion',  bg: '#10181c' },
-];
 
 function SelectedWorkCard({ work }) {
   return (
@@ -65,12 +42,8 @@ export default function Work() {
       <Section theme="dark" className={styles.page}>
         <FadeIn>
           <div className={styles.header}>
-            <h1 className={styles.title}>Our Work</h1>
-            <p className={styles.desc}>
-              We create complete visual systems where every element works together to support
-              the same brand experience. From branding identity to social media content, every
-              piece is designed to fit into the bigger picture.
-            </p>
+            <h1 className={styles.title}>{WORK_HEADER.title}</h1>
+            <p className={styles.desc}>{WORK_HEADER.description}</p>
           </div>
         </FadeIn>
 
@@ -89,19 +62,20 @@ export default function Work() {
         />
       ))}
 
-      {/* ── CTA ── */}
+      {/* ── CTA (shared data with Home) ── */}
       <Section theme="dark" className={styles.cta}>
         <div className={styles.ctaInner}>
           <FadeIn className={styles.ctaText}>
             <h2 className={styles.ctaHeadline}>
-              Have a Project<br />in Mind?<br />
-              <em>Get in Touch!</em>
+              {CTA.headline.split('\n').map((line, i) => (
+                <span key={i}>
+                  {line.includes('Get in Touch!') ? <em>{line}</em> : line}
+                  {i < CTA.headline.split('\n').length - 1 && <br />}
+                </span>
+              ))}
             </h2>
-            <p className={styles.ctaBody}>
-              Tell us about your brand and what you're looking to achieve.
-              We'll come back with a direction that fits.
-            </p>
-            <Button to="/contact">Let's Connect ↗</Button>
+            <p className={styles.ctaBody}>{CTA.body}</p>
+            <Button to={CTA.button.to}>{CTA.button.label}</Button>
           </FadeIn>
         </div>
       </Section>

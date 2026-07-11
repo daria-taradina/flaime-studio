@@ -1,8 +1,10 @@
 import { Link } from 'react-router-dom';
 import { useLayoutEffect, useRef, useState } from 'react';
+import { NAV_ITEMS, SOCIAL_LINKS } from '../../data/navigation';
+import { CONTACT_INFO } from '../../data/contact';
 import styles from './Footer.module.css';
 
-const REFERENCE_FONT_SIZE = 200; // px — arbitrary large size used only for measuring, not displayed
+const REFERENCE_FONT_SIZE = 200;
 
 export default function Footer() {
   const rowRef = useRef(null);
@@ -15,7 +17,7 @@ export default function Footer() {
       const measure = measureRef.current;
       if (!row || !measure) return;
       const availableWidth = row.clientWidth;
-      const textWidth = measure.scrollWidth; // natural width at REFERENCE_FONT_SIZE
+      const textWidth = measure.scrollWidth;
       if (!textWidth) return;
       setFontSize(REFERENCE_FONT_SIZE * (availableWidth / textWidth));
     };
@@ -24,7 +26,6 @@ export default function Footer() {
     const ro = new ResizeObserver(fit);
     ro.observe(rowRef.current);
     window.addEventListener('resize', fit);
-    // Refit once web fonts finish loading — initial measurement may use a fallback font
     document.fonts?.ready.then(fit);
 
     return () => {
@@ -36,24 +37,24 @@ export default function Footer() {
   return (
     <footer className={styles.footer}>
       <div className={`container ${styles.top}`}>
-        <p className={styles.location}>Based in Los Angeles. Working worldwide.</p>
+        <p className={styles.location}>Based in {CONTACT_INFO.location}. {CONTACT_INFO.locationNote}.</p>
 
         <div className={styles.links}>
           <div className={styles.col}>
-            <Link to="/work">Work</Link>
-            <Link to="/services">Services</Link>
-            <Link to="/about">About</Link>
+            {NAV_ITEMS.filter(i => i.to !== '/').map(item => (
+              <Link key={item.to} to={item.to}>{item.label}</Link>
+            ))}
           </div>
           <div className={styles.col}>
-            <Link to="/contact">Contact</Link>
-            <a href="https://instagram.com" target="_blank" rel="noreferrer">Instagram</a>
+            {SOCIAL_LINKS.map(link => (
+              <a key={link.label} href={link.href} target="_blank" rel="noreferrer">{link.label}</a>
+            ))}
           </div>
         </div>
 
         <span className={styles.copyright}>© {new Date().getFullYear()} Flaime Studio</span>
       </div>
 
-      {/* Full-bleed wordmark — font-size is computed in JS to exactly span this row's width */}
       <div className={styles.bigLogoRow} ref={rowRef}>
         <span className={styles.bigLogo} style={{ fontSize: `${fontSize}px` }}>
           fl<em>ai</em>me studio
@@ -61,7 +62,6 @@ export default function Footer() {
         <span className={styles.bigLogoMark} aria-hidden="true"></span>
       </div>
 
-      {/* Hidden measuring twin — same text/classes, fixed reference size, off-screen, never visible */}
       <span
         ref={measureRef}
         className={styles.bigLogo}

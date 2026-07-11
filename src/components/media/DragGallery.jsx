@@ -1,20 +1,11 @@
 import { useRef, useState, useCallback, useEffect } from 'react';
-import { backgroundStyle } from '../utils/media';
+import { backgroundStyle } from '../../utils/media';
 import styles from './DragGallery.module.css';
 
 /**
  * Manual drag/swipe horizontal gallery.
  * Desktop: shows prev/next arrow buttons + drag.
  * Mobile: swipe only (arrows hidden).
- *
- * items: array of either
- *   { id, type: 'image', bg: <url>, title?, category? }
- *   { id, type: 'video', src: <url>, poster?: <url>, title?, category? }
- * (type defaults to 'image' if omitted, for backwards compatibility)
- *
- * props:
- *   ratio        — CSS aspect-ratio for cards, e.g. '3 / 4' or '9 / 16' (default '3 / 4')
- *   showOverlay  — whether to render the title/category overlay (default true)
  */
 export default function DragGallery({ items = [], ratio = '3 / 4', showOverlay = true }) {
   const trackRef    = useRef(null);
@@ -40,7 +31,6 @@ export default function DragGallery({ items = [], ratio = '3 / 4', showOverlay =
     return () => t.removeEventListener('scroll', updateArrows);
   }, [updateArrows]);
 
-  /* ── Mouse drag ── */
   const onMouseDown = (e) => {
     isDragging.current = true;
     hasMoved.current   = false;
@@ -62,7 +52,6 @@ export default function DragGallery({ items = [], ratio = '3 / 4', showOverlay =
     if (trackRef.current) trackRef.current.style.cursor = 'grab';
   };
 
-  /* ── Arrow navigation — scroll by ~80% of track width ── */
   const scrollBy = (dir) => {
     const t = trackRef.current;
     if (!t) return;
@@ -117,7 +106,6 @@ function GalleryCard({ item, ratio, showOverlay }) {
   const videoRef = useRef(null);
   const isVideo  = item.type === 'video';
 
-  // Pause video when it scrolls out of view; play when it's visible.
   useEffect(() => {
     if (!isVideo) return;
     const el = cardRef.current;

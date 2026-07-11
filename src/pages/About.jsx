@@ -1,4 +1,5 @@
-import FadeIn from '../components/FadeIn';
+import FadeIn from '../components/ui/FadeIn';
+import { ABOUT_HERO, ABOUT_INTRO, ABOUT_STATS } from '../data/about';
 import styles from './About.module.css';
 
 export default function About() {
@@ -8,10 +9,14 @@ export default function About() {
 
         <FadeIn>
           <div className={styles.hero}>
-            <span className="section-label">Who We Are</span>
+            <span className="section-label">{ABOUT_HERO.label}</span>
             <h1 className={styles.headline}>
-              A creative studio built for<br />
-              <em>brands that want to be seen.</em>
+              {ABOUT_HERO.headline.split('\n').map((line, i) => (
+                <span key={i}>
+                  {line.includes('brands that want to be seen.') ? <em>{line}</em> : line}
+                  {i === 0 && <br />}
+                </span>
+              ))}
             </h1>
           </div>
         </FadeIn>
@@ -24,26 +29,15 @@ export default function About() {
         <div className={styles.body}>
           <FadeIn>
             <div className={styles.intro}>
-              <p>
-                Flaime Studio was founded on the belief that visual identity is a brand's most
-                powerful strategic asset. We work at the intersection of creative direction,
-                AI-powered production, and marketing strategy — helping emerging and established
-                product brands communicate what makes them worth choosing.
-              </p>
-              <p>
-                Every project starts with the same question: <em>what does this brand need to say,
-                and to whom?</em> From there we build the visual language to say it clearly.
-              </p>
+              {ABOUT_INTRO.map((paragraph, i) => (
+                <p key={i}>{i === 1 ? <em>{paragraph}</em> : paragraph}</p>
+              ))}
             </div>
           </FadeIn>
 
           <FadeIn delay={0.1}>
             <div className={styles.stats}>
-              {[
-                { value: '50+', label: 'Brands worked with' },
-                { value: '3', label: 'Years in creative direction' },
-                { value: '100%', label: 'Custom, no templates' },
-              ].map(s => (
+              {ABOUT_STATS.map((s) => (
                 <div key={s.label} className={styles.stat}>
                   <span className={styles.statValue}>{s.value}</span>
                   <span className={styles.statLabel}>{s.label}</span>

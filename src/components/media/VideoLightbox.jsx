@@ -2,18 +2,8 @@ import { useEffect } from 'react';
 import styles from './VideoLightbox.module.css';
 
 /**
- * Full-screen modal video player, for videos that should play WITH sound
- * (unlike the muted ambient previews in VideoSlider/DragGallery).
- *
- * Browsers only allow unmuted autoplay right after a genuine user gesture -
- * this only ever mounts as a direct result of a click handler, so that
- * condition is satisfied. `controls` is also on, so if a browser blocks it
- * anyway, the person can just hit play themselves.
- *
- * Usage: keep the "currently open" video in state on the parent, e.g.
- *   const [openVideo, setOpenVideo] = useState(null);
- *   <VideoLightbox video={openVideo} onClose={() => setOpenVideo(null)} />
- * Render nothing (null) when no video is open.
+ * Full-screen modal video player with sound.
+ * Only mounts from a click handler so unmuted autoplay is permitted.
  */
 export default function VideoLightbox({ video, onClose }) {
   useEffect(() => {

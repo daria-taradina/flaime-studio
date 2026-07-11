@@ -1,9 +1,7 @@
 import styles from './PlayButton.module.css';
 
 /**
- * The circular play/pause button, extracted out of FeatureMedia so any
- * clickable-video card (feature media, video slider, future lightbox
- * triggers) uses the exact same visual instead of each re-implementing it.
+ * Circular play/pause button — shared across any clickable video card.
  */
 export default function PlayButton({ playing = false, onClick, className = '', ...rest }) {
   return (

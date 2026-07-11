@@ -1,16 +1,12 @@
-import Section from './Section';
-import FadeIn from './FadeIn';
+import Section from '../layout/Section';
+import FadeIn from '../ui/FadeIn';
 import FeatureMedia from './FeatureMedia';
-import { isColor } from '../utils/media';
+import { isColor } from '../../utils/media';
 import styles from './CaseStudyTemplate.module.css';
 
 /**
- * Renders a full case study page from a project data object
- * (see src/data/projects.js). One template, any number of projects.
- *
- * Every <Section> below has theme="dark" to match the mockup, but since
- * theme lives on the Section itself, flipping any block to "light" later
- * is a one-word change here - no CSS hunting required.
+ * Renders a full case study page from a project data object.
+ * One template, any number of projects — just add to data/projects.js.
  */
 export default function CaseStudyTemplate({ project }) {
   if (!project) return null;
@@ -53,10 +49,6 @@ export default function CaseStudyTemplate({ project }) {
           <h2 className={styles.summaryHeading}>{summaryHeading}</h2>
         </FadeIn>
 
-        {/* Same dot-timeline technique as Home's Process section:
-            horizontal with a connecting line on desktop, flips to a
-            vertical line on the left on mobile. See .breakdownTimeline
-            below for the responsive rules. */}
         <FadeIn delay={0.1}>
           <div className={styles.breakdownTimeline}>
             <div className={styles.breakdownLine} />

@@ -1,0 +1,108 @@
+/* ── HERO ──────────────────────────────────────────────────── */
+.hero {
+  position: relative;
+  min-height: 100vh;
+  min-height: 100svh;
+  display: flex;
+  align-items: flex-end;
+  padding-bottom: var(--space-xl);
+  overflow: hidden;
+}
+
+.heroBg {
+  position: absolute;
+  inset: 0;
+  z-index: 0;
+  background: linear-gradient(135deg, #1a1209 0%, #0d0d0d 50%, #141a10 100%);
+}
+
+.heroBgVideo {
+  position: absolute;
+  inset: 0;
+  width: 100%; height: 100%;
+  object-fit: cover;
+  object-position: center top;
+  display: block;
+  pointer-events: none;
+}
+
+.heroBgOverlay {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    to bottom,
+    rgba(0,0,0, calc(var(--overlay-opacity, 0.45) * 0.6)) 0%,
+    rgba(0,0,0, var(--overlay-opacity, 0.45))              50%,
+    rgba(0,0,0, calc(var(--overlay-opacity, 0.45) * 1.4)) 100%
+  );
+}
+
+.heroContent {
+  position: relative;
+  z-index: 1;
+  display: grid;
+  grid-template-columns: 1fr auto;
+  gap: var(--space-xl);
+  align-items: flex-end;
+  padding-top: 8rem;
+}
+
+.heroHeadline {
+  font-family: var(--ff-ui);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-h1);
+  letter-spacing: var(--ls-h1);
+  line-height: var(--lh-h1);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.2em;
+  align-content: flex-end;
+  width: 12ch;
+}
+
+.heroWord { display: inline-block; }
+
+.heroRight {
+  container-type: inline-size;
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  text-align: left;
+  gap: var(--space-md);
+  padding-bottom: 0.5rem;
+  width: var(--img-pair-width);
+  max-width: var(--img-pair-width);
+}
+
+.heroDesc {
+  font-family: var(--ff-ui);
+  font-size: clamp(0.85rem, 5.1cqw, var(--fs-h4));
+  letter-spacing: var(--ls-p);
+  color: color-mix(in srgb, var(--section-fg) 80%, transparent);
+  line-height: 1.65;
+  width: 100%;
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .heroContent {
+    grid-template-columns: 1fr;
+    gap: var(--space-lg);
+    align-items: flex-start;
+    padding-top: 7rem;
+  }
+
+  .heroRight {
+    align-items: flex-start;
+    text-align: left;
+    width: 80%;
+    max-width: 480px;
+  }
+
+  .heroDesc {
+    font-size: 1.05rem;
+    line-height: 1.6;
+  }
+
+  .heroBgVideo { object-position: 70% top; }
+}

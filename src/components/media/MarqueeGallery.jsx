@@ -3,17 +3,7 @@ import styles from './MarqueeGallery.module.css';
 
 /**
  * Auto-scrolling horizontal marquee gallery.
- *
- * Props:
- *   items  — array of { id, title, category, bg (css color or cloudinary URL) }
- *   speed  — pixels per second (default 60)
- *   gap    — gap between cards in px (default 16)
- *
- * How it works:
- * - Renders the items list twice side-by-side (seamless loop)
- * - Uses requestAnimationFrame for buttery 60fps scroll
- * - Pauses on hover / touch so users can look
- * - On mobile, also allows touch-drag
+ * Renders items twice for seamless infinite loop.
  */
 export default function MarqueeGallery({ items = [], speed = 60, gap = 16 }) {
   const trackRef = useRef(null);
@@ -24,15 +14,12 @@ export default function MarqueeGallery({ items = [], speed = 60, gap = 16 }) {
   const dragRef  = useRef({ active: false, startX: 0, startPos: 0 });
   const [halfWidth, setHalfWidth] = useState(0);
 
-  // Measure the width of one set of items after render
   useEffect(() => {
     const track = trackRef.current;
     if (!track) return;
-    // half = one full copy
     setHalfWidth(track.scrollWidth / 2);
   }, [items, gap]);
 
-  // Animation loop
   useEffect(() => {
     if (!halfWidth) return;
 
@@ -41,7 +28,6 @@ export default function MarqueeGallery({ items = [], speed = 60, gap = 16 }) {
         const delta = lastTsRef.current ? (ts - lastTsRef.current) / 1000 : 0;
         lastTsRef.current = ts;
         posRef.current -= speed * delta;
-        // Seamless reset: when we've scrolled one full copy, jump back
         if (posRef.current <= -halfWidth) {
           posRef.current += halfWidth;
         }
@@ -49,7 +35,7 @@ export default function MarqueeGallery({ items = [], speed = 60, gap = 16 }) {
           trackRef.current.style.transform = `translateX(${posRef.current}px)`;
         }
       } else {
-        lastTsRef.current = ts; // keep ts fresh so no jump on resume
+        lastTsRef.current = ts;
       }
       rafRef.current = requestAnimationFrame(animate);
     };
@@ -58,11 +44,9 @@ export default function MarqueeGallery({ items = [], speed = 60, gap = 16 }) {
     return () => cancelAnimationFrame(rafRef.current);
   }, [halfWidth, speed]);
 
-  // Pause on hover
   const pause = () => { pausedRef.current = true; };
   const resume = () => { pausedRef.current = false; };
 
-  // Touch drag
   const onTouchStart = (e) => {
     dragRef.current = { active: true, startX: e.touches[0].clientX, startPos: posRef.current };
     pausedRef.current = true;
@@ -91,7 +75,6 @@ export default function MarqueeGallery({ items = [], speed = 60, gap = 16 }) {
       onTouchMove={onTouchMove}
       onTouchEnd={onTouchEnd}
     >
-      {/* Fade edges */}
       <div className={styles.fadeLeft}  aria-hidden="true" />
       <div className={styles.fadeRight} aria-hidden="true" />
 
@@ -110,7 +93,7 @@ export default function MarqueeGallery({ items = [], speed = 60, gap = 16 }) {
                 ? { backgroundImage: `url(${item.bg})` }
                 : { backgroundColor: item.bg || '#1e1e1e' }
             }
-            aria-hidden={i >= items.length} /* duplicates are decorative */
+            aria-hidden={i >= items.length}
           >
             <div className={styles.overlay}>
               <span className={styles.cardCategory}>{item.category}</span>

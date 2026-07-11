@@ -1,28 +1,12 @@
 import { useRef, useState, useCallback, useEffect } from 'react';
-import { backgroundStyle } from '../utils/media';
-import PlayButton from './PlayButton';
+import { backgroundStyle } from '../../utils/media';
+import PlayButton from '../ui/PlayButton';
 import VideoLightbox from './VideoLightbox';
 import styles from './VideoSlider.module.css';
 
 /**
  * Manual drag/swipe horizontal video slider.
- *
- * Two modes per item, picked with `sound`:
- *
- *  - Ambient (default, `sound` omitted/false): muted autoplay-on-scroll
- *    preview, like before. Needs { cloudName, publicId, poster? }.
- *    Browsers never allow this kind of autoplay to have sound - that's
- *    a platform rule, not something to work around.
- *
- *  - Sound-on (`sound: true`): shows a static thumbnail only (bg color
- *    or image, or a video `poster`) with a play button. Clicking opens
- *    a full lightbox player with real controls and audio - unmuted
- *    playback is only allowed right after a genuine click, which this
- *    satisfies since the lightbox only ever mounts from that handler.
- *    Needs { src (playable video url), poster?, bg? }.
- *
- * Before real assets exist, either mode can use a `bg` placeholder
- * (color or image) via the shared backgroundStyle helper.
+ * Two modes: ambient (muted autoplay) and sound-on (lightbox on click).
  */
 
 function VideoCard({ item, isActive, onOpenLightbox }) {
@@ -37,7 +21,6 @@ function VideoCard({ item, isActive, onOpenLightbox }) {
     ? `https://res.cloudinary.com/${item.cloudName}/image/upload/f_auto,q_auto,w_900/${item.poster}`
     : undefined;
 
-  // Ambient videos play/pause themselves based on scroll position.
   useEffect(() => {
     if (!hasAmbientVideo) return;
     const v = videoRef.current;
@@ -46,8 +29,6 @@ function VideoCard({ item, isActive, onOpenLightbox }) {
     else v.pause();
   }, [isActive, hasAmbientVideo]);
 
-  // Sound cards (and ambient cards with no video yet) show a static
-  // thumbnail - color placeholder, image, or the video's own poster frame.
   const thumbnail = isSoundCard || !hasAmbientVideo
     ? backgroundStyle(item.bg || item.poster)
     : undefined;
@@ -94,17 +75,15 @@ export default function VideoSlider({ videos = [] }) {
   const [openVideo, setOpenVideo] = useState(null);
   const hasMoved   = useRef(false);
 
-  /* Update active index as user scrolls */
   const onScroll = useCallback(() => {
     const track = trackRef.current;
     if (!track) return;
     const cardW = track.querySelector(`.${styles.card}`)?.offsetWidth || 1;
-    const gap   = 24; // matches CSS gap
+    const gap   = 24;
     const idx   = Math.round(track.scrollLeft / (cardW + gap));
     setActiveIdx(Math.min(idx, videos.length - 1));
   }, [videos.length]);
 
-  /* ── Mouse drag ── */
   const onMouseDown = (e) => {
     isDragging.current = true;
     hasMoved.current   = false;
@@ -131,7 +110,6 @@ export default function VideoSlider({ videos = [] }) {
     }
   };
 
-  /* Snap to nearest card on mouse-up */
   const onMouseUpSnap = () => {
     onMouseUp();
     snapNearest();
@@ -148,7 +126,6 @@ export default function VideoSlider({ videos = [] }) {
     setActiveIdx(clamped);
   }, [videos.length]);
 
-  /* Dot navigation */
   const goTo = (idx) => {
     const track = trackRef.current;
     if (!track) return;
@@ -160,7 +137,6 @@ export default function VideoSlider({ videos = [] }) {
 
   return (
     <div className={styles.wrapper}>
-      {/* Track */}
       <div
         ref={trackRef}
         className={styles.track}
@@ -170,9 +146,7 @@ export default function VideoSlider({ videos = [] }) {
         onMouseUp={onMouseUpSnap}
         onMouseLeave={onMouseUp}
       >
-        {/* Left padding spacer so first card is inset */}
         <div className={styles.spacer} aria-hidden="true" />
-
         {videos.map((item, i) => (
           <VideoCard
             key={item.id}
@@ -181,12 +155,9 @@ export default function VideoSlider({ videos = [] }) {
             onOpenLightbox={setOpenVideo}
           />
         ))}
-
-        {/* Right padding spacer */}
         <div className={styles.spacer} aria-hidden="true" />
       </div>
 
-      {/* Dot indicators */}
       <div className={styles.dots} role="tablist" aria-label="Video slides">
         {videos.map((_, i) => (
           <button

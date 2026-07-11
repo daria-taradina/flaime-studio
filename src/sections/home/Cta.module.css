@@ -1,0 +1,72 @@
+/* ── CTA ───────────────────────────────────────────────────── */
+.cta {
+  padding-block: var(--space-lg);
+  border-top: 1px solid var(--clr-border);
+  margin-bottom: -100px;
+}
+
+.ctaInner {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--space-xl);
+  align-items: start;
+}
+
+.ctaImg {
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  max-height: 700px;
+  overflow: hidden;
+}
+
+.ctaImg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.ctaText {
+  display: flex;
+  flex-direction: column;
+}
+
+.ctaHeadline {
+  font-family: var(--ff-ui);
+  font-weight: var(--fw-h1);
+  letter-spacing: var(--ls-h1);
+  font-size: var(--fs-h1);
+  line-height: 1.1;
+  margin-bottom: var(--space-xl);
+}
+
+.ctaHeadline em {
+  font-style: italic;
+  font-weight: 600;
+  color: var(--clr-accent);
+}
+
+.ctaBody {
+  font-family: var(--ff-ui);
+  font-size: var(--fs-p);
+  letter-spacing: var(--ls-p);
+  color: color-mix(in srgb, var(--section-fg) 60%, transparent);
+  line-height: 1.65;
+  max-width: 36ch;
+  margin-bottom: var(--space-md);
+}
+
+/* ── RESPONSIVE ── */
+@media (max-width: 768px) {
+  .ctaInner {
+    grid-template-columns: 1fr;
+  }
+  .ctaImg {
+    order: 2;
+    aspect-ratio: 9 / 16;
+    margin-bottom: -80px;
+  }
+  .ctaText {
+    order: 1;
+    padding: 0 24px;
+  }
+}

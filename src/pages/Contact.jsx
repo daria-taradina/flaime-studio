@@ -1,11 +1,8 @@
 import { useState } from 'react';
-import FadeIn from '../components/FadeIn';
+import FadeIn from '../components/ui/FadeIn';
+import { SERVICES } from '../data/services';
+import { CONTACT_INFO } from '../data/contact';
 import styles from './Contact.module.css';
-
-const SERVICES = [
-  'Creative Concept','Visual Identity','AI Generated Content',
-  'Social Media Content','Packaging Design','Web Design & Development','Other',
-];
 
 export default function Contact() {
   const [selected, setSelected] = useState([]);
@@ -24,7 +21,6 @@ export default function Contact() {
     //   headers: { Accept: 'application/json' },
     // });
     // if (res.ok) setSubmitted(true);
-    // For now simulate success:
     await new Promise(r => setTimeout(r, 800));
     setSubmitted(true);
     setLoading(false);
@@ -94,15 +90,15 @@ export default function Contact() {
           <FadeIn delay={0.2} className={styles.info}>
             <div className={styles.infoBlock}>
               <span className="section-label">Email</span>
-              <a href="mailto:hello@flaimestudio.com" className={styles.infoLink}>hello@flaimestudio.com</a>
+              <a href={`mailto:${CONTACT_INFO.email}`} className={styles.infoLink}>{CONTACT_INFO.email}</a>
             </div>
             <div className={styles.infoBlock}>
               <span className="section-label">Instagram</span>
-              <a href="https://instagram.com" target="_blank" rel="noreferrer" className={styles.infoLink}>@flaimestudio</a>
+              <a href={CONTACT_INFO.instagram.url} target="_blank" rel="noreferrer" className={styles.infoLink}>{CONTACT_INFO.instagram.handle}</a>
             </div>
             <div className={styles.infoBlock}>
               <span className="section-label">Based in</span>
-              <p className={styles.infoText}>Los Angeles, CA<br />Working worldwide</p>
+              <p className={styles.infoText}>{CONTACT_INFO.location}<br />{CONTACT_INFO.locationNote}</p>
             </div>
           </FadeIn>
         </div>
