@@ -17,11 +17,12 @@ export const HERO = {
 
 // ── Intro ───────────────────────────────────────────────────
 export const INTRO = {
-  label: 'Who We Are',
-  text: 'Flaime Studio is a creative studio helping product-based brands communicate their value through design and creative direction.',
-  images: [
-    { src: cloudinaryUrl('image', 'hf_20260403_215802_26dda678-2f90-4fe0-b5d7-39a55f0f377b_1_jgsrxl', 'q_auto/f_auto'), alt: 'Flaime Studio work sample' },
-    { src: cloudinaryUrl('image', 'F-3_uunmgt', 'q_auto/f_auto'), alt: 'Flaime Studio work sample' },
+  text: 'Flaime Studio is a creative agency helping product-based brands communicate their value through design and creative direction. Every project is built on a deep understanding of the brand, allowing us to create solutions that address specific business challenges.',
+  cta: { label: 'See More Work', to: '/work' },
+  cards: [
+    { id: 1, title: 'Loam Blends', subtitle: 'Social Media Experience' },
+    { id: 2, title: 'Milave Haircare', subtitle: 'Social Media & Website Experience' },
+    { id: 3, title: 'JLux Label', subtitle: 'Fashion AI Photography' },
   ],
 };
 

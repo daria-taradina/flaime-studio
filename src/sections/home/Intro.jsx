@@ -1,28 +1,26 @@
 import FadeIn from '../../components/ui/FadeIn';
 import Section from '../../components/layout/Section';
+import Button from '../../components/ui/Button';
+import CardGrid from '../../components/media/CardGrid';
 import { INTRO } from '../../data/home';
 import styles from './Intro.module.css';
 
 export default function Intro() {
   return (
-    <Section theme="light" className={styles.intro}>
-      <div className={styles.introInner}>
-        <FadeIn className={styles.introLabel}>
-          <span className="section-label">{INTRO.label}</span>
-        </FadeIn>
-
-        <FadeIn delay={0.05} className={styles.introText}>
+    <Section theme="dark" className={styles.intro}>
+      <div className={styles.top}>
+        <FadeIn className={styles.text}>
           <p>{INTRO.text}</p>
         </FadeIn>
 
-        <FadeIn delay={0.1} className={styles.introImages}>
-          {INTRO.images.map((img) => (
-            <div key={img.src} className={styles.introImg}>
-              <img src={img.src} alt={img.alt} />
-            </div>
-          ))}
+        <FadeIn delay={0.05} className={styles.cta}>
+          <Button to={INTRO.cta.to}>{INTRO.cta.label}</Button>
         </FadeIn>
       </div>
+
+      <FadeIn delay={0.1}>
+        <CardGrid items={INTRO.cards} />
+      </FadeIn>
     </Section>
   );
 }
