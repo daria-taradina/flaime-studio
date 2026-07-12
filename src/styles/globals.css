@@ -25,17 +25,16 @@
   --step-3:  clamp(2.5rem,   6vw,   3.5rem);
   --step-4:  clamp(3.5rem,   9vw,   5.5rem);
 
-  /* ── Type spec — real px values measured from her live site via DevTools ──
-     H1 98.6px | H2 58px | H3 26.7px | H4 21.2px | P 21px | Button text 13.8px
-     Converted to rem (16px base), with a fluid min for narrow viewports so
-     they don't feel oversized on mobile before your existing --page-pad
-     breakpoint kicks in. */
-  --fs-h1: clamp(2.75rem, 1.5rem + 5vw, 6.1625rem);   --ls-h1: -0.05em;   --fw-h1: 300; --lh-h1: 1.0;
-  --fs-h2: clamp(2rem,    1.2rem + 3.5vw, 3.625rem);  --ls-h2: -0.05em;   --fw-h2: 400; --lh-h2: 1.0;
-  --fs-h3: clamp(1.35rem, 1rem + 1.5vw, 1.669rem);    --ls-h3: -0.06em;   --fw-h3: 400; --lh-h3: 1.35;
-  --fs-h4: 1.325rem;                                   --ls-h4: -0.025em;  --fw-h4: 600; --lh-h4: 1.1;
-  --fs-p:  1.3125rem;                                  --ls-p:  -0.06em;                 --lh-p:  1.5;
-  --fs-btn: 1.5rem;                                 --ls-btn: -0.05em;
+ /* ── Type spec — sourced from Figma mockup (desktop 1728px / mobile 440px frames) ── */
+  --fs-h1: clamp(3rem, 1.762rem + 4.503vw, 6.625rem);      --ls-h1: -0.05em; --fw-h1: 300; --lh-h1: 1.0;
+  --fs-h2: clamp(2.25rem, 1.097rem + 4.193vw, 5.625rem);   --ls-h2: -0.05em; --fw-h2: 400; --lh-h2: 1.4;
+  --fs-h3: clamp(1.5rem, 0.988rem + 1.863vw, 3rem);        --ls-h3: -0.06em; --fw-h3: 400; --lh-h3: 1.35;
+  --fs-h4: clamp(1.5rem, 0.988rem + 1.863vw, 3rem);        --ls-h4: -0.025em; --fw-h4: 600; --lh-h4: 1.1;
+  --fs-p:  clamp(1.25rem, 0.994rem + 0.932vw, 2rem);       --ls-p:  -0.06em; --lh-p: 1.15;
+  --fs-p2: clamp(0.9375rem, 0.745rem + 0.699vw, 1.5rem);   --ls-p2: -0.05em; --lh-p2: 1.3;
+  --fs-btn: clamp(1.25rem, 1.122rem + 0.466vw, 1.625rem);  --ls-btn: -0.05em;
+  --fs-footer-link:  clamp(1.25rem, 0.999rem + 0.932vw, 2rem);     --ls-footer-link: -0.08em;
+  --fs-footer-small: clamp(0.625rem, 0.412rem + 0.776vw, 1.25rem); --ls-footer-small: -0.08em;
 
   --space-xs: 0.5rem;
   --space-sm: 1rem;
@@ -52,6 +51,65 @@
   --radius-sm: 4px;
   --radius-md: 10px;
   --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+}
+
+/* ── Type utility classes — composed into module files ──────────────── */
+.h1 {
+  font-family: var(--ff-ui);
+  font-size: var(--fs-h1);
+  font-weight: var(--fw-h1);
+  letter-spacing: var(--ls-h1);
+  line-height: var(--lh-h1);
+}
+.h2 {
+  font-family: var(--ff-ui);
+  font-size: var(--fs-h2);
+  font-weight: var(--fw-h2);
+  letter-spacing: var(--ls-h2);
+  line-height: var(--lh-h2);
+}
+.h3 {
+  font-family: var(--ff-ui);
+  font-size: var(--fs-h3);
+  font-weight: var(--fw-h3);
+  letter-spacing: var(--ls-h3);
+  line-height: var(--lh-h3);
+}
+.h4 {
+  font-family: var(--ff-ui);
+  font-size: var(--fs-h4);
+  font-weight: var(--fw-h4);
+  letter-spacing: var(--ls-h4);
+  line-height: var(--lh-h4);
+}
+.p {
+  font-family: var(--ff-ui);
+  font-size: var(--fs-p);
+  letter-spacing: var(--ls-p);
+  line-height: var(--lh-p);
+}
+.p2 {
+  font-family: var(--ff-ui);
+  font-size: var(--fs-p2);
+  letter-spacing: var(--ls-p2);
+  line-height: var(--lh-p2);
+}
+.btn-text {
+  font-family: var(--ff-ui);
+  font-size: var(--fs-btn);
+  font-weight: 600;
+  letter-spacing: var(--ls-btn);
+}
+.footer-link {
+  font-family: var(--ff-ui);
+  font-size: var(--fs-footer-link);
+  font-weight: 500;
+  letter-spacing: var(--ls-footer-link);
+}
+.footer-small {
+  font-family: var(--ff-ui);
+  font-size: var(--fs-footer-small);
+  letter-spacing: var(--ls-footer-small);
 }
 
 *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
@@ -94,3 +152,4 @@ ul, ol { list-style: none; }
     transition-duration: 0.01ms !important;
   }
 }
+

@@ -48,11 +48,7 @@
 }
 
 .heroHeadline {
-  font-family: var(--ff-ui);
-  font-size: var(--fs-h1);
-  font-weight: var(--fw-h1);
-  letter-spacing: var(--ls-h1);
-  line-height: var(--lh-h1);
+  composes: h1 from global;
   display: flex;
   flex-wrap: wrap;
   gap: 0.2em;
@@ -75,11 +71,9 @@
 }
 
 .heroDesc {
-  font-family: var(--ff-ui);
-  font-size: clamp(0.85rem, 5.1cqw, var(--fs-h4));
-  letter-spacing: var(--ls-p);
+  composes: p2 from global;
+  font-size: clamp(0.85rem, 5.1cqw, var(--fs-p2)); /* overrides the composed fs-p2 with the cqw-based fluid version */
   color: color-mix(in srgb, var(--section-fg) 80%, transparent);
-  line-height: 1.65;
   width: 100%;
 }
 
