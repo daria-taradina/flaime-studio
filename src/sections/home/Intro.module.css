@@ -10,17 +10,14 @@
   justify-content: space-between;
   align-items: flex-start;
   gap: var(--space-lg);
-  margin-bottom: var(--space-xl);
+  margin-top: var(--space-sm);
+  margin-bottom: var(--space-2xl);
 }
 
-.text p {
-  font-family: var(--ff-ui);
-  font-size: var(--fs-p2);
-  font-weight: 300;
-  letter-spacing: var(--ls-p2);
-  line-height: var(--lh-p2);
+.text {
+  composes: p from global;
   color: var(--section-fg);
-  max-width: 48ch;
+  max-width: 37ch;
 }
 
 .cta {

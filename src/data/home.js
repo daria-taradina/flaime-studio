@@ -9,9 +9,9 @@ export const HERO = {
   videoPublicId: 'hf_20260611_231757_26018a0c-efd2-4af3-a5a5-1c4fe405b2dd_efvzeg',
   posterPublicId: 'hf_20260611_231223_d542720e-9929-4e9e-985b-b20205b0fcd6_abxyer',
   overlayOpacity: 0.45,
-  headline: ['Transforming', 'brands', 'into', 'visual', 'experiences.'],
+  headline: 'Transforming\nbrands into visual\nexperiences.',    
   description:
-    'We shape how your brand is seen and perceived — helping people understand its value, connect with its story, and choose it with confidence.',
+    'We shape how your brand is seen and perceived, helping people understand its value, connect with its story, and choose it with confidence.',
   cta: { label: "Let's Connect ↗", to: '/contact' },
 };
 

@@ -9,6 +9,7 @@
   display: flex;
   flex-direction: column;
   gap: var(--space-sm);
+  height: clamp(24.313rem, 21.473rem + 10.326vw, 32.625rem);
 }
 
 .thumb {

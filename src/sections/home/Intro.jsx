@@ -14,7 +14,7 @@ export default function Intro() {
         </FadeIn>
 
         <FadeIn delay={0.05} className={styles.cta}>
-          <Button to={INTRO.cta.to}>{INTRO.cta.label}</Button>
+          <Button to={INTRO.cta.to} size="md">{INTRO.cta.label}</Button>
         </FadeIn>
       </div>
 

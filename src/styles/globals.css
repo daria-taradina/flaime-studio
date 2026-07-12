@@ -26,24 +26,25 @@
   --step-4:  clamp(3.5rem,   9vw,   5.5rem);
 
  /* ── Type spec — sourced from Figma mockup (desktop 1728px / mobile 440px frames) ── */
-  --fs-h1: clamp(3rem, 1.762rem + 4.503vw, 6.625rem);      --ls-h1: -0.05em; --fw-h1: 300; --lh-h1: 1.0;
-  --fs-h2: clamp(2.25rem, 1.097rem + 4.193vw, 5.625rem);   --ls-h2: -0.05em; --fw-h2: 400; --lh-h2: 1.4;
-  --fs-h3: clamp(1.5rem, 0.988rem + 1.863vw, 3rem);        --ls-h3: -0.06em; --fw-h3: 400; --lh-h3: 1.35;
-  --fs-h4: clamp(1.5rem, 0.988rem + 1.863vw, 3rem);        --ls-h4: -0.025em; --fw-h4: 600; --lh-h4: 1.1;
-  --fs-p:  clamp(1.25rem, 0.994rem + 0.932vw, 2rem);       --ls-p:  -0.06em; --lh-p: 1.15;
-  --fs-p2: clamp(0.9375rem, 0.745rem + 0.699vw, 1.5rem);   --ls-p2: -0.05em; --lh-p2: 1.3;
-  --fs-btn: clamp(1.25rem, 1.122rem + 0.466vw, 1.625rem);  --ls-btn: -0.05em;
+  --fs-h1: clamp(3.000rem, 1.762rem + 4.503vw, 6.625rem);      --ls-h1: -0.05em; --fw-h1: 300; --lh-h1: 1.0;
+  --fs-h2: clamp(2.250rem, 1.097rem + 4.193vw, 5.625rem);   --ls-h2: -0.05em; --fw-h2: 400; --lh-h2: 1.4;
+  --fs-h3: clamp(1.500rem, 0.988rem + 1.863vw, 3.000rem);        --ls-h3: -0.06em; --fw-h3: 400; --lh-h3: 1.35;
+  --fs-h4: clamp(1.500rem, 0.988rem + 1.863vw, 3.000rem);        --ls-h4: -0.025em; --fw-h4: 600; --lh-h4: 1.1;
+  --fs-p: clamp(1.250rem, 0.994rem + 0.932vw, 2.000rem);      --ls-p:  -0.06em; --lh-p: 1.15;
+  --fs-p2: clamp(0.938rem, 0.745rem + 0.699vw, 1.500rem);   --ls-p2: -0.05em; --lh-p2: 1.3;
+  --fs-btn-big: clamp(1.250rem, 1.122rem + 0.466vw, 1.625rem);  --ls-btn: -0.05em;
   --fs-footer-link:  clamp(1.25rem, 0.999rem + 0.932vw, 2rem);     --ls-footer-link: -0.08em;
-  --fs-footer-small: clamp(0.625rem, 0.412rem + 0.776vw, 1.25rem); --ls-footer-small: -0.08em;
+  --fs-footer-small: clamp(0.625rem, 0.411rem + 0.776vw, 1.250rem); --ls-footer-small: -0.08em;
+
 
   --space-xs: 0.5rem;
   --space-sm: 1rem;
   --space-md: 2.5rem;
   --space-lg: 5rem;
-  --space-xl: 90px;
+  --space-xl: 8.0000rem;
   --space-2xl: 9rem;
 
-  --page-pad: 60px;
+  --page-pad: 3.7500rem;
 
   --intro-img-w: clamp(120px, 16vw, 200px);
   --img-pair-width: calc(var(--intro-img-w) * 2 + var(--space-sm));
@@ -51,6 +52,21 @@
   --radius-sm: 4px;
   --radius-md: 10px;
   --transition: 0.35s cubic-bezier(0.25, 0.46, 0.45, 0.94);
+
+  /* Scroll to discover */
+  --fs-label: clamp(1.250rem, 1.165rem + 0.311vw, 1.500rem);
+
+  /* ── HERO layout — sourced from Figma mockup (1728px desktop frame) ── */
+  --hero-inset-left:   var(--page-pad);   /* 60px — matches global page padding, reuse it */
+  --hero-inset-bottom: clamp(3.556rem, 7.407vw, 8rem);              /* 128px */
+  --hero-col-gap:      clamp(8.053rem, 16.782vw, 18.125rem);         /* 290px — gap between h1 and right column */
+  --hero-right-inset:  clamp(3.75rem,  7.8125vw, 8.4375rem);         /* 135px — right column's distance from edge */
+  --hero-stack-gap:    clamp(3.222rem, 6.713vw, 7.25rem);           /* 116px — gap between p2 and scroll indicator */
+  --hero-right-width:  25rem;                                   /* the "box" cap so p2 doesn't wrap tall */
+
+  /* ── HERO mobile — sourced from Figma mockup (440px desktop frame) ── */
+  --hero-mobile-stack-gap:     2.9375rem; /* 47px — headline to description */
+  --hero-mobile-scroll-bottom: 3.75rem;   /* 60px — scroll indicator from bottom */
 }
 
 /* ── Type utility classes — composed into module files ──────────────── */
@@ -96,7 +112,7 @@
 }
 .btn-text {
   font-family: var(--ff-ui);
-  font-size: var(--fs-btn);
+  font-size: var(--fs-btn-big);
   font-weight: 600;
   letter-spacing: var(--ls-btn);
 }
@@ -135,9 +151,9 @@ ul, ol { list-style: none; }
 
 .section-label {
   font-family: var(--ff-ui);
-  font-size: var(--step--1);
-  font-weight: 500;
-  letter-spacing: 0.12em;
+  font-size: var(--fs-label);
+  font-weight: 300;
+  letter-spacing: -0.05rem;
   text-transform: uppercase;
   color: var(--clr-muted);
 }

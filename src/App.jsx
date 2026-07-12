@@ -20,7 +20,7 @@ export default function App() {
   return (
     <BrowserRouter>
       <ScrollToTop />
-      
+      <Navbar />
       <Routes>
         <Route path="/" element={<Home />} />
         <Route path="/work" element={<Work />} />

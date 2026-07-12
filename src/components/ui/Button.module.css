@@ -2,10 +2,7 @@
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  font-family: var(--ff-ui);
-  font-size: var(--fs-btn);
-  font-weight: 400;
-  letter-spacing: var(--ls-btn);
+  composes: btn-text from global;
   white-space: nowrap;
   border: 1px solid currentColor;
   border-radius: 100px;
@@ -19,7 +16,12 @@
   border-color: var(--section-fg);
 }
 
-.md { padding: 0.5rem 2rem; }
+.md {
+  height: clamp(3.813rem, 3.407rem + 1.475vw, 5.000rem);
+  width: clamp(24.188rem, 22.266rem + 6.988vw, 29.813rem);
+}
+
+/*.md { padding: 0.5rem 2rem; }*/
 .sm { padding: 0.5rem 2.25rem; }
 
 /* Full-width variant — same container-relative shrink as .heroDesc, so
