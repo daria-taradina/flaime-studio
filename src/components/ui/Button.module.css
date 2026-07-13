@@ -39,3 +39,9 @@
     padding: 1rem 1.5rem;
   }
 }
+
+@media (max-width: 768px) {
+  .md {
+    width: 100%; /* matches container width, same as cards/text — not its own formula anymore */
+  }
+}
