@@ -21,7 +21,6 @@
   width: clamp(24.188rem, 22.266rem + 6.988vw, 29.813rem);
 }
 
-/*.md { padding: 0.5rem 2rem; }*/
 .sm { padding: 0.5rem 2.25rem; }
 
 /* Full-width variant — same container-relative shrink as .heroDesc, so

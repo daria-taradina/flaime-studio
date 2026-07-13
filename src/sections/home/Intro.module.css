@@ -10,7 +10,7 @@
 
 .top {
   display: flex;
-  justify-content: space-between;
+  justify-content: flex-start;
   align-items: flex-start;
   gap: var(--intro-cta-gap); /* 423px, text to button */
   padding-bottom: var(--intro-row-gap);
@@ -20,6 +20,8 @@
   composes: p from global;
   color: var(--section-fg);
   max-width: 37ch;
+  min-width: 0;
+  flex: 1 1 auto;
 }
 
 .cta {
@@ -29,12 +31,30 @@
 
 /* ── RESPONSIVE ── */
 @media (max-width: 768px) {
+  .intro {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-areas:
+      "text"
+      "cards"
+      "cta";
+    row-gap: var(--space-md); /* same token already used for mobile stacking */
+  }
+
   .top {
-    flex-direction: column;
-    gap: var(--space-md);
+    display: contents; /* dissolves the wrapper so text/cta become real grid items of .intro */
+  }
+
+  .text {
+    grid-area: text;
+  }
+
+  .cards {
+    grid-area: cards;
   }
 
   .cta {
+    grid-area: cta;
     padding-top: 0;
   }
 }

@@ -18,7 +18,7 @@ export default function Intro() {
         </FadeIn>
       </div>
 
-      <FadeIn delay={0.1}>
+      <FadeIn delay={0.1} className={styles.cards}>
         <CardGrid items={INTRO.cards} />
       </FadeIn>
     </Section>
