@@ -67,7 +67,18 @@
   /* ── HERO mobile — sourced from Figma mockup (440px desktop frame) ── */
   --hero-mobile-stack-gap:     2.9375rem; /* 47px — headline to description */
   --hero-mobile-scroll-bottom: 3.75rem;   /* 60px — scroll indicator from bottom */
-}
+
+  /* ── INTRO layout — sourced from Figma mockup (1728px desktop frame) ── */
+  --intro-top:          clamp(3.527rem, 7.349vw, 7.9375rem); /* 127px at 1728 — section top to text row */
+  --intro-row-gap:      clamp(2.834rem, 5.903vw, 6.375rem);  /* 102px at 1728 — text row to cards */
+  --intro-bottom:       clamp(0.972rem, 2.025vw, 2.1875rem); /* 35px at 1728 — cards to section bottom */
+  --intro-cta-gap:      clamp(11.749rem, 24.479vw, 26.4375rem); /* 423px at 1728 — text to button */
+
+  /* ── Card Grid ── */
+  --cards-gap:    clamp(0.555rem, 1.157vw, 1.25rem);   /* 20px at 1728 — gap between the 3 cards */
+  --card-content-gap: clamp(0.667rem, 1.389vw, 1.5rem); /* thumb → label spacing */
+
+  }
 
 /* ── Type utility classes — composed into module files ──────────────── */
 .h1 {

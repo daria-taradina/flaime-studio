@@ -2,16 +2,18 @@
 .intro {
   position: relative;
   z-index: 1;
-  padding-block: var(--space-xl);
+  display: flex;
+  flex-direction: column;
+  padding-block: var(--intro-top) var(--intro-bottom); /* 127px top / 35px bottom, no collapsing */
+  gap: var(--intro-row-gap); /* 102px — the one gap between .top and the cards */
 }
 
 .top {
   display: flex;
   justify-content: space-between;
   align-items: flex-start;
-  gap: var(--space-lg);
-  margin-top: var(--space-sm);
-  margin-bottom: var(--space-2xl);
+  gap: var(--intro-cta-gap); /* 423px, text to button */
+  padding-bottom: var(--intro-row-gap);
 }
 
 .text {

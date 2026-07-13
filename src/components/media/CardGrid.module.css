@@ -1,20 +1,18 @@
-/* ── CardGrid ───────────────────────────────────────────── */
 .grid {
   display: grid;
   grid-template-columns: repeat(3, 1fr);
-  gap: var(--space-md);
+  gap: var(--cards-gap);
 }
 
 .card {
   display: flex;
   flex-direction: column;
-  gap: var(--space-sm);
-  height: clamp(24.313rem, 21.473rem + 10.326vw, 32.625rem);
+  gap: var(--card-content-gap); /* was --cards-gap (undefined) */
 }
 
 .thumb {
   width: 100%;
-  aspect-ratio: 1 / 1;
+  aspect-ratio: 1 / 1; /* square on every breakpoint, no hardcoded size needed */
   overflow: hidden;
   background: rgba(255, 255, 255, 0.08);
 }
@@ -34,17 +32,19 @@
 
 .title {
   font-family: var(--ff-ui);
-  composes: h4 from global;
+  font-size: var(--fs-h4);       /* 48px at 1728 matches your spec exactly */
+  font-weight: 400;              /* spec says 400 — h4's 600 doesn't apply here */
+  letter-spacing: -0.08em;       /* spec's value, not h4's -0.025em */
+  line-height: 1.15;             /* real ratio, not the 110px artifact */
   color: var(--section-fg);
 }
 
 .subtitle {
-  font-family: var(--ff-ui);
-  composes: p2 from global;
-  color: var(--section-muted);
+  composes: p2 from global;      /* fs-p2 already caps at 24px, ls already -0.05em — matches spec */
+  color: var(--section-fg);
+  opacity: 0.5;                  /* per spec, instead of a separate muted color token */
 }
 
-/* ── Responsive ── */
 @media (max-width: 768px) {
   .grid {
     grid-template-columns: 1fr;
