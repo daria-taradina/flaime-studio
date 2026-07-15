@@ -17,8 +17,8 @@
 }
 
 .md {
-  height: clamp(3.813rem, 3.407rem + 1.475vw, 5.000rem);
-  width: clamp(24.188rem, 22.266rem + 6.988vw, 29.813rem);
+  height: var(--btn-md-height);
+  width: var(--btn-md-width);
 }
 
 .sm { padding: 0.5rem 2.25rem; }

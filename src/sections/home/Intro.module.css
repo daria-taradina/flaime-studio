@@ -4,22 +4,22 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  padding-block: var(--intro-top); /* 127px top / 35px bottom */
-  gap: var(--intro-row-gap); /* 102px — between .top and the cards */
+  padding-block: var(--intro-pad); /* 125px top and bottom*/
+  padding-inline: var(--page-pad);
+  gap: var(--intro-pad); /* 125px — between .top and the cards */
 }
 
 .top {
   display: flex;
-  align-items: flex-start;
+  align-items: flex-end;
   gap: var(--intro-cta-gap); /* 423px at 1728 — text to button */
 }
 
 .text {
   composes: p from global;
   color: var(--section-fg);
-  max-width: 37ch;
-  
-  flex: 1 1 auto;
+  max-width: 37ch;  
+  flex: 0 1 auto;
 }
 
 .cta {

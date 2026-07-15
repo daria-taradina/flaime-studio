@@ -26,12 +26,12 @@
   --step-4:  clamp(3.5rem,   9vw,   5.5rem);
 
  /* ── Type spec — sourced from Figma mockup (desktop 1728px / mobile 440px frames) ── */
-  --fs-h1: clamp(3.000rem, 1.762rem + 4.503vw, 6.625rem);      --ls-h1: -0.05em; --fw-h1: 300; --lh-h1: 1.0;
+  --fs-h1: clamp(3.0625rem, 6.142vw, 6.625rem);      --ls-h1: -0.05em; --fw-h1: 300; --lh-h1: 1.0;
   --fs-h2: clamp(2.250rem, 1.097rem + 4.193vw, 5.625rem);   --ls-h2: -0.05em; --fw-h2: 400; --lh-h2: 1.4;
   --fs-h3: clamp(1.500rem, 0.988rem + 1.863vw, 3.000rem);        --ls-h3: -0.06em; --fw-h3: 400; --lh-h3: 1.35;
   --fs-h4: clamp(1.500rem, 0.988rem + 1.863vw, 3.000rem);        --ls-h4: -0.025em; --fw-h4: 600; --lh-h4: 1.1;
-  --fs-p: clamp(1.250rem, 0.994rem + 0.932vw, 2.000rem);      --ls-p:  -0.06em; --lh-p: 1.15;
-  --fs-p2: clamp(0.938rem, 0.745rem + 0.699vw, 1.500rem);   --ls-p2: -0.05em; --lh-p2: 1.3;
+  --fs-p: clamp(0.925rem, 0.052rem + 1.746vw, 1.9375rem);      --ls-p:  -0.06em; --lh-p: 1.15;
+  --fs-p2: clamp(0.6875rem, 1.401vw, 1.5rem);   --ls-p2: -0.05em; --lh-p2: 1.3;
   --fs-btn-big: clamp(1.250rem, 1.122rem + 0.466vw, 1.625rem);  --ls-btn: -0.05em;
   --fs-footer-link:  clamp(1.25rem, 0.999rem + 0.932vw, 2rem);     --ls-footer-link: -0.08em;
   --fs-footer-small: clamp(0.625rem, 0.411rem + 0.776vw, 1.250rem); --ls-footer-small: -0.08em;
@@ -44,7 +44,7 @@
   --space-xl: 8.0000rem;
   --space-2xl: 9rem;
 
-  --page-pad: 3.7500rem;
+  --page-pad: clamp(1.738rem, 1.050rem + 2.500vw, 3.750rem);   /*3.7500rem;*/
 
   --intro-img-w: clamp(120px, 16vw, 200px);
   --img-pair-width: calc(var(--intro-img-w) * 2 + var(--space-sm));
@@ -62,7 +62,7 @@
   --hero-col-gap:      clamp(8.053rem, 16.782vw, 18.125rem);         /* 290px — gap between h1 and right column */
   --hero-right-inset:  clamp(3.75rem,  7.8125vw, 8.4375rem);         /* 135px — right column's distance from edge */
   --hero-stack-gap:    clamp(3.222rem, 6.713vw, 7.25rem);           /* 116px — gap between p2 and scroll indicator */
-  --hero-right-width:  25rem;                                   /* the "box" cap so p2 doesn't wrap tall */
+  --hero-right-width:  clamp(11.625rem, 23.276vw, 25.125rem);                                   /* the "box" cap so p2 doesn't wrap tall */
 
   /* ── HERO mobile — sourced from Figma mockup (440px desktop frame) ── */
   --hero-mobile-stack-gap:     2.9375rem; /* 47px — headline to description */
@@ -71,11 +71,21 @@
   /* ── INTRO layout — sourced from Figma mockup (1728px desktop frame) ── */
   --intro-top:          clamp(4.375rem, 3.158rem + 4.425vw, 7.938rem); /* 127px at 1728 — section top to text row */
   --intro-row-gap:      clamp(2.834rem, 5.903vw, 6.375rem);  /* 102px at 1728 — text row to cards */
-  --intro-bottom:       clamp(0.972rem, 2.025vw, 2.1875rem); /* 35px at 1728 — cards to section bottom */
-  --intro-cta-gap:      clamp(11.749rem, 24.479vw, 26.4375rem); /* 423px at 1728 — text to button */
+  --intro-bottom:       clamp(59.3px, 0.08px + 7.403cqi, 128px); /* 35px at 1728 — cards to section bottom */
+  /*--intro-cta-gap:      clamp(11.749rem, 24.479vw, 26.4375rem); /* 423px at 1728 — text to button */
+  
+  /* ── INTRO ── */
+  --intro-pad:      clamp(3.619rem, 7.231vw, 7.8125rem);   /* 57.9px → 125px */
+  --intro-cta-gap:  clamp(12.2125rem, 24.526vw, 26.4375rem); /* 195.4px → 423px */
+  --cards-gap:      clamp(0.579rem, 1.157vw, 1.25rem);      /* 9.26px → 20px */
+  --card-img-size:  clamp(15.1625rem, 30.323vw, 32.75rem);  /* 242.6px → 524px */
+  --btn-md-height:  clamp(2.3125rem, 4.634vw, 5rem);        /* 37px → 80px — was missing */
+  --btn-md-width:   clamp(13.8rem, 27.608vw, 29.8125rem);   /* 220.8px → 477px */
+  --btn-big-text:   clamp(0.75rem, 1.509vw, 1.625rem);      /* 12px → 26px */
 
   /* ── INTRO cta inset — sourced from Figma mockup (1728px desktop frame) ── */
   --intro-cta-inset: clamp(1.25rem, 2.604vw, 2.8125rem); /* 45px at 1728 */
+
 
   /* ── Card Grid ── */
   --cards-gap:    clamp(0.555rem, 1.157vw, 1.25rem);   /* 20px at 1728 — gap between the 3 cards */
@@ -126,7 +136,7 @@
 }
 .btn-text {
   font-family: var(--ff-ui);
-  font-size: var(--fs-btn-big);
+  font-size: var(--btn-big-text);
   font-weight: 600;
   letter-spacing: var(--ls-btn);
 }

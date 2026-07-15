@@ -3,7 +3,7 @@
   position: relative;
   min-height: 100vh;
   min-height: 100svh;
-  padding-bottom: var(--hero-inset-bottom);
+  
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -49,6 +49,7 @@
   width: 100%;
   padding-left: var(--hero-inset-left);
   padding-right: var(--hero-right-inset);
+  padding-bottom: var(--hero-inset-bottom);
 }
 
 .heroHeadline {
@@ -76,6 +77,9 @@
 }
 
 .scrollIndicator {
+  composes: p2 from global;
+  text-transform: uppercase;
+  color: var(--clr-muted);
   display: flex;
   align-items: center;
   justify-content: space-between;

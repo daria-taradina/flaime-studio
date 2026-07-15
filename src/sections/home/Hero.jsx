@@ -38,7 +38,7 @@ export default function Hero() {
         >
           <p className={styles.heroDesc}>{HERO.description}</p>
           <div className={styles.scrollIndicator}>
-            <span className="section-label">Scroll to Discover</span>
+            <span className={styles.scrollIndicator}>Scroll to Discover</span>
             <span className={styles.scrollArrow} aria-hidden="true">↓</span>
           </div>
         </motion.div>
