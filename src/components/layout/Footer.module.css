@@ -1,53 +1,38 @@
 .footer {
-  border-top: 1px solid var(--clr-border);
-  margin-top: var(--space-xl);
+  border-top: 1px solid var(--clr-border);  
   overflow: hidden;
 }
 
 .top {
+  padding-block: var(--pad-x);
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
-  padding-top: var(--space-lg);
-  padding-bottom: var(--space-lg);
-  gap: var(--space-lg);
+  align-items: flex-start;  
 }
 
 /* Fixed to one line — was wrapping because of max-width: 22ch */
 .location {
-  font-family: var(--ff-ui);
-  font-size: var(--fs-p);
-  letter-spacing: var(--ls-p);
+  composes: p2 from global;
   color: var(--clr-muted);
   white-space: nowrap;
-  flex-shrink: 0;
+  padding-right: var(--space-2xl);
 }
 
 .links {
+  composes: p from global;
+  text-transform: uppercase;
   display: flex;
-  gap: var(--space-xl);
+  gap: var(--pad-x);
 }
 
 .col {
   display: flex;
   flex-direction: column;
-  gap: 0.6rem;
+  gap: 0.6rem;  
 }
-
-.col a {
-  font-family: var(--ff-ui);
-  font-size: var(--fs-h4);
-  font-weight: var(--fw-h4);
-  letter-spacing: var(--ls-h4);
-  color: rgba(255, 255, 255, 0.5);
-  transition: color var(--transition);
-}
-.col a:hover { color: var(--clr-white); }
 
 .copyright {
-  font-family: var(--ff-ui);
-  font-size: var(--fs-p);
-  letter-spacing: var(--ls-p);
+  composes: p2 from global;
   color: var(--clr-muted);
   white-space: nowrap;
   flex-shrink: 0;
@@ -78,14 +63,7 @@
 
 /* © mark — pinned to the same 60px edge as everything else, positioned independently
    of the logo so it never eats into the logo's fit-to-width measurement */
-.bigLogoMark {
-  position: absolute;
-  right: var(--page-pad, 60px);
-  bottom: 0.35em;
-  font-family: var(--ff-ui);
-  font-size: clamp(0.9rem, 1.5vw, 1.25rem);
-  color: var(--clr-white);
-}
+
 
 @media (max-width: 600px) {
   .top { flex-direction: column; gap: var(--space-md); }

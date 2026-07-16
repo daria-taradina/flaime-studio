@@ -6,7 +6,7 @@ import styles from './Cta.module.css';
 
 export default function Cta() {
   return (
-    <Section theme="dark" container={false} className={styles.cta}>
+    <Section theme="light" container={false} padY={false} className={styles.cta}>
       <div className={styles.ctaInner}>
         <FadeIn className={styles.ctaImg}>
           <img src={CTA.image} alt="Get in touch with Flaime Studio" />
