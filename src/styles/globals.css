@@ -27,7 +27,7 @@
 
  /* ── Type spec — sourced from Figma mockup (desktop 1728px / mobile 440px frames) ── */
   --fs-h1: clamp(3.0625rem, 6.142vw, 6.625rem);      --ls-h1: -0.05em; --fw-h1: 300; --lh-h1: 1.0;
-  --fs-h2: clamp(2.250rem, 1.097rem + 4.193vw, 5.625rem);   --ls-h2: -0.05em; --fw-h2: 400; --lh-h2: 1.4;
+  --fs-h2: clamp(2.606rem, 5.205vw, 5.625rem);   --ls-h2: -0.05em; --fw-h2: 400; --lh-h2: 1.4;
   --fs-h3: clamp(1.500rem, 0.988rem + 1.863vw, 3.000rem);        --ls-h3: -0.06em; --fw-h3: 400; --lh-h3: 1.35;
   --fs-h4: clamp(1.500rem, 0.988rem + 1.863vw, 3.000rem);        --ls-h4: -0.025em; --fw-h4: 600; --lh-h4: 1.1;
   --fs-p: clamp(0.925rem, 0.052rem + 1.746vw, 1.9375rem);      --ls-p:  -0.06em; --lh-p: 1.15;
@@ -44,7 +44,9 @@
   --space-xl: 8.0000rem;
   --space-2xl: 9rem;
 
-  --page-pad: clamp(1.738rem, 1.050rem + 2.500vw, 3.750rem);   /*3.7500rem;*/
+  --page-pad: clamp(1.738rem, 1.050rem + 2.500vw, 3.750rem);   /*3.7500rem;   sides=60px*/
+  --section-pad: clamp(3.313rem, 2.010rem + 4.736vw, 7.125rem); /* top/buttom = 114-52px */
+
 
   --intro-img-w: clamp(120px, 16vw, 200px);
   --img-pair-width: calc(var(--intro-img-w) * 2 + var(--space-sm));
@@ -90,6 +92,17 @@
   /* ── Card Grid ── */
   --cards-gap:    clamp(0.555rem, 1.157vw, 1.25rem);   /* 20px at 1728 — gap between the 3 cards */
   --card-content-gap: clamp(0.667rem, 1.389vw, 1.5rem); /* thumb → label spacing */
+
+  /* ── SERVICES — 1728px → 800px (pre-collapse) ── */
+  --services-pad:        clamp(2.95rem, 5.899vw, 6.375rem);    /* placeholder: 47.2px → 102px, confirm 800px value */
+  --services-list-width: clamp(23.9rem, 47.803vw, 51.625rem);  /* 382.4px → 826px, derived from symmetric insets */
+  --services-content-width: clamp(18.125rem, 36.309vw, 39.25rem); /* ~290px → 628px */
+  --services-text-gap:      clamp(3.619rem, 7.231vw, 7.8125rem); /* placeholder: 57.9px → 125px */
+
+  /* ── SELECTED WORKS — 1728px → 800px (pre-collapse) ── */
+  --works-pad:      clamp(3.1875rem, 6.373vw, 6.375rem);  /* 51px → 102px */
+  --works-gap:      clamp(0.375rem, 0.751vw, 0.8125rem);  /* 6px → 13px */
+  --works-card-width: clamp(10.85rem, 21.702vw, 23.4375rem); /* 173.6px → 375px */
 
   }
 

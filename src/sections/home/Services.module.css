@@ -1,18 +1,25 @@
-/* ── SERVICES ──────────────────────────────────────────────── */
 .services {
-  padding-block: var(--space-xl);
-  /* border-top: 1px solid var(--clr-border); */
-  margin-bottom: 110px;
+  padding-block: var(--services-pad);   /* 102px top/bottom */
+  display: flex;
+  flex-direction: column;
+}
+
+.servicesText {
+  composes: p from global;
+  color: var(--section-fg);
+  max-width: var(--services-content-width); /* 628px shared column width */
 }
 
 .servicesInner {
-  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;   /* centers this block relative to .services — no width/margin value needed */
+  gap: var(--page-pad);  /* label → list gap, reusing page-pad since it matches */
+  margin-top: var(--services-pad); /* paragraph → bottom container gap */
 }
 
 .servicesLabelCol {
-  position: absolute;
-  top: 0.3em;
-  left: 0;
+  text-align: center;
 }
 
 .servicesList {
@@ -25,17 +32,21 @@
 
 .servicesList ul {
   width: 100%;
-  max-width: 700px;
+  max-width: var(--services-list-width); /* 826px, derived from the symmetric insets */
 }
 
 .serviceItem {
+  display: flex;
+  justify-content: center;
   padding: 1.1rem 0;
 }
 
 .serviceTitle {
   display: inline-block;
-  composes: h2 from global;
+  composes: h2 from global;   /* reuses --fs-h2 directly, no section-specific size */
+  white-space: nowrap;        /* each line stays one line regardless of resize */
   line-height: 1.2;
+  
   color: var(--section-fg);
   transition: font-size var(--transition);
 }
@@ -49,19 +60,5 @@
 @media (hover: none) {
   .serviceItem.isNear .serviceTitle {
     font-size: calc(var(--fs-h2) * 1.05);
-  }
-}
-
-/* ── RESPONSIVE ── */
-@media (max-width: 768px) {
-  .servicesInner {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    gap: var(--space-md);
-  }
-  .servicesLabelCol {
-    position: static;
-    text-align: center;
   }
 }

@@ -5,7 +5,7 @@
 
 .track {
   display: flex;
-  gap: 14px;
+  gap: var(--works-gap);
   overflow-x: scroll;
   overflow-y: hidden;
   scroll-snap-type: x mandatory;
@@ -25,7 +25,7 @@
 
 .card {
   flex-shrink: 0;
-  width: clamp(200px, 28vw, 340px);
+  width: var(--works-card-width);
   border-radius: var(--radius-md);
   background-size: cover;
   background-position: center;

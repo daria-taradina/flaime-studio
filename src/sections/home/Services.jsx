@@ -35,6 +35,14 @@ export default function Services() {
 
   return (
     <Section theme="dark" className={styles.services}>
+      <FadeIn className={styles.servicesText}>
+        <p>
+          We create complete visual systems where every element works together
+          to support the same brand experience. From branding identity to
+          social media content, every piece is designed to fit into the bigger picture.
+        </p>
+      </FadeIn>
+
       <div className={styles.servicesInner}>
         <FadeIn className={styles.servicesLabelCol}>
           <span className="section-label">What We Do</span>
