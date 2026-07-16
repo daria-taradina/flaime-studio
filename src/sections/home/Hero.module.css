@@ -2,8 +2,7 @@
 .hero {
   position: relative;
   min-height: 100vh;
-  min-height: 100svh;
-  
+  min-height: 100svh;  
   display: flex;
   align-items: flex-end;
   overflow: hidden;
@@ -47,9 +46,9 @@
   align-items: flex-end;
   padding-top: 8rem;
   width: 100%;
-  padding-left: var(--hero-inset-left);
+  padding-left: var(--pad-x);
   padding-right: var(--hero-right-inset);
-  padding-bottom: var(--hero-inset-bottom);
+  padding-bottom: var(--pad-y);
 }
 
 .heroHeadline {

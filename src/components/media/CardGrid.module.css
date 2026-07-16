@@ -14,7 +14,7 @@
   width: 100%;
   aspect-ratio: 1 / 1; /* square on every breakpoint, no hardcoded size needed */
   overflow: hidden;
-  background: rgba(255, 255, 255, 0.08);
+  background: rgba(150, 62, 62, 0.736);
 }
 
 .thumb img {

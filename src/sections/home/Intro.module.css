@@ -4,9 +4,7 @@
   z-index: 1;
   display: flex;
   flex-direction: column;
-  padding-block: var(--intro-pad); /* 125px top and bottom*/
-  padding-inline: var(--page-pad);
-  gap: var(--intro-pad); /* 125px — between .top and the cards */
+  gap: var(--pad-y); /* 125px — between .top and the cards */
 }
 
 .top {
@@ -17,7 +15,6 @@
 
 .text {
   composes: p from global;
-  color: var(--section-fg);
   max-width: 37ch;  
   flex: 0 1 auto;
 }

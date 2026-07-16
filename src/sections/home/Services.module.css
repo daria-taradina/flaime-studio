@@ -1,12 +1,10 @@
 .services {
-  padding-block: var(--services-pad);   /* 102px top/bottom */
   display: flex;
   flex-direction: column;
 }
 
 .servicesText {
   composes: p from global;
-  color: var(--section-fg);
   max-width: var(--services-content-width); /* 628px shared column width */
 }
 
@@ -14,7 +12,7 @@
   display: flex;
   flex-direction: column;
   align-items: center;   /* centers this block relative to .services — no width/margin value needed */
-  gap: var(--page-pad);  /* label → list gap, reusing page-pad since it matches */
+  gap: var(--pad-x);  /* label → list gap, reusing page-pad since it matches */
   margin-top: var(--services-pad); /* paragraph → bottom container gap */
 }
 
@@ -38,16 +36,12 @@
 .serviceItem {
   display: flex;
   justify-content: center;
-  padding: 1.1rem 0;
 }
 
 .serviceTitle {
   display: inline-block;
   composes: h2 from global;   /* reuses --fs-h2 directly, no section-specific size */
-  white-space: nowrap;        /* each line stays one line regardless of resize */
-  line-height: 1.2;
-  
-  color: var(--section-fg);
+  white-space: nowrap;        /* each line stays one line regardless of resize */  
   transition: font-size var(--transition);
 }
 

@@ -1,23 +1,25 @@
 /*
-  SECTION THEME SYSTEM
+  SECTION SYSTEM
   ─────────────────────────────────────────────────────────
-  Add this file to your project (e.g. src/styles/section-theme.css)
-  and import it in main.jsx AFTER your existing global stylesheet,
-  since it reads --clr-bg-dark / --clr-bg-light / --clr-white / etc.
+  Everything a <Section> needs — color theme, side padding,
+  top/bottom padding — lives in this one file. Import it in
+  main.jsx AFTER globals.css, since it reads --clr-* and
+  --pad-x / --pad-y from there.
 
-  What this solves: right now every page's CSS module hardcodes its
-  own background + text + border colors per section (.hero, .intro,
-  .process, .cta all repeat the same rgba(255,255,255,0.x) patterns).
-  If you ever want to swap which sections are dark vs light, you're
-  editing colors in N different files.
+  Three independent knobs, each driven by a data attribute
+  set in Section.jsx:
 
-  Instead: every section gets `data-theme="dark"` or `data-theme="light"`
-  and everything else (text color, muted text, borders, button hover
-  colors) derives from that ONE attribute via CSS variables. Change
-  the theme prop on a <Section>, the whole block re-colors correctly.
+  - data-theme="dark" | "light"   → background + text colors
+  - data-pad-y="true" | "false"   → top/bottom padding on/off
+  - .container (a plain class)    → left/right padding, always on
+                                     unless container={false} skips
+                                     rendering it entirely
 */
 
+/* ── COLOR THEME ─────────────────────────────────────────── */
+
 .section {
+  position: relative;
   background: var(--section-bg);
   color: var(--section-fg);
 }
@@ -38,11 +40,51 @@
   --section-card-bg: rgba(13, 13, 13, 0.03);
 }
 
-/* Optional: bump this in later if you add more themes (e.g. an accent-bg
-   "feature" section) — same pattern, one more attribute value. */
-
-/* section-label already exists globally — make it theme-aware instead of
-   hardcoded, with the old value as fallback so nothing breaks elsewhere */
+/* section-label reads its color from whichever theme is active */
 .section-label {
   color: var(--section-muted, var(--clr-muted));
+}
+
+/* ── VERTICAL PADDING ────────────────────────────────────── */
+/* On by default. A section that manages its own top/bottom
+   spacing (e.g. Hero, full-bleed galleries) passes padY={false}
+   to opt out. */
+
+.section[data-pad-y='true'] {
+  padding-block: var(--pad-y);
+}
+
+/* ── HORIZONTAL PADDING ──────────────────────────────────── */
+/* .container is the inner wrapper Section renders when
+   container={true} (the default). It's what every normal
+   section's content sits inside; full-bleed sections skip it
+   via container={false}. */
+
+.container {
+  width: 100%;
+  padding-inline: var(--pad-x);
+}
+
+/* ── GRAIN OVERLAY ───────────────────────────────────────── */
+/* Rendered conditionally by Section when grain={true}.
+   Blend mode/opacity flip with data-theme like everything
+   else in this file. */
+
+.grain {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.section[data-theme='dark'] .grain {
+  opacity: var(--grain-opacity-dark, 0.05);
+  mix-blend-mode: overlay;
+}
+
+.section[data-theme='light'] .grain {
+  opacity: var(--grain-opacity-light, 0.03);
+  mix-blend-mode: multiply;
 }

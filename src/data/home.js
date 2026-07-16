@@ -20,7 +20,7 @@ export const INTRO = {
   text: 'Flaime Studio is a creative agency helping product-based brands communicate their value through design and creative direction. Every project is built on a deep understanding of the brand, allowing us to create solutions that address specific business challenges.',
   cta: { label: 'See More Work', to: '/work' },
   cards: [
-    { id: 1, title: 'Loam Blends', subtitle: 'Social Media Experience' },
+    { id: 1, title: 'Loam Blends', subtitle: 'Social Media Experience', src: 'https://res.cloudinary.com/dgad4xyuc/image/upload/v1781228734/F-3_uunmgt.jpg' },
     { id: 2, title: 'Milave Haircare', subtitle: 'Social Media & Website Experience' },
     { id: 3, title: 'JLux Label', subtitle: 'Fashion AI Photography' },
   ],
@@ -47,10 +47,10 @@ export const WORKS_BLURB =
 export const PROCESS = {
   tagline: 'Turning creative ideas into\nmemorable brand experiences.',
   steps: [
-    { title: 'Define Your Goals', body: "We start by understanding your brand, audience, and the specific challenge we're solving." },
-    { title: 'Concept Creation', body: 'Ideas shaped into visual directions — moodboards, references, and first creative proposals.' },
-    { title: 'Review & Refine', body: 'Collaborative feedback loops until every detail is aligned with your vision.' },
-    { title: 'Work Delivered', body: 'Final assets in all formats you need, ready to publish or hand off.' },
+    { title: 'Define Your Goals', body: "We start with a short creative briefing to understand your product, brand philosophy, visual goals, tone of voice, and aesthetic direction. We look at your existing content, your competitors, and your ideal positioning. This helps us build a clear, brand-aligned direction." },
+    { title: 'Concept Creation', body: 'Based on your goals and brand identity, we develop concepts that match the business goals and brand story you want to communicate. You’ll receive several creative directions showing how your product could look across platforms — all aligned with your brand personality.' },
+    { title: 'Review & Refine', body: 'If you want any adjustments, this is the step where we make revisions. Your feedback helps shape the final outcome through focused refinements until every detail feels right.' },
+    { title: 'Work Delivered', body: 'You receive polished, consistent files in ready-to-use formats for ads, social media, websites, and product pages. Every file is optimized to support your brand identity and help you present your products with confidence.' },
   ],
 };
 

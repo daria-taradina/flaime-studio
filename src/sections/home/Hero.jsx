@@ -21,7 +21,7 @@ function HeroBg() {
 
 export default function Hero() {
   return (
-    <Section theme="dark" container={false} className={styles.hero}>
+    <Section theme="dark" container={false} padY={false} className={styles.hero}>
       <HeroBg />
       <div className={styles.heroContent}>
         <h1 className={styles.heroHeadline}>
